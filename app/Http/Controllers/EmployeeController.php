@@ -34,6 +34,7 @@ class EmployeeController extends Controller
         'emp_name'=>$request->emp_name,
         'designation'=>$request->designation,
         'joining_date'=>$request->joining_date,
+        'monthly_salary'=>$request->monthly_salary,
         'father_name'=>$request->father_name,
         'mother_name'=>$request->mother_name,
         'mobile_number'=>$request->mobile_number,
@@ -47,9 +48,18 @@ class EmployeeController extends Controller
         'religion'=>$request->religion,
         'gender'=>$request->gender,
         'profile_pic'=>$request->profile_pic,
-        'emergency_contact_name'=>$request->emergency_contact_name,
-        'emergency_contact_number'=>$request->emergency_contact_number,
-        'emergency_contact_relation'=>$request->emergency_contact_relation
+
+        'emergency_contact_name_one'=>$request->emergency_contact_name_one,
+        'emergency_contact_number_one'=>$request->emergency_contact_number_one,
+        'emergency_contact_relation_one'=>$request->emergency_contact_relation_one,
+
+        'emergency_contact_name_two'=>$request->emergency_contact_name_two,
+        'emergency_contact_number_two'=>$request->emergency_contact_number_two,
+        'emergency_contact_relation_two'=>$request->emergency_contact_relation_two,
+
+        'emergency_contact_name_three'=>$request->emergency_contact_name_three,
+        'emergency_contact_number_three'=>$request->emergency_contact_number_three,
+        'emergency_contact_relation_three'=>$request->emergency_contact_relation_three
         ]);
     return redirect()->route('employee.index')->withSuccess('Employee is added successfully'); 
     }
@@ -82,6 +92,7 @@ class EmployeeController extends Controller
         $data['emp_name'] = $request->emp_name;
         $data['designation'] = $request->designation;
         $data['joining_date'] = $request->joining_date;
+        $data['monthly_salary'] = $request->monthly_salary;
         $data['father_name'] = $request->father_name;
         $data['mother_name'] = $request->mother_name;
         $data['mobile_number'] = $request->mobile_number;
@@ -95,9 +106,18 @@ class EmployeeController extends Controller
         $data['religion'] = $request->religion;
         $data['gender'] = $request->gender;
         $data['profile_pic'] = $request->profile_pic;
-        $data['emergency_contact_name'] = $request->emergency_contact_name;
-        $data['emergency_contact_number'] = $request->emergency_contact_number;
-        $data['emergency_contact_relation'] = $request->emergency_contact_relation;
+
+        $data['emergency_contact_name_one'] = $request->emergency_contact_name_one;
+        $data['emergency_contact_number_one'] = $request->emergency_contact_number_one;
+        $data['emergency_contact_relation_one'] = $request->emergency_contact_relation_one;
+
+        $data['emergency_contact_name_two'] = $request->emergency_contact_name_two;
+        $data['emergency_contact_number_two'] = $request->emergency_contact_number_two;
+        $data['emergency_contact_relation_two'] = $request->emergency_contact_relation_two;
+
+        $data['emergency_contact_name_three'] = $request->emergency_contact_name_three;
+        $data['emergency_contact_number_three'] = $request->emergency_contact_number_three;
+        $data['emergency_contact_relation_three'] = $request->emergency_contact_relation_three;
 
         $updated = DB::table('employees')
                   ->where('id', $request->id)
