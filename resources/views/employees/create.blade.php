@@ -57,8 +57,8 @@ Welcome
 
                               <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                  <label>Monthly Salary <small style="color: red">*</small></label>
-                                  <input type="number" required class="form-control" id="monthly_salary" name="monthly_salary" >
+                                  <label>Per Day Salary <small style="color: red">*</small></label>
+                                  <input type="number" required class="form-control" id="per_day_salary" name="per_day_salary" >
                                 </div>
                               </div>
                               </div>

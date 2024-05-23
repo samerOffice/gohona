@@ -57,8 +57,8 @@ Welcome
 
                     <div class="col-md-4 col-sm-12">
                       <div class="form-group">
-                        <label>Monthly Salary</label>
-                        <input type="number" required class="form-control" id="monthly_salary" name="monthly_salary" value="{{$employee->monthly_salary}}">
+                        <label>Per Day Salary</label>
+                        <input type="number" required class="form-control" id="per_day_salary" name="per_day_salary" value="{{$employee->per_day_salary}}">
                       </div>
                     </div>
                     </div>

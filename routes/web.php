@@ -14,6 +14,7 @@ use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\TermsAndConditionsController;
 use App\Http\Controllers\BookingTermsAndConditionsController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PayrollController;
 
 
 
@@ -77,8 +78,11 @@ Route::resource('terms_and_conditions', TermsAndConditionsController::class);
 //booking terms and condition
 Route::resource('booking_terms_and_conditions', BookingTermsAndConditionsController::class);
 
-//booking terms and condition
+//employees
 Route::resource('employee', EmployeeController::class);
+
+//payrolls
+Route::resource('payroll', PayrollController::class);
 
 });
 
