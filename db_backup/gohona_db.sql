@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2024 at 04:03 PM
+-- Generation Time: May 23, 2024 at 03:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -160,6 +160,7 @@ CREATE TABLE `employees` (
   `emp_name` varchar(100) DEFAULT NULL,
   `designation` varchar(100) DEFAULT NULL,
   `joining_date` date DEFAULT NULL,
+  `per_day_salary` varchar(100) DEFAULT NULL,
   `father_name` varchar(100) DEFAULT NULL,
   `mother_name` varchar(100) DEFAULT NULL,
   `mobile_number` varchar(100) DEFAULT NULL,
@@ -173,9 +174,15 @@ CREATE TABLE `employees` (
   `religion` varchar(10) DEFAULT NULL,
   `gender` varchar(10) DEFAULT NULL,
   `profile_pic` varchar(100) DEFAULT NULL,
-  `emergency_contact_name` varchar(100) DEFAULT NULL,
-  `emergency_contact_number` varchar(100) DEFAULT NULL,
-  `emergency_contact_relation` varchar(10) DEFAULT NULL,
+  `emergency_contact_name_one` varchar(100) DEFAULT NULL,
+  `emergency_contact_number_one` varchar(100) DEFAULT NULL,
+  `emergency_contact_relation_one` varchar(10) DEFAULT NULL,
+  `emergency_contact_name_two` varchar(100) DEFAULT NULL,
+  `emergency_contact_number_two` varchar(100) DEFAULT NULL,
+  `emergency_contact_relation_two` varchar(100) DEFAULT NULL,
+  `emergency_contact_name_three` varchar(100) DEFAULT NULL,
+  `emergency_contact_number_three` varchar(100) DEFAULT NULL,
+  `emergency_contact_relation_three` varchar(100) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -184,8 +191,10 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name`, `emergency_contact_number`, `emergency_contact_relation`, `created_at`, `updated_at`) VALUES
-(1, 'Kamrul Hasan', 'Sales Executive', '2022-06-13', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh, dhaka-1100<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', '2024-05-16 13:28:47', '2024-05-16 13:28:47');
+INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `created_at`, `updated_at`) VALUES
+(1, 'Kamrul Hasan', 'Sales Executive', '2022-06-13', '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
+(2, 'Hamid Mahmud', 'Sales Executive', '2024-03-13', '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
+(3, 'Kartik Paul', 'Sales Manager', '2020-05-08', '1200', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12');
 
 -- --------------------------------------------------------
 
@@ -312,7 +321,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_nr`, `product_details`, `product_category`, `product_type`, `weight`, `carat`, `quantity`, `st_or_dia`, `st_or_dia_price`, `wage`, `wage_type`, `supplier`, `purchase_price`, `stock_type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'aa', 'sss@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
+(1, 'aa', 'sss@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL),
 (2, 'ww', 'ww@gmail.com', 6, 2, 'y', 2, '2', NULL, NULL, NULL, '2', NULL, NULL, 3, 1, NULL, NULL),
 (11, 'dsf', 'aa@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
 (12, 'qqq', 'qq@gmai', 9, NULL, '32kg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
@@ -620,7 +629,7 @@ ALTER TABLE `districts`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`

@@ -76,7 +76,9 @@
           </li>
 
       
-          <li class="nav-item @if(Request::is('employee')) menu-open @endif">
+          <li class="nav-item @if(Request::is('employee')) menu-open 
+                              @elseif(Request::is('payroll')) menu-open 
+                              @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-wallet"></i>
               <p>
@@ -91,13 +93,15 @@
                   <p style="{{ Request::is('employee') ? 'color: white; !important' : ''}}">Employees</p>
                 </a>
               </li>
-             
+
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Payrolls</p>
+                <a href="{{route('payroll.index')}}" class="nav-link {{ Request::is('payroll') ? 'nav-link active' : ''}}" style="{{ Request::is('payroll') ? 'background-color: #17a2b8; !important' : ''}}">
+                  <i class="far fa-circle nav-icon" style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}"></i>
+                  <p style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}">Payrolls</p>
                 </a>
               </li>
+             
+      
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

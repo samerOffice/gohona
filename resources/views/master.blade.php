@@ -69,6 +69,8 @@
 <!-- REQUIRED SCRIPTS -->
 <!-- jQuery -->
 <script src="{{asset('public/plugins/jquery/jquery.min.js')}}"></script>
+<!-- axios -->
+<script src="{{asset('public/plugins/axios/axios.min.js')}}"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/plugins/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
 <!-- DataTables  & Plugins -->

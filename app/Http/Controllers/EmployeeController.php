@@ -34,7 +34,7 @@ class EmployeeController extends Controller
         'emp_name'=>$request->emp_name,
         'designation'=>$request->designation,
         'joining_date'=>$request->joining_date,
-        'monthly_salary'=>$request->monthly_salary,
+        'per_day_salary'=>$request->per_day_salary,
         'father_name'=>$request->father_name,
         'mother_name'=>$request->mother_name,
         'mobile_number'=>$request->mobile_number,
@@ -92,7 +92,7 @@ class EmployeeController extends Controller
         $data['emp_name'] = $request->emp_name;
         $data['designation'] = $request->designation;
         $data['joining_date'] = $request->joining_date;
-        $data['monthly_salary'] = $request->monthly_salary;
+        $data['per_day_salary'] = $request->per_day_salary;
         $data['father_name'] = $request->father_name;
         $data['mother_name'] = $request->mother_name;
         $data['mobile_number'] = $request->mobile_number;
