@@ -54,6 +54,13 @@ Welcome
                         <input type="date" required class="form-control" id="joining_date" name="joining_date" value="{{$employee->joining_date}}">
                       </div>
                     </div>
+
+                    <div class="col-md-4 col-sm-12">
+                      <div class="form-group">
+                        <label>Monthly Salary</label>
+                        <input type="number" required class="form-control" id="monthly_salary" name="monthly_salary" value="{{$employee->monthly_salary}}">
+                      </div>
+                    </div>
                     </div>
                                                           
                     <div class="row">
@@ -159,27 +166,87 @@ Welcome
                         </div>
                       </div>
                     </div>
-            
-                  <div class="row">
-                    <div class="col-md-4 col-sm-12">
-                      <div class="form-group">
-                        <label>Emergency Contact Person Name</label>
-                        <input type="text"  class="form-control" id="emergency_contact_name" name="emergency_contact_name" value="{{$employee->emergency_contact_name}}">
-                    </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                      <div class="form-group">
-                        <label>Emergency Contact Number</label>
-                        <input type="text" class="form-control" id="emergency_contact_number" name="emergency_contact_number" value="{{$employee->emergency_contact_number}}">
-                      </div>
-                    </div>
-                    <div class="col-md-4 col-sm-12">
-                      <div class="form-group">
-                        <label>Relation with Emergency Contact Person</label>
-                        <input type="text" class="form-control" id="emergency_contact_relation" name="emergency_contact_relation" value="{{$employee->emergency_contact_relation}}">
-                      </div>
-                    </div>
-                    </div>                      
+
+
+                    <br>
+<br>
+                              <div class="card">
+                                <div class="card-header">
+                                  Emergency Contact Person Information
+                                </div>
+                              <div class="card-body">
+                                <div class="row">
+                                  <h2>1.</h2>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                      <label>Name <small style="color: red">*</small></label>
+                                      <input type="text" required  class="form-control" id="emergency_contact_name_one" name="emergency_contact_name_one" value="{{$employee->emergency_contact_name_one}}">
+                                    </div>
+                                  </div>
+                                <div class="col-md-4 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Number <small style="color: red">*</small></label>
+                                    <input type="text" required class="form-control" id="emergency_contact_number_one" name="emergency_contact_number_one" value="{{$employee->emergency_contact_number_one}}">
+                                  </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Relation <small style="color: red">*</small></label>
+                                    <input type="text" required class="form-control" id="emergency_contact_relation_one" name="emergency_contact_relation_one" value="{{$employee->emergency_contact_relation_one}}">
+                                  </div>
+                                </div>
+                               </div>
+                               <div class="row">
+                                <h2>2.</h2>
+                              </div>
+                               <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Name <small style="color: red">*</small></label>
+                                    <input type="text" required  class="form-control" id="emergency_contact_name_two" name="emergency_contact_name_two" value="{{$employee->emergency_contact_name_two}}">
+                                  </div>
+                                </div>
+                              <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                  <label>Number <small style="color: red">*</small></label>
+                                  <input type="text" required class="form-control" id="emergency_contact_number_two" name="emergency_contact_number_two" value="{{$employee->emergency_contact_number_two}}">
+                                </div>
+                              </div>
+                              <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                  <label>Relation <small style="color: red">*</small></label>
+                                  <input type="text" required class="form-control" id="emergency_contact_relation_two" name="emergency_contact_relation_two" value="{{$employee->emergency_contact_relation_two}}">
+                                </div>
+                              </div>
+                             </div>
+                             <div class="row">
+                              <h2>3.</h2>
+                            </div>
+                             <div class="row">
+                              <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                  <label>Name</label>
+                                  <input type="text" class="form-control" id="emergency_contact_name_three" name="emergency_contact_name_three" value="{{$employee->emergency_contact_name_three}}">
+                                </div>
+                              </div>
+                            <div class="col-md-4 col-sm-12">
+                              <div class="form-group">
+                                <label>Number</label>
+                                <input type="text" class="form-control" id="emergency_contact_number_three" name="emergency_contact_number_three" value="{{$employee->emergency_contact_number_three}}">
+                              </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                              <div class="form-group">
+                                <label>Relation</label>
+                                <input type="text" class="form-control" id="emergency_contact_relation_three" name="emergency_contact_relation_three" value="{{$employee->emergency_contact_relation_three}}">
+                              </div>
+                            </div>
+                           </div>
+
+                              </div>
+                              </div>
                   </div>
                             
                     </div>

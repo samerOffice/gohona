@@ -34,24 +34,31 @@ Welcome
                               </div> --}}
 
                               <div class="row">
-                              <div class="col-md-4 col-sm-12">
+                              <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                  <label >Full Name</label>
+                                  <label >Full Name <small style="color: red">*</small></label>
                                   <input type="text" required class="form-control" id="emp_name" name="emp_name" >
                                 </div>
                               </div>
 
-                              <div class="col-md-4 col-sm-12">
+                              <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                  <label >Designation</label>
+                                  <label >Designation <small style="color: red">*</small></label>
                                   <input type="text" required class="form-control" id="designation" name="designation" >
                                 </div>
                               </div>
 
-                              <div class="col-md-4 col-sm-12">
+                              <div class="col-md-3 col-sm-12">
                                 <div class="form-group">
-                                  <label >Joining Date</label>
+                                  <label >Joining Date <small style="color: red">*</small></label>
                                   <input type="date" required class="form-control" id="joining_date" name="joining_date" >
+                                </div>
+                              </div>
+
+                              <div class="col-md-3 col-sm-12">
+                                <div class="form-group">
+                                  <label>Monthly Salary <small style="color: red">*</small></label>
+                                  <input type="number" required class="form-control" id="monthly_salary" name="monthly_salary" >
                                 </div>
                               </div>
                               </div>
@@ -76,33 +83,33 @@ Welcome
                               <div class="row">
                                 <div class="col-md-6 col-sm-12">
                                   <div class="form-group">
-                                    <label >Contact Number</label>
+                                    <label >Contact Number <small style="color: red">*</small></label>
                                     <input type="text" required class="form-control" id="mobile_number" name="mobile_number" >
                                   </div>
                                 </div>
                                 <div class="col-md-6 col-sm-12">
                                   <div class="form-group">
-                                    <label >NID Number</label>
+                                    <label >NID Number <small style="color: red">*</small></label>
                                     <input type="text" required class="form-control" id="nid_number" name="nid_number" >
                                   </div>
                                 </div>
                               </div>
                                 
                               <div class="form-group">
-                                <label >Present Address</label><br>
-                                <textarea name="present_address" class="summernote" id="present_address"></textarea>
+                                <label >Present Address <small style="color: red">*</small></label><br>
+                                <textarea required name="present_address" class="summernote" id="present_address"></textarea>
                               </div>
 
                               <div class="form-group">
-                                <label >Permanent Address</label><br>
-                                <textarea name="permanent_address" class="summernote" id="permanent_address" ></textarea>
+                                <label >Permanent Address <small style="color: red">*</small></label><br>
+                                <textarea required name="permanent_address" class="summernote" id="permanent_address" ></textarea>
                               </div>
 
                               <div class="row">
                                 <div class="col-md-4 col-sm-12">
                                   <div class="form-group">
-                                    <label >Date of Birth</label>
-                                    <input type="date"  class="form-control" id="birth_date" name="birth_date" >
+                                    <label >Date of Birth <small style="color: red">*</small></label>
+                                    <input type="date" required class="form-control" id="birth_date" name="birth_date" >
                                   </div>
                                 </div>
                                 <div class="col-md-4 col-sm-12">
@@ -157,26 +164,85 @@ Welcome
                                 </div>
                               </div>
                       
-                            <div class="row">
+<br>
+<br>
+                              <div class="card">
+                                <div class="card-header">
+                                  Emergency Contact Person Information
+                                </div>
+                              <div class="card-body">
+                                <div class="row">
+                                  <h2>1.</h2>
+                                </div>
+                                <div class="row">
+                                  <div class="col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                      <label>Name <small style="color: red">*</small></label>
+                                      <input type="text" required  class="form-control" id="emergency_contact_name_one" name="emergency_contact_name_one">
+                                    </div>
+                                  </div>
+                                <div class="col-md-4 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Number <small style="color: red">*</small></label>
+                                    <input type="text" required class="form-control" id="emergency_contact_number_one" name="emergency_contact_number_one">
+                                  </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Relation <small style="color: red">*</small></label>
+                                    <input type="text" required class="form-control" id="emergency_contact_relation_one" name="emergency_contact_relation_one">
+                                  </div>
+                                </div>
+                               </div>
+                               <div class="row">
+                                <h2>2.</h2>
+                              </div>
+                               <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                  <div class="form-group">
+                                    <label>Name <small style="color: red">*</small></label>
+                                    <input type="text" required  class="form-control" id="emergency_contact_name_two" name="emergency_contact_name_two">
+                                  </div>
+                                </div>
                               <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                  <label>Emergency Contact Person Name</label>
-                                  <input type="text"  class="form-control" id="emergency_contact_name" name="emergency_contact_name">
-                              </div>
-                              </div>
-                              <div class="col-md-4 col-sm-12">
-                                <div class="form-group">
-                                  <label>Emergency Contact Number</label>
-                                  <input type="text" class="form-control" id="emergency_contact_number" name="emergency_contact_number">
+                                  <label>Number <small style="color: red">*</small></label>
+                                  <input type="text" required class="form-control" id="emergency_contact_number_two" name="emergency_contact_number_two">
                                 </div>
                               </div>
                               <div class="col-md-4 col-sm-12">
                                 <div class="form-group">
-                                  <label>Relation with Emergency Contact Person</label>
-                                  <input type="text" class="form-control" id="emergency_contact_relation" name="emergency_contact_relation">
+                                  <label>Relation <small style="color: red">*</small></label>
+                                  <input type="text" required class="form-control" id="emergency_contact_relation_two" name="emergency_contact_relation_two">
                                 </div>
                               </div>
-                              </div>                      
+                             </div>
+                             <div class="row">
+                              <h2>3.</h2>
+                            </div>
+                             <div class="row">
+                              <div class="col-md-4 col-sm-12">
+                                <div class="form-group">
+                                  <label>Name</label>
+                                  <input type="text"  class="form-control" id="emergency_contact_name_three" name="emergency_contact_name_three">
+                                </div>
+                              </div>
+                            <div class="col-md-4 col-sm-12">
+                              <div class="form-group">
+                                <label>Number</label>
+                                <input type="text" class="form-control" id="emergency_contact_number_three" name="emergency_contact_number_three">
+                              </div>
+                            </div>
+                            <div class="col-md-4 col-sm-12">
+                              <div class="form-group">
+                                <label>Relation</label>
+                                <input type="text" class="form-control" id="emergency_contact_relation_three" name="emergency_contact_relation_three">
+                              </div>
+                            </div>
+                           </div>
+
+                              </div>
+                              </div>
                             </div>
                             <!-- /.card-body -->
                             <button type="submit" id="ss"  class="btn btn-info float-right mr-4">Submit</button>
