@@ -84,6 +84,9 @@ Route::resource('employee', EmployeeController::class);
 //payrolls
 Route::resource('payroll', PayrollController::class);
 
+//dependencies
+Route::post('/employee_details_dependancy', [PayrollController::class, 'employee_details_dependancy']);
+
 });
 
 
