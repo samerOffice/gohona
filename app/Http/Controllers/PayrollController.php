@@ -17,6 +17,24 @@ class PayrollController extends Controller
         return view('payrolls.index',compact('employees'));
     }
 
+    public function employee_details_dependancy(Request $request){
+        $selectedEmployeeId = $request->input('data');
+        $employeeInfo = DB::table('employees')
+                    ->where('id',$selectedEmployeeId)
+                    ->first();
+  
+        $data = [
+            'joining_date' => $employeeInfo->joining_date,
+            'per_day_salary' => $employeeInfo->per_day_salary
+        ];
+
+    return $data;
+    // $per_day_salary = $employeeInfo->per_day_salary;
+    // $joining_date = $employeeInfo->joining_date;
+    //   echo $joining_date;
+    //   echo $per_day_salary;
+    }
+
     /**
      * Show the form for creating a new resource.
      */

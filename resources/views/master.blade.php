@@ -70,7 +70,8 @@
 <!-- jQuery -->
 <script src="{{asset('public/plugins/jquery/jquery.min.js')}}"></script>
 <!-- axios -->
-<script src="{{asset('public/plugins/axios/axios.min.js')}}"></script>
+{{-- <script src="{{asset('public/plugins/axios/axios.min.js')}}"></script> --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.2/axios.min.js"></script>
 <!-- Bootstrap -->
 <script src="{{asset('public/plugins/bootstrap/js/bootstrap.bundle.min.js')}} "></script>
 <!-- DataTables  & Plugins -->
