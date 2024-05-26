@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 class PayrollController extends Controller
 {
@@ -22,9 +23,13 @@ class PayrollController extends Controller
         $employeeInfo = DB::table('employees')
                     ->where('id',$selectedEmployeeId)
                     ->first();
+
+        $joining_date = $employeeInfo->joining_date;
+        $joining_month = Carbon::parse($joining_date)->format('m');
   
         $data = [
             'joining_date' => $employeeInfo->joining_date,
+            'joining_month' => $joining_month,
             'per_day_salary' => $employeeInfo->per_day_salary
         ];
 
