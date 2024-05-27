@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2024 at 03:39 PM
+-- Generation Time: May 27, 2024 at 03:30 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -160,6 +160,7 @@ CREATE TABLE `employees` (
   `emp_name` varchar(100) DEFAULT NULL,
   `designation` varchar(100) DEFAULT NULL,
   `joining_date` date DEFAULT NULL,
+  `yearly_bonus_date` date DEFAULT NULL,
   `per_day_salary` varchar(100) DEFAULT NULL,
   `father_name` varchar(100) DEFAULT NULL,
   `mother_name` varchar(100) DEFAULT NULL,
@@ -183,6 +184,7 @@ CREATE TABLE `employees` (
   `emergency_contact_name_three` varchar(100) DEFAULT NULL,
   `emergency_contact_number_three` varchar(100) DEFAULT NULL,
   `emergency_contact_relation_three` varchar(100) DEFAULT NULL,
+  `yearly_bonus_status` int(10) DEFAULT NULL COMMENT 'null = no bonus is inserted yet\r\n1 = already bonus inserted\r\n',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -191,10 +193,10 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `created_at`, `updated_at`) VALUES
-(1, 'Kamrul Hasan', 'Sales Executive', '2022-06-13', '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
-(2, 'Hamid Mahmud', 'Sales Executive', '2024-03-13', '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
-(3, 'Kartik Paul', 'Sales Manager', '2020-05-08', '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12');
+INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `yearly_bonus_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `yearly_bonus_status`, `created_at`, `updated_at`) VALUES
+(1, 'Kamrul Hasan', 'Sales Executive', '2022-06-13', NULL, '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
+(2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', NULL, '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
+(3, 'Kartik Paul', 'Sales Manager', '2020-05-08', NULL, '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12');
 
 -- --------------------------------------------------------
 
@@ -269,6 +271,54 @@ CREATE TABLE `payment_methods` (
 
 INSERT INTO `payment_methods` (`id`, `name`, `under_type`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'ADVANCE', 'Cash', 1, '2024-05-13 10:40:11', '2024-05-13 10:40:11');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payrolls`
+--
+
+CREATE TABLE `payrolls` (
+  `id` int(11) NOT NULL,
+  `emp_id` int(100) DEFAULT NULL,
+  `salary_date` date DEFAULT NULL,
+  `joining_date` date DEFAULT NULL,
+  `per_day_salary` varchar(100) DEFAULT NULL,
+  `total_bonus_day` varchar(100) DEFAULT NULL,
+  `yearly_total_bonus_amount` varchar(100) DEFAULT NULL,
+  `bonus_eligible_month` varchar(100) DEFAULT NULL,
+  `bonus_payable_month` varchar(100) DEFAULT NULL,
+  `bonus_payable_amount` varchar(100) DEFAULT NULL,
+  `total_working_days` varchar(100) DEFAULT NULL,
+  `total_leave` varchar(100) DEFAULT NULL,
+  `total_number_of_payable_days` varchar(100) DEFAULT NULL,
+  `monthly_salary` varchar(100) DEFAULT NULL,
+  `monthly_holiday_bonus` varchar(100) DEFAULT NULL,
+  `total_daily_allowance` varchar(100) DEFAULT NULL,
+  `total_travel_allowance` varchar(100) DEFAULT NULL,
+  `rental_cost_allowance` varchar(100) DEFAULT NULL,
+  `hospital_bill_allowance` varchar(100) DEFAULT NULL,
+  `insurance_allowance` varchar(100) DEFAULT NULL,
+  `sales_commission` varchar(100) DEFAULT NULL,
+  `retail_commission` varchar(100) DEFAULT NULL,
+  `total_others` varchar(100) DEFAULT NULL,
+  `total_salary` varchar(100) DEFAULT NULL,
+  `yearly_bonus` varchar(100) DEFAULT NULL,
+  `total_payable_salary` varchar(100) DEFAULT NULL,
+  `advance_less` varchar(100) DEFAULT NULL,
+  `any_deduction` varchar(100) DEFAULT NULL,
+  `final_pay_amount` varchar(100) DEFAULT NULL,
+  `loan_advance` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `payrolls`
+--
+
+INSERT INTO `payrolls` (`id`, `emp_id`, `salary_date`, `joining_date`, `per_day_salary`, `total_bonus_day`, `yearly_total_bonus_amount`, `bonus_eligible_month`, `bonus_payable_month`, `bonus_payable_amount`, `total_working_days`, `total_leave`, `total_number_of_payable_days`, `monthly_salary`, `monthly_holiday_bonus`, `total_daily_allowance`, `total_travel_allowance`, `rental_cost_allowance`, `hospital_bill_allowance`, `insurance_allowance`, `sales_commission`, `retail_commission`, `total_others`, `total_salary`, `yearly_bonus`, `total_payable_salary`, `advance_less`, `any_deduction`, `final_pay_amount`, `loan_advance`, `created_at`, `updated_at`) VALUES
+(1, 2, '2024-05-27', '2024-02-01', '900', '39', '35100', '04-2024', '05-2024', '8775', '26', '1', '25', '22500', '900', '0', '0', '0', '0', '0', '0', '0', '900', '23400', '0', '23400', '0', '0', '23400', NULL, '2024-05-27 13:21:24', '2024-05-27 13:21:24');
 
 -- --------------------------------------------------------
 
@@ -547,6 +597,12 @@ ALTER TABLE `payment_methods`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `payrolls`
+--
+ALTER TABLE `payrolls`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
@@ -647,6 +703,12 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `payrolls`
+--
+ALTER TABLE `payrolls`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
