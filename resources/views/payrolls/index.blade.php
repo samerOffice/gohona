@@ -27,7 +27,7 @@ Welcome
         </div>
           <div class="col-12">
             <!-- Main content -->
-            <div class="invoice p-3 mt-3">
+            <div class=" p-3 mt-3">
               <!-- title row -->
               <div class="row">
                 <div class="col-12">
@@ -195,9 +195,9 @@ Welcome
                 <!-- this row will not appear when printing -->
                 <div class="row no-print">
                   <div class="col-12">
-                    <button type="button" id="invoice_print" class="btn btn-primary" style="margin-right: 5px;">
+                    {{-- <button type="button" id="invoice_print" class="btn btn-primary" style="margin-right: 5px;">
                       <i class="fas fa-print"></i> Print
-                    </button>
+                    </button> --}}
                     <button type="submit" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Submit
                       Payment
                     </button>
@@ -228,9 +228,9 @@ $(document).ready(function() {
             theme: 'bootstrap4'
             });   
             
-  $('#invoice_print').on('click',function(){
-    window.addEventListener("load", window.print());
-  })
+  // $('#invoice_print').on('click',function(){
+  //   window.addEventListener("load", window.print());
+  // })
     });
 
 $('#employee').on('change',function(event){
@@ -389,7 +389,7 @@ axios.get('sanctum/csrf-cookie').then(response=>{
         $('#bonus_eligible_month').val(eligible_mm_yyyy);
         $('#bonus_pay_month').val(payMonth_mm_yyyy);
 
-        var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').html();
+        var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').val();
 
         //........current mm-yyyy starts............
         var currentDateFormatted = new Date();
@@ -492,7 +492,7 @@ axios.get('sanctum/csrf-cookie').then(response=>{
         $('#bonus_eligible_month').val(eligible_mm_yyyy);
         $('#bonus_pay_month').val(payMonth_mm_yyyy);
 
-        var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').html();
+        var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').val();
 
         //........current mm-yyyy starts............
         var currentDateFormatted = new Date();
