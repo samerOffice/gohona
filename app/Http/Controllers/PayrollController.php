@@ -51,24 +51,22 @@ class PayrollController extends Controller
      */
     public function store(Request $request)
     {
+        
+        
         $payroll = DB::table('payrolls')
         ->insertGetId([
-        'emp_id'=>$request->employee,
-        // 'salary_date'=>Carbon::now()->format('Y-m-d'),
+        'employee'=>$request->employee,
         'salary_date'=>$request->salary_date,
-
         'joining_date'=>$request->joining_date,
         'per_day_salary'=>$request->per_day_salary,
-        // 'total_bonus_day'=>'39',
-        'total_bonus_day'=>$request->emp_total_bonus_day,
-
-        'yearly_total_bonus_amount'=>$request->emp_total_bonus_amount,     
+        'emp_total_bonus_day'=>$request->emp_total_bonus_day,
+        'emp_total_bonus_amount'=>$request->emp_total_bonus_amount,     
         'bonus_eligible_month'=>$request->bonus_eligible_month,
-        'bonus_payable_month'=>$request->bonus_pay_month,
-        'bonus_payable_amount'=>$request->bonus_pay_amount,
-        'total_working_days'=>$request->total_working_day,
+        'bonus_pay_month'=>$request->bonus_pay_month,
+        'bonus_pay_amount'=>$request->bonus_pay_amount,
+        'total_working_day'=>$request->total_working_day,
         'total_leave'=>$request->total_leave,
-        'total_number_of_payable_days'=>$request->total_number_of_pay_day,
+        'total_number_of_pay_day'=>$request->total_number_of_pay_day,
         'monthly_salary'=>$request->monthly_salary,
         'monthly_holiday_bonus'=>$request->monthly_holiday_bonus,
         'total_daily_allowance'=>$request->total_daily_allowance,
@@ -88,21 +86,166 @@ class PayrollController extends Controller
         'loan_advance'=>$request->loan_advance
         ]);
 
-
         $only_payroll = $request->all();
          // Filter out fields with values equal to zero
          $filteredData = array_filter($only_payroll, function($value) {
             return $value != 0;
         });
 
-    
-        // return response()->json(['filtered_data' => $filteredData]);
-        dd($filteredData);
+
+        //retrieve employee name
+        $emp = DB::table('payrolls')
+               ->where('id',$payroll)
+               ->first();
+        $employee_id = $emp->employee;
+
+
+       //for yearly bonus update
+
+
+       $carbonDate = Carbon::createFromFormat('m-Y', $request->bonus_pay_month);
+
+       // Format the date to dd-mm-yyyy
+       $formattedDate = $carbonDate->format('Y-m-d');
 
 
 
-        return redirect()->route('payroll.index')->withSuccess('Payroll is added successfully'); 
+
+       $data = array();
+       $data['yearly_bonus_date'] = $formattedDate;
+        $updated = DB::table('employees')
+                  ->where('id', $employee_id)
+                  ->update($data);
+
+
+
+        $emp_details = DB::table('employees')
+                       ->where('id',$employee_id)
+                       ->first();
+        
+        $emp_name = $emp_details->emp_name;
+        $emp_id = $emp_details->id;
+        $emp_designation = $emp_details->designation;
+ 
+         // Redirect to another route to show the data
+         return redirect()->route('payroll_show_data')->with([
+            'filtered_data' => $filteredData,
+            'emp_name' => $emp_name,
+            'emp_id' => $emp_id,
+            'emp_designation' => $emp_designation,
+            'payroll' => $payroll
+        ]);
+
     }
+
+
+    public function payroll_show_data(){
+        // Retrieve filtered data from session
+        $filteredData = session('filtered_data', []);
+        $emp_name = session('emp_name');
+        $emp_id = session('emp_id');
+        $emp_designation = session('emp_designation');
+        $payroll = session('payroll');
+        // Pass the filtered data to the Blade view
+        return view('payrolls.show_data',compact('filteredData','emp_name','emp_id','emp_designation','payroll'));
+    }
+
+
+
+    public function generateCsv(Request $request)
+    {
+        $id = $request->payroll;
+        $fileName = 'payroll_data.csv';
+
+        // $payrolls = Payroll::all();
+
+        $payroll = DB::table('payrolls')
+                    ->leftJoin('employees','payrolls.employee','=','employees.id')
+                    ->select('payrolls.*','employees.emp_name as employee_name')
+                    ->where('payrolls.id',$id)
+                    ->first();
+
+        // Define the headers for the CSV file
+        $headers = [
+            'Employee', 
+            'Salary Date',
+            'Joining Date',
+            'Per Day Salary',
+            'Total Bonus Day',
+            'Total Bonus Amount',
+            'Bonus Eligible Month',
+            'Bonus Payable Month',
+            'Bonus Pay Amount',
+            'Total Working Days',
+            'Total Leave',
+            'Total Number of Payable Days',
+            'Monthly Salary',
+            'Monthly Holiday Bonus',
+            'Total Daily Allowance',
+            'Total Travel Allowance',
+            'Rental Cost Allowance',
+            'Hospital Bill Allowance',
+            'Insurance Allowance',
+            'Sales Commission',
+            'Retail Commission',
+            'Total Others',
+            'Total Salary',
+            'Yearly Bonus',
+            'Total Payable Salary',
+            'Advance Less',
+            'Any Deduction',
+            'Final Payment Amount',
+            'Loan Advance'
+        ];
+
+        // Open output stream
+        $file = fopen('php://output', 'w');
+     
+        // Set the headers for the CSV file
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="' . $fileName . '"');
+
+        // Write the header row to the CSV file
+        fputcsv($file, $headers);
+
+            fputcsv($file, [
+                $payroll->employee_name,
+                $payroll->salary_date,
+                $payroll->joining_date,
+                $payroll->per_day_salary,
+                $payroll->emp_total_bonus_day,
+                $payroll->emp_total_bonus_amount,
+                $payroll->bonus_eligible_month,
+                $payroll->bonus_pay_month,
+                $payroll->bonus_pay_amount,
+                $payroll->total_working_day,
+                $payroll->total_leave,
+                $payroll->total_number_of_pay_day,
+                $payroll->monthly_salary,
+                $payroll->monthly_holiday_bonus,
+                $payroll->total_daily_allowance,
+                $payroll->total_travel_allowance,
+                $payroll->rental_cost_allowance,
+                $payroll->hospital_bill_allowance,
+                $payroll->insurance_allowance,
+                $payroll->sales_commission,
+                $payroll->retail_commission,
+                $payroll->total_others,
+                $payroll->total_salary,
+                $payroll->yearly_bonus,
+                $payroll->total_payable_salary,
+                $payroll->advance_less,
+                $payroll->any_deduction,
+                $payroll->final_pay_amount,
+                $payroll->loan_advance
+            ]);
+        
+        // Close the output stream
+        fclose($file);
+        exit();
+    }
+
+
 
     /**
      * Display the specified resource.
@@ -135,6 +278,8 @@ class PayrollController extends Controller
     {
         //
     }
+
+    
 
    
 }

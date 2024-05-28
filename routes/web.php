@@ -87,6 +87,11 @@ Route::resource('payroll', PayrollController::class);
 //dependencies
 Route::post('/employee_details_dependancy', [PayrollController::class, 'employee_details_dependancy']);
 
+
+Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data'])->name('payroll_show_data');
+
+ Route::post('/generate-csv', [PayrollController::class, 'generateCsv'])->name('generate-csv');
+
 });
 
 
