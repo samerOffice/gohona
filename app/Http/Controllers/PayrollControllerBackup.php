@@ -65,7 +65,8 @@ class PayrollController extends Controller
      */
     public function store(Request $request)
     {
-         
+        
+        
         $payroll = DB::table('payrolls')
         ->insertGetId([
         'employee'=>$request->employee,
@@ -114,58 +115,53 @@ class PayrollController extends Controller
 
 
        //for yearly bonus update
+
+
        $carbonDate = Carbon::createFromFormat('m-Y', $request->bonus_pay_month);
 
        // Format the date to dd-mm-yyyy
        $formattedDate = $carbonDate->format('Y-m-d');
 
 
+
+
        $data = array();
        $data['yearly_bonus_date'] = $formattedDate;
-       $updated = DB::table('employees')
+        $updated = DB::table('employees')
                   ->where('id', $employee_id)
                   ->update($data);
 
 
-       return redirect()->route('payroll_show_data');
+
+        $emp_details = DB::table('employees')
+                       ->where('id',$employee_id)
+                       ->first();
+        
+        $emp_name = $emp_details->emp_name;
+        $emp_id = $emp_details->id;
+        $emp_designation = $emp_details->designation;
+ 
+         // Redirect to another route to show the data
+         return redirect()->route('payroll_show_data')->with([
+            'filtered_data' => $filteredData,
+            'emp_name' => $emp_name,
+            'emp_id' => $emp_id,
+            'emp_designation' => $emp_designation,
+            'payroll' => $payroll
+        ]);
+
     }
 
 
     public function payroll_show_data(){
-        
-        
-        $last_inserted_data = DB::table('payrolls')
-                             ->orderBy('id', 'desc')
-                             ->first();
-
-        $last_inserted_id = $last_inserted_data->id;
-
-        $emp_payroll_info = DB::table('payrolls')
-                                ->leftJoin('employees','payrolls.employee','employees.id')
-                                ->select(
-                                'employees.id as emp_id',
-                                'employees.emp_name as emp_name',
-                                'employees.designation as emp_designation',
-                                'employees.joining_date as emp_joining_date',
-                                'payrolls.*',        
-                                'payrolls.salary_date as emp_salary_date')
-                                ->where('payrolls.id', $last_inserted_id)
-                                ->first();
-
-        $emp_payroll_info = (array) $emp_payroll_info;
-        $filteredData = array_filter($emp_payroll_info, function($value) {
-            return $value != 0;
-        });
-
-        $emp_id = $filteredData['emp_id'] ?? null;
-        $emp_name = $filteredData['emp_name'] ?? null;
-        $emp_designation = $filteredData['emp_designation'] ?? null; // Fix typo
-        $emp_joining_date = $filteredData['emp_joining_date'] ?? null; // Fix typo
-        $emp_salary_date = $filteredData['emp_salary_date'] ?? null; // Fix typo
-
-        
-
-        return view('payrolls.show_data',compact('filteredData','emp_id','emp_name','emp_designation','emp_joining_date','emp_salary_date','last_inserted_id'));
+        // Retrieve filtered data from session
+        $filteredData = session('filtered_data', []);
+        $emp_name = session('emp_name');
+        $emp_id = session('emp_id');
+        $emp_designation = session('emp_designation');
+        $payroll = session('payroll');
+        // Pass the filtered data to the Blade view
+        return view('payrolls.show_data',compact('filteredData','emp_name','emp_id','emp_designation','payroll'));
     }
 
 

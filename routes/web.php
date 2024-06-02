@@ -15,6 +15,8 @@ use App\Http\Controllers\TermsAndConditionsController;
 use App\Http\Controllers\BookingTermsAndConditionsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PayrollController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\RoleAndPermissionController;
 
 
 
@@ -78,19 +80,27 @@ Route::resource('terms_and_conditions', TermsAndConditionsController::class);
 //booking terms and condition
 Route::resource('booking_terms_and_conditions', BookingTermsAndConditionsController::class);
 
+//setting
+Route::resource('settings', SettingController::class);
+
 //employees
 Route::resource('employee', EmployeeController::class);
 
 //payrolls
 Route::resource('payroll', PayrollController::class);
+Route::get('/payroll_list', [PayrollController::class, 'payroll_list'])->name('payroll_list');
+Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data'])->name('payroll_show_data');
 
 //dependencies
 Route::post('/employee_details_dependancy', [PayrollController::class, 'employee_details_dependancy']);
 
 
 Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data'])->name('payroll_show_data');
+Route::post('/generate-csv', [PayrollController::class, 'generateCsv'])->name('generate-csv');
 
- Route::post('/generate-csv', [PayrollController::class, 'generateCsv'])->name('generate-csv');
+//roles and permissions
+Route::resource('roles_and_permissions',RoleAndPermissionController::class);
+Route::get('/delete_role/{delete_id}', [RoleAndPermissionController::class, 'delete_role'])->name('delete_role');
 
 });
 

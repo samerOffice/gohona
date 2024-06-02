@@ -77,7 +77,8 @@
 
       
           <li class="nav-item @if(Request::is('employee')) menu-open 
-                              @elseif(Request::is('payroll')) menu-open 
+                              @elseif(Request::is('payroll')) menu-open
+                              @elseif(Request::is('payroll_list')) menu-open
                               @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-wallet"></i>
@@ -97,7 +98,15 @@
               <li class="nav-item">
                 <a href="{{route('payroll.index')}}" class="nav-link {{ Request::is('payroll') ? 'nav-link active' : ''}}" style="{{ Request::is('payroll') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}"></i>
-                  <p style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}">Payrolls</p>
+                  <p style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}">Add Payroll</p>
+                </a>
+              </li>
+
+
+              <li class="nav-item">
+                <a href="{{route('payroll_list')}}" class="nav-link {{ Request::is('payroll_list') ? 'nav-link active' : ''}}" style="{{ Request::is('payroll_list') ? 'background-color: #17a2b8; !important' : ''}}">
+                  <i class="far fa-circle nav-icon" style="{{ Request::is('payroll_list') ? 'color: white; !important' : ''}}"></i>
+                  <p style="{{ Request::is('payroll_list') ? 'color: white; !important' : ''}}">Payroll List</p>
                 </a>
               </li>
              
@@ -170,6 +179,8 @@
           @elseif(Request::is('payment_method')) menu-open 
           @elseif(Request::is('terms_and_conditions')) menu-open
           @elseif(Request::is('booking_terms_and_conditions')) menu-open
+          @elseif(Request::is('settings')) menu-open
+          @elseif(Request::is('roles_and_permissions')) menu-open
           @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-gears"></i>
@@ -248,20 +259,24 @@
                   <p style="{{ Request::is('booking_terms_and_conditions') ? 'color: white; !important' : ''}}">Booking T&C</p>
                 </a>
               </li>
-           
-              
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Settings</p>
+
+
+              <li class="nav-item ">
+                <a href="{{route('settings.index')}}" class="nav-link {{ Request::is('settings') ? 'nav-link active' : ''}}" style="{{ Request::is('settings') ? 'background-color: #17a2b8; !important' : ''}}">
+                  <i class="far fa-circle nav-icon" style="{{ Request::is('settings') ? 'color: white; !important' : ''}}"></i>
+                  <p style="{{ Request::is('settings') ? 'color: white; !important' : ''}}">Settings</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Roles & Permissions</p>
+
+
+              <li class="nav-item ">
+                <a href="{{route('roles_and_permissions.index')}}" class="nav-link {{ Request::is('roles_and_permissions') ? 'nav-link active' : ''}}" style="{{ Request::is('roles_and_permissions') ? 'background-color: #17a2b8; !important' : ''}}">
+                  <i class="far fa-circle nav-icon" style="{{ Request::is('roles_and_permissions') ? 'color: white; !important' : ''}}"></i>
+                  <p style="{{ Request::is('roles_and_permissions') ? 'color: white; !important' : ''}}">Roles & Permissions</p>
                 </a>
               </li>
+        
+             
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
