@@ -40,7 +40,19 @@ Payroll
                                     && 
                                     ($key !== 'emp_total_bonus_day')
                                     && 
+                                    ($key !== 'emp_id')
+                                    && 
                                     ($key !== 'employee')
+                                    && 
+                                    ($key !== 'id')
+                                    && 
+                                    ($key !== 'emp_name')
+                                    && 
+                                    ($key !== 'emp_designation')
+                                    && 
+                                    ($key !== 'joining_date')
+                                    && 
+                                    ($key !== 'emp_salary_date')                                  
                                     && 
                                     ($key !== 'emp_total_bonus_amount')
                                     && 
@@ -49,10 +61,14 @@ Payroll
                                     ($key !== 'bonus_pay_month')
                                     && 
                                     ($key !== 'bonus_pay_amount')
+                                    && 
+                                    ($key !== 'created_at')
+                                    && 
+                                    ($key !== 'updated_at')
                                     )
                                     <tr>
                                         <th>
-                                            @if($key === 'joining_date')
+                                            @if($key === 'emp_joining_date')
                                             Joining Date
                                             @elseif($key === 'salary_date')
                                             Salary Date
@@ -121,7 +137,7 @@ Payroll
                   {{-- <button onclick="window.location.href='{{ route('generate-csv', ['id' => $payroll]) }}'">Download CSV</button> --}}
                   <form method="post" action="{{route('generate-csv')}}">
                     @csrf
-                    <input type="hidden" name="payroll" value="{{$payroll}}">
+                    <input type="hidden" name="payroll" value="{{$last_inserted_id}}">
                   <button type="submit" class="btn btn-success"><i class="fas fa-download"></i> Download CSV</button>
                 </form>
                 </div>
@@ -164,12 +180,12 @@ $(document).ready(function() {
                 // Restore original content
                 document.body.innerHTML = originalContent;
 
-                // setTimeout(function() {
-                //     if (!window.matchMedia('print').matches) {
-                //         // Redirect to a different page if print was canceled
-                //         window.location.href = '{{ route('payroll_show_data') }}';
-                //     }
-                // }, 500);
+                setTimeout(function() {
+                    if (!window.matchMedia('print').matches) {
+                        // Redirect to a different page if print was canceled
+                        window.location.href = '{{ route('payroll_show_data') }}';
+                    }
+                }, 500);
 
             }
    
