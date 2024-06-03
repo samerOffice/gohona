@@ -38,10 +38,12 @@ Login
                                 @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
-            </div>       
+            </div>  
+            
             <!-- Submit button -->
             <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-lg btn-block" style="background-color: #2aa62a; color:white; border-color: #2aa62a">Login</button>
-            <br>  
+            <br> 
+            <a href="{{route('register')}}" style="text-align: right !important; margin-left: 50%">Create New Account</a> 
           </form>
         </div>
       </div>

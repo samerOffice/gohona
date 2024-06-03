@@ -88,6 +88,8 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+
               <li class="nav-item">
                 <a href="{{route('employee.index')}}" class="nav-link {{ Request::is('employee') ? 'nav-link active' : ''}}" style="{{ Request::is('employee') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('employee') ? 'color: white; !important' : ''}}"></i>
@@ -120,6 +122,7 @@
             </ul>
           </li>
 
+          @if(in_array(9, $permitted_menus_array))
           <li  class="nav-item nav-link {{ Request::is('product') ? 'nav-link active' : ''}}" style="{{ Request::is('product') ? 'background-color: #17a2b8; !important' : ''}}">
             <a href="{{url('/product')}}" >
               <i class="nav-icon fa-regular fa-gem" {{ Request::is('product') ? 'color: white; !important' : ''}}"></i>
@@ -128,6 +131,7 @@
               </p>
             </a>
           </li>
+          @endif
 
 
           <li class="nav-item">

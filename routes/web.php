@@ -101,6 +101,8 @@ Route::post('/generate-csv', [PayrollController::class, 'generateCsv'])->name('g
 //roles and permissions
 Route::resource('roles_and_permissions',RoleAndPermissionController::class);
 Route::get('/delete_role/{delete_id}', [RoleAndPermissionController::class, 'delete_role'])->name('delete_role');
+Route::get('/menus/{role_id}', [RoleAndPermissionController::class, 'menus'])->name('menus');
+Route::post('/menu_permission_store', [RoleAndPermissionController::class, 'menu_permission_store'])->name('menu_permission_store');
 
 });
 

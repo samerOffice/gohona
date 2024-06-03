@@ -4,7 +4,7 @@ Registration
 @endsection
 
 @section('content')
-<section >
+<section>
     <div class="container mt-1" style="background-color: #f1f6fa; animation: 1.5s fadeIn; border-radius: 15px;" >
       <div class="row d-flex align-items-center justify-content-center"  style="padding:20px; background-image: url('{{ asset('public/img/fd.png') }}');  background-size: cover;">
         <div class="col-md-8 col-lg-7 col-xl-6">
@@ -22,16 +22,25 @@ Registration
             <!-- Email input -->
             <div data-mdb-input-init class="form-outline mb-4">
                 <label for="Email">Full Name</label>
-              {{-- <input type="email" placeholder="Email" id="email" name="email" class="form-control form-control-lg" /> --}}
               <input type="text" placeholder="Name"  id="name" class="form-control form-control-lg" name="name" required autofocus>
                     @if ($errors->has('name'))
                     <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
             </div>
 
+
+            <div data-mdb-input-init class="form-outline mb-4">
+              <label for="Email">Role</label>
+              <select class="form-control select2bs4" id="role_id" name="role_id" style="width: 100%;">                        
+                  <option value=''>Select Role</option>
+                  @foreach ($roles as $role)
+                  <option value="{{$role->id}}">{{$role->role_name}}</option> 
+                  @endforeach                            
+              </select>
+            </div>
+
             <div data-mdb-input-init class="form-outline mb-4">
                 <label for="Email">Email</label>
-              {{-- <input type="email" placeholder="Email" id="email" name="email" class="form-control form-control-lg" /> --}}
               <input type="email" placeholder="Email" class="form-control form-control-lg @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}">
                             @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -40,17 +49,15 @@ Registration
             <!-- Password input -->
             <div data-mdb-input-init class="form-outline mb-4">
                 <label for="password">Password</label>
-              {{-- <input type="password" placeholder="Password" id="password" name="password" class="form-control form-control-lg" /> --}}
               <input type="password" placeholder="Password" id="password" name="password" onkeyup="typePassword()" class="form-control form-control-lg"  required>
-                                {{-- @if ($errors->has('password'))
+                                @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif --}}
+                                @endif
             </div>
             
             <!--Confirm Password input -->
             <div data-mdb-input-init class="form-outline mb-4">
                 <label for="password">Confirm Password</label>
-              {{-- <input type="password" placeholder="Password" id="password" name="password" class="form-control form-control-lg" /> --}}
               <input type="password" required class="form-control form-control-lg" onkeyup="machPassword()" id="confirm_password" name="confirm_password">
               <p id="message"></p>
             </div> 
@@ -67,6 +74,11 @@ Registration
 @push('importantScripts')
 
 <script>
+
+   //Initialize Select2 Elements
+   $('.select2bs4').select2({
+            theme: 'bootstrap4'
+            });
     const given_passoword = document.getElementById('password');
     const confirm_password = document.getElementById('confirm_password');
     const message = document.getElementById('message');

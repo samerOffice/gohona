@@ -66,7 +66,7 @@ Welcome
                             @endif     
                         </td>            
                           <td>
-                            <a href="#" style="color: white"><button class="btn btn-outline-info"><i class="fa-regular fa-window-maximize"></i> View</button></a> | 
+                            <a href="{{route('menus',$role->id)}}" style="color: white"><button class="btn btn-outline-info"><i class="fa-regular fa-window-maximize"></i> View</button></a> | 
                             <a href="{{route('roles_and_permissions.edit', $role->id)}}" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a> |
                                <a onclick="Swal.fire({
                                  title: 'Are You Sure?',
