@@ -5,6 +5,8 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use DB;
+
 class CustomAuthController extends Controller
 {
     public function __construct()
@@ -45,23 +47,40 @@ class CustomAuthController extends Controller
 
     public function registration()
     {
-        return view('auth.register');
+
+        $roles = DB::table('roles')
+               ->where('id','<>',1)
+               ->get();
+        
+        return view('auth.register',compact('roles'));
     }
 
 
     public function customRegistration(Request $request)
     {
-        // $request->validate([
-        //     'name' => 'required|string|max:250',
-        //     'email' => 'required|email|max:250|unique:users',
-        //     'password' => 'required|min:8|confirmed'
+        
+           
+        $request->validate([
+            'name' => 'required|string|max:250',
+            'email' => 'required|email|max:250|unique:users',
+            'password' => 'required|min:8'
+        ]);
+
+        // User::create([
+        //     'name' => $request->name,
+        //     'email' => $request->email,
+        //     'role_id' => $request->role_id,
+        //     'password' => Hash::make($request->password)
         // ]);
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
+
+        $add_user = DB::table('users')
+                                ->insertGetId([
+                                    'name' => $request->name,
+                                    'email' => $request->email,
+                                    'role_id' => $request->role_id,
+                                    'password' => Hash::make($request->password)
+                                    ]);
 
         $credentials = $request->only('email', 'password');
         Auth::attempt($credentials);
@@ -83,8 +102,18 @@ class CustomAuthController extends Controller
 
     public function dashboard()
     {
-        if (Auth::check()) {
-            return view('auth.dashboard');
+        if (Auth::check()){
+
+            $user_role = Auth::user()->role_id;
+
+            $data = DB::table('menu_permissions')
+                    ->where('role',$user_role)
+                    ->first();
+            $permitted_menus = $data->menus;
+
+            $permitted_menus_array = explode(',', $permitted_menus);
+            // dd($permitted_menus_array);
+            return view('auth.dashboard',compact('permitted_menus_array'));
         }
         return redirect("login")->withSuccess('You are not allowed to access');
     }

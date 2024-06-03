@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class RoleAndPermissionController extends Controller
 {
@@ -56,9 +57,7 @@ class RoleAndPermissionController extends Controller
         $role = DB::table('roles')
         ->where('id',$id)
         ->first();
-
       return view('roles_and_permissions.edit',compact('role'));
-
     }
 
     /**
@@ -76,10 +75,66 @@ class RoleAndPermissionController extends Controller
     }
 
     public function delete_role($id){
-
         $deleted = DB::table('roles')
                   ->where('id', $id)
                   ->delete();
         return redirect()->route('roles_and_permissions.index')->withSuccess('Role is deleted successfully');   
+    }
+
+    public function menus($role_id){
+
+        $menus = DB::table('menus')->get();
+
+        $data = DB::table('menu_permissions')
+              ->where('role',$role_id)
+              ->first();
+
+        if($data == null){
+        
+            return view('roles_and_permissions.initial_permitted_menus',compact('menus','role_id'));
+
+        }else{
+
+            $permitted_menus = $data->menus;
+            // Use explode to convert the string into an array
+            $permitted_menus_array = explode(',', $permitted_menus);
+            return view('roles_and_permissions.permitted_menus',compact('menus','role_id','permitted_menus_array'));
+        }
+
+        
+    }
+
+    public function menu_permission_store(Request $request){
+        
+        $user_role_id = $request->role_id;
+
+        $menu_permission_data = DB::table('menu_permissions')
+                ->where('role',$user_role_id)
+                ->first();
+
+        if($menu_permission_data == null){
+
+            $selectedItems = implode(',',$request->input('menu'));
+            $add_menu_permission = DB::table('menu_permissions')
+                                ->insertGetId([
+                                    'role'=>$user_role_id,
+                                    'menus'=>$selectedItems
+                                    ]);
+            return redirect()->route('roles_and_permissions.index')->withSuccess('Menu Permission is addded successfully');
+        }else{
+
+            $selectedItems = implode(',',$request->input('menu'));
+            
+            $data = array();
+            $data['menus'] =  $selectedItems;
+            $updated = DB::table('menu_permissions')
+                      ->where('role', $user_role_id)
+                      ->update($data);
+    
+            return redirect()->route('roles_and_permissions.index')->withSuccess('Menu Permission is updated successfully');
+
+        }
+        
+       
     }
 }

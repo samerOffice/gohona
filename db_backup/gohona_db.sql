@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2024 at 01:38 PM
+-- Generation Time: Jun 03, 2024 at 02:57 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -39,7 +39,7 @@ CREATE TABLE `booking_terms_and_conditions` (
 --
 
 INSERT INTO `booking_terms_and_conditions` (`id`, `terms`, `created_at`, `updated_at`) VALUES
-(1, '<p><span style=\"font-size:10px;\">১) ক্যাশ মেমো ছাড়া কোন আপত্তি বা পরিবর্তন গ্রহনযোগ্য হবে না।&nbsp;২) স্বর্ণের মূল্য বাংলাদেশ জুয়েলারী সমিতি থেকে নির্ধারন করে দেয়া হয় যা জুয়েলারী সমিতির সদস্য হিসেবে আমাদের অনুসরন করতে হয়। ৩) ক্রেতা পন্য ও পন্যের ওজন, হলর্মাক, ডিজাইন দেখে ক্রয় বা বুকিং করবেন এবং কোন সমস্যা হলে শোরুম কর্তৃপক্ষকে জানাবেন এবং কর্তৃপক্ষ যথাযথ সমাধান করবেন। পরবর্তীতে কোন আপত্তি গ্রহনযোগ্য নয়। ৪) কোন ধরনের শারীরিক সমস্যাবা ক্যামিকেল জাতীয় কোন ধরনের দ্রব্য ব্যবহারের কারনে রং পরিবর্তন হলে বিক্রেতা দায়ী থাকবে না।&nbsp;&nbsp;৫) ৭ দিনের মধ্যে বুকিং বাতিল করেন তাহলে কোনো টাকা কাটা যাবে না। ৬) বুকিং করার ৭ দিনের পর বুকিং বাতিল করলে জমাকৃত টাকার ২০% টাকা বাদ দিয়ে ৭ দিন পর টাকা ফেরত দেয়া হবে। ৭) বুকিং বাতিল করার পর যদি ক্রেতা টাকা ফেরত না নিয়ে বুকিংকৃত পন্যের মোট মূল্যের বেশি মূল্যের কোন পন্য ক্রয় করেন বা বুকিং দেন তাহলে কোন টাকা কাটা যাবে না।&nbsp;৮) বুকিং করার সময়ই পন্যের মোট মূল্য নির্ধারন করা হয়ে যাবে, পরে যদি কোন রেট কম বা বেশি হয় তবে তা ক্রেতা বা বিক্রেতা কেউই কোন আপত্তি করতে পারবে না।&nbsp; ৯) সরকারী ও বাজুস এর ক্রয় বিক্রয় নির্দেশনা ও&nbsp;নীতিমালা মোতাবেক ক্রেতা নির্দেশনা ও&nbsp;নীতিমালা অনুসরন না করলে বিক্রেতাকে কোনভাবেই নিয়ম বা নীতি মানতে বাধ্য করতে পারবে না। ১০) বাজুস এর ক্রয় বিক্রয় নির্দেশনা ও&nbsp;&nbsp;নীতিমালা মোতাবেক পন্য বুকিং এর কোন নির্দেশনা ও&nbsp;নীতিমালা নাই। সে ক্ষেত্রে বিক্রেতার উপর নির্ভর করে বিক্রেতা ক্রেতার পন্য ক্রয়ের সুবিধার জন্য বুকিং রাখে বা রাখার ব্যবস্থা করে।&nbsp;</span><br type=\"_moz\"></p><p><span style=\"font-size:10px;\">১১) ক্রেতার সুবির্ধাতে ও সম্মতিতে পন্য বুকিং করা হলোঃ</span></p><p><span style=\"font-size:10px;\">১) রেট এবং মোট মূল্য ফিক্স করে অগ্রিম প্রদান করে বুকিং এর তারিখ হতে ১৫ দিনের মধ্যে পন্য ডেলিভারী নেয়ার জন্য বুকিং করা হলো। --------------</span></p><p><span style=\"font-size:10px;\">২) রেট এবং মোট মূল্য ফিক্স না করে আনুমানিক মূল্য ধরে অগ্রিম প্রদান করে বুকিং এর তারিখ হতে ৩০/৪৫ দিনের মধ্যে পন্য ডেলিভারী নেয়ার জন্য বুকিং করা হলো। </span><span style=\"font-size:10px;\">--------------</span></p>', '2024-05-13 13:34:12', '2024-05-13 13:34:12');
+(1, '<p><span style=\"font-size:10px;\">১) ক্যাশ মেমো ছাড়া কোন আপত্তি বা পরিবর্তন গ্রহনযোগ্য হবে না।&nbsp;২) স্বর্ণের মূল্য বাংলাদেশ জুয়েলারী সমিতি থেকে নির্ধারন করে দেয়া হয় যা জুয়েলারী সমিতির সদস্য হিসেবে আমাদের অনুসরন করতে হয়। ৩) ক্রেতা পন্য ও পন্যের ওজন, হলর্মাক, ডিজাইন দেখে ক্রয় বা বুকিং করবেন এবং কোন সমস্যা হলে শোরুম কর্তৃপক্ষকে জানাবেন এবং কর্তৃপক্ষ যথাযথ সমাধান করবেন। পরবর্তীতে কোন আপত্তি গ্রহনযোগ্য নয়। ৪) কোন ধরনের শারীরিক সমস্যাবা ক্যামিকেল জাতীয় কোন ধরনের দ্রব্য ব্যবহারের কারনে রং পরিবর্তন হলে বিক্রেতা দায়ী থাকবে না।&nbsp;&nbsp;৫) ৭ দিনের মধ্যে বুকিং বাতিল করেন তাহলে কোনো টাকা কাটা যাবে না। ৬) বুকিং করার ৭ দিনের পর বুকিং বাতিল করলে জমাকৃত টাকার ২০% টাকা বাদ দিয়ে ৭ দিন পর টাকা ফেরত দেয়া হবে। ৭) বুকিং বাতিল করার পর যদি ক্রেতা টাকা ফেরত না নিয়ে বুকিংকৃত পন্যের মোট মূল্যের বেশি মূল্যের কোন পন্য ক্রয় করেন বা বুকিং দেন তাহলে কোন টাকা কাটা যাবে না।&nbsp;৮) বুকিং করার সময়ই পন্যের মোট মূল্য নির্ধারন করা হয়ে যাবে, পরে যদি কোন রেট কম বা বেশি হয় তবে তা ক্রেতা বা বিক্রেতা কেউই কোন আপত্তি করতে পারবে না।&nbsp; ৯) সরকারী ও বাজুস এর ক্রয় বিক্রয় নির্দেশনা ও&nbsp;নীতিমালা মোতাবেক ক্রেতা নির্দেশনা ও&nbsp;নীতিমালা অনুসরন না করলে বিক্রেতাকে কোনভাবেই নিয়ম বা নীতি মানতে বাধ্য করতে পারবে না। ১০) বাজুস এর ক্রয় বিক্রয় নির্দেশনা ও&nbsp;&nbsp;নীতিমালা মোতাবেক পন্য বুকিং এর কোন নির্দেশনা ও&nbsp;নীতিমালা নাই। সে ক্ষেত্রে বিক্রেতার উপর নির্ভর করে বিক্রেতা ক্রেতার পন্য ক্রয়ের সুবিধার জন্য বুকিং রাখে বা রাখার ব্যবস্থা করে।&nbsp;</span><br type=\"_moz\"></p><p><span style=\"font-size:10px;\">১১) ক্রেতার সুবির্ধাতে ও সম্মতিতে পন্য বুকিং করা হলোঃ</span></p><p><span style=\"font-size:10px;\">১) রেট এবং মোট মূল্য ফিক্স করে অগ্রিম প্রদান করে বুকিং এর তারিখ হতে ১৫ দিনের মধ্যে পন্য ডেলিভারী নেয়ার জন্য বুকিং করা হলো। --------------</span></p><p><span style=\"font-size:10px;\">২) রেট এবং মোট মূল্য ফিক্স না করে আনুমানিক মূল্য ধরে অগ্রিম প্রদান করে বুকিং এর তারিখ হতে ৩০/৪৫ দিনের মধ্যে পন্য ডেলিভারী নেয়ার জন্য বুকিং করা হলো। <br></span><br></p>', '2024-05-13 13:34:12', '2024-05-13 13:34:12');
 
 -- --------------------------------------------------------
 
@@ -194,9 +194,9 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `yearly_bonus_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `yearly_bonus_status`, `created_at`, `updated_at`) VALUES
-(1, 'Kamrul Hasan', 'Sales Executive', '2022-06-13', NULL, '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
-(2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', '2024-05-28', '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
-(3, 'Kartik Paul', 'Sales Manager', '2020-05-08', NULL, '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12');
+(1, 'Kamrul Hasan Uddin', 'Sales Executive', '2022-06-13', '2023-07-02', '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
+(2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', '2025-12-03', '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
+(3, 'Kartik Paul', 'Sales Manager', '2020-05-08', '2021-02-03', '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12');
 
 -- --------------------------------------------------------
 
@@ -213,6 +213,83 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menus`
+--
+
+CREATE TABLE `menus` (
+  `id` int(11) NOT NULL,
+  `menu_name` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `menus`
+--
+
+INSERT INTO `menus` (`id`, `menu_name`, `created_at`, `updated_at`) VALUES
+(1, 'Access Admin Dashboard', '2024-06-03 05:38:50', '2024-06-03 05:38:50'),
+(2, 'Access POS', '2024-06-03 05:38:50', '2024-06-03 05:38:50'),
+(3, 'Access Booking', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(4, 'Edit Booking', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(5, 'Delete Booking', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(6, 'Access Clients', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(7, 'Edit Client', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(8, 'Delete Client', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(9, 'Access Products', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(10, 'Add Product', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(11, 'Edit Product', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(12, 'Delete Product', '2024-06-03 05:42:05', '2024-06-03 05:42:05'),
+(13, 'Access Stock', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(14, 'Add Stock', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(15, 'Access Sales Entry', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(16, 'Access Sale Settings', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(17, 'Edit Sell', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(18, 'Due Transaction List', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(19, 'Add Due Transaction', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(20, 'Edit Due Transaction', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(21, 'Delete Due Transaction', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(22, 'Access Suppliers', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(23, 'Add Supplier', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(24, 'Edit Supplier', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(25, 'Show Supplier', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(26, 'Delete Supplier', '2024-06-03 05:46:44', '2024-06-03 05:46:44'),
+(27, 'Access Suppliers Transaction', '2024-06-03 05:50:30', '2024-06-03 05:50:30'),
+(28, 'Create Supplier Transaction', '2024-06-03 05:50:30', '2024-06-03 05:50:30'),
+(29, 'Edit Supplier Transaction', '2024-06-03 05:50:30', '2024-06-03 05:50:30'),
+(30, 'Delete Supplier Transaction', '2024-06-03 05:50:30', '2024-06-03 05:50:30'),
+(31, 'Access Product Categories', '2024-06-03 05:50:30', '2024-06-03 05:50:30'),
+(32, 'Add Product Category', '2024-06-03 05:50:30', '2024-06-03 05:50:30'),
+(33, 'Edit Product Category', '2024-06-03 05:50:30', '2024-06-03 05:50:30'),
+(34, 'Delete Product Category', '2024-06-03 05:50:30', '2024-06-03 05:50:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_permissions`
+--
+
+CREATE TABLE `menu_permissions` (
+  `id` int(11) NOT NULL,
+  `role` int(10) DEFAULT NULL,
+  `menus` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `menu_permissions`
+--
+
+INSERT INTO `menu_permissions` (`id`, `role`, `menus`, `created_at`, `updated_at`) VALUES
+(1, 1, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34', '2024-06-03 10:06:05', '2024-06-03 10:06:05'),
+(2, 2, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34', '2024-06-03 10:06:42', '2024-06-03 10:06:42'),
+(3, 3, '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16', '2024-06-03 10:07:23', '2024-06-03 10:07:23'),
+(4, 5, '1', '2024-06-03 12:07:50', '2024-06-03 12:07:50');
 
 -- --------------------------------------------------------
 
@@ -318,7 +395,20 @@ CREATE TABLE `payrolls` (
 --
 
 INSERT INTO `payrolls` (`id`, `employee`, `salary_date`, `joining_date`, `per_day_salary`, `emp_total_bonus_day`, `emp_total_bonus_amount`, `bonus_eligible_month`, `bonus_pay_month`, `bonus_pay_amount`, `total_working_day`, `total_leave`, `total_number_of_pay_day`, `monthly_salary`, `monthly_holiday_bonus`, `total_daily_allowance`, `total_travel_allowance`, `rental_cost_allowance`, `hospital_bill_allowance`, `insurance_allowance`, `sales_commission`, `retail_commission`, `total_others`, `total_salary`, `yearly_bonus`, `total_payable_salary`, `advance_less`, `any_deduction`, `final_pay_amount`, `loan_advance`, `created_at`, `updated_at`) VALUES
-(1, 2, '2024-05-28', '2024-02-01', '900', '39', '35100', '04-2024', '05-2024', '8775', '26', '1', '25', '22500', '900', '0', '0', '0', '0', '0', '0', '0', '900', '23400', '8775', '32175', '0', '0', '32175', NULL, '2024-05-28 11:37:27', '2024-05-28 11:37:27');
+(1, 2, '2024-05-28', '2024-02-01', '900', '39', '35100', '04-2024', '05-2024', '8775', '26', '1', '25', '22500', '900', '0', '0', '0', '0', '0', '0', '0', '900', '23400', '8775', '32175', '0', '0', '32175', NULL, '2024-05-28 11:37:27', '2024-05-28 11:37:27'),
+(2, 2, '2024-05-28', '2024-02-01', '900', '39', '35100', '07-2024', '08-2024', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '0', '24300', '0', '0', '24300', NULL, '2024-05-28 12:39:44', '2024-05-28 12:39:44'),
+(3, 1, '2024-05-30', '2022-06-13', '1200', '39', '46800', '08-2022', '09-2022', '11700', '26', '1', '25', '30000', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '31200', '0', '31200', '0', '0', '31200', NULL, '2024-05-30 08:33:19', '2024-05-30 08:33:19'),
+(4, 2, '2024-05-30', '2024-02-01', '900', '39', '35100', '10-2024', '11-2024', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '0', '24300', '0', '0', '24300', NULL, '2024-05-30 08:34:21', '2024-05-30 08:34:21'),
+(5, 2, '2024-05-30', '2024-02-01', '900', '39', '35100', '01-2025', '03-2025', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '0', '24300', '0', '0', '24300', NULL, '2024-05-30 08:34:54', '2024-05-30 08:34:54'),
+(6, 1, '2024-05-30', '2022-06-13', '1200', '39', '46800', '11-2022', '12-2022', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '0', '32400', NULL, '2024-05-30 08:35:21', '2024-05-30 08:35:21'),
+(7, 1, '2024-06-01', '2022-06-13', '1200', '39', '46800', '03-2023', '04-2023', '11700', '26', '1', '25', '30000', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '31200', '0', '31200', '0', '0', '31200', NULL, '2024-06-01 12:05:00', '2024-06-01 12:05:00'),
+(8, 2, '2024-06-02', '2024-02-01', '900', '39', '35100', '05-2025', '06-2025', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '0', '24300', '0', '0', '24300', NULL, '2024-06-02 11:52:35', '2024-06-02 11:52:35'),
+(9, 2, '2024-06-02', '2024-02-01', '900', '39', '35100', '08-2025', '09-2025', '8775', '26', '1', '25', '22500', '900', '0', '0', '0', '0', '0', '0', '0', '900', '23400', '0', '23400', '0', '0', '23400', NULL, '2024-06-02 12:56:39', '2024-06-02 12:56:39'),
+(10, 1, '2024-06-02', '2022-06-13', '1200', '39', '46800', '06-2023', '07-2023', '11700', '26', '0', '26', '31200', '1200', '10', '10', '10', '20', '20', '10', '20', '1300', '32500', '0', '32500', '100', '100', '32300', NULL, '2024-06-02 13:06:03', '2024-06-02 13:06:03'),
+(11, 3, '2024-06-02', '2020-05-08', '800', '39', '31200', '07-2020', '08-2020', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-02 13:11:27', '2024-06-02 13:11:27'),
+(12, 2, '2024-06-03', '2024-02-01', '900', '39', '35100', '11-2025', '12-2025', '8775', '26', '1', '25', '22500', '900', '0', '0', '0', '0', '0', '0', '0', '900', '23400', '0', '23400', '0', '100', '23300', NULL, '2024-06-03 04:49:23', '2024-06-03 04:49:23'),
+(13, 3, '2024-06-03', '2020-05-08', '800', '39', '31200', '10-2020', '11-2020', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-03 09:51:18', '2024-06-03 09:51:18'),
+(14, 3, '2024-06-03', '2020-05-08', '800', '39', '31200', '01-2021', '02-2021', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-03 11:12:11', '2024-06-03 11:12:11');
 
 -- --------------------------------------------------------
 
@@ -404,6 +494,30 @@ INSERT INTO `product_categories` (`id`, `product_category_name`, `created_at`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `roles`
+--
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL,
+  `role_name` varchar(100) DEFAULT NULL,
+  `status` int(10) DEFAULT NULL COMMENT '1 = active, 2 = inactive',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `roles`
+--
+
+INSERT INTO `roles` (`id`, `role_name`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Super Admin', 1, '2024-06-02 11:33:21', '2024-06-02 11:33:21'),
+(2, 'Admin', 1, '2024-06-02 11:38:32', '2024-06-02 11:38:32'),
+(3, 'Manager', 1, '2024-06-02 11:38:42', '2024-06-02 11:38:42'),
+(5, 'User', 1, '2024-06-02 11:50:43', '2024-06-02 11:50:43');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sale_types`
 --
 
@@ -428,6 +542,29 @@ INSERT INTO `sale_types` (`id`, `name`, `status`, `created_at`, `updated_at`) VA
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `company_name` varchar(100) DEFAULT NULL,
+  `company_cell` varchar(100) DEFAULT NULL,
+  `bin` varchar(100) DEFAULT NULL,
+  `jakat` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `up` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `company_name`, `company_cell`, `bin`, `jakat`, `created_at`, `up`) VALUES
+(1, 'SENCO Gold', '01513470120', '004315254-0101', '2.5', '2024-06-02 09:46:12', '2024-06-02 09:46:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `suppliers`
 --
 
@@ -445,7 +582,7 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `name`, `mobile_no`, `due_amount`, `created_at`, `updated_at`) VALUES
-(2, 'test supplier', '01513470130', '154', '2024-05-09 11:08:19', '2024-05-09 11:08:19'),
+(2, 'test supplier ff', '01513470130', '154', '2024-05-09 11:08:19', '2024-05-09 11:08:19'),
 (3, 'test supplier 2', '01513470137', '23,12343', '2024-05-11 07:09:25', '2024-05-11 07:09:25');
 
 -- --------------------------------------------------------
@@ -503,6 +640,7 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `role_id` int(10) DEFAULT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
@@ -514,9 +652,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'samer', 'sam@gmail.com', NULL, '$2y$10$jGI.KEL.bRzHURMI9grvlOAZdI/Y0DIxKmFHkGPttNY4OYdGzpEyG', NULL, '2024-05-04 22:34:15', '2024-05-04 22:34:15'),
-(2, 'maliha', 'maliha@gmail.com', NULL, '$2y$10$CJO8QVtP2nkshFJTA9.VbeEKdj3t0xif7izsQNo2mGUR2MkchJWOq', NULL, '2024-05-04 22:58:25', '2024-05-04 22:58:25');
+INSERT INTO `users` (`id`, `name`, `email`, `role_id`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'samer', 'sam@gmail.com', 1, NULL, '$2y$10$qds/6htrZ7UZgHzp/uCzFuK7tl5dxZ.5fHGuVpk87MWDvNNTrxQYK', NULL, NULL, NULL),
+(2, 'Senco Gold', 'senco@gmail.com', 5, NULL, '$2y$10$D25aMeeoynljhf.UmUuXXe2HBSEHBBV.Y0pYi3ekEz.PW/8NpD/KK', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -579,6 +717,18 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `menus`
+--
+ALTER TABLE `menus`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `menu_permissions`
+--
+ALTER TABLE `menu_permissions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -623,9 +773,21 @@ ALTER TABLE `product_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `roles`
+--
+ALTER TABLE `roles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sale_types`
 --
 ALTER TABLE `sale_types`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -694,6 +856,18 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `menus`
+--
+ALTER TABLE `menus`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT for table `menu_permissions`
+--
+ALTER TABLE `menu_permissions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -709,7 +883,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `payrolls`
 --
 ALTER TABLE `payrolls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -730,10 +904,22 @@ ALTER TABLE `product_categories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `roles`
+--
+ALTER TABLE `roles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `sale_types`
 --
 ALTER TABLE `sale_types`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `suppliers`

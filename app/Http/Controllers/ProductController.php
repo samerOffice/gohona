@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductExcelImport;
+use Auth;
 // use App\Imports\CsvImport;
 
 class ProductController extends Controller
@@ -15,12 +16,23 @@ class ProductController extends Controller
      */
     public function index()
     {
+        
+        $user_role = Auth::user()->role_id;
+
+            $data = DB::table('menu_permissions')
+                    ->where('role',$user_role)
+                    ->first();
+            $permitted_menus = $data->menus;
+
+            $permitted_menus_array = explode(',', $permitted_menus);
+        
+        
         $products = DB::table('products')
                   ->leftJoin('product_categories','products.product_category','=','product_categories.id')
                   ->leftJoin('suppliers','products.supplier','=','suppliers.id')
                   ->select('products.*','suppliers.name as supplier_name','product_categories.product_category_name as product_category_name')
                   ->get();
-        return view('products.index',compact('products'));
+        return view('products.index',compact('products','permitted_menus_array'));
     }
 
     /**
