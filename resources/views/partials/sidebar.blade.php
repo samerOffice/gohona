@@ -34,6 +34,7 @@
               </p>
             </a>
           </li>
+          @if(in_array(15, $permitted_menus_array))
           <li class=" nav-item">
             <a href="" class="nav-link">
               <i class="nav-icon fa-solid fa-bangladeshi-taka-sign"></i>
@@ -42,6 +43,9 @@
               </p>
             </a>
           </li>
+          @endif
+
+          @if(in_array(16, $permitted_menus_array))
           <li class="nav-item">
             <a href="#" class="nav-link ">
               <i class="nav-icon fa-solid fa-sheet-plastic"></i>
@@ -50,6 +54,9 @@
               </p>
             </a>
           </li>
+          @endif
+
+          @if(in_array(2, $permitted_menus_array))
           <li class="nav-item">
             <a href="#" class="nav-link ">
               <i class="nav-icon fa-solid fa-book-open-reader"></i>
@@ -58,6 +65,9 @@
               </p>
             </a>
           </li>
+          @endif
+
+          @if(in_array(3, $permitted_menus_array))
           <li class="nav-item">
             <a href="#" class="nav-link ">
               <i class="nav-icon fa-solid fa-book-bookmark"></i>
@@ -66,6 +76,9 @@
               </p>
             </a>
           </li>
+          @endif
+
+          @if(in_array(6, $permitted_menus_array))
           <li class="nav-item">
             <a href="#" class="nav-link ">
               <i class="nav-icon fa-solid fa-users"></i>
@@ -74,7 +87,7 @@
               </p>
             </a>
           </li>
-
+          @endif
       
           <li class="nav-item @if(Request::is('employee')) menu-open 
                               @elseif(Request::is('payroll')) menu-open
@@ -89,29 +102,34 @@
             </a>
             <ul class="nav nav-treeview">
 
-
+              @if(in_array(35, $permitted_menus_array))
               <li class="nav-item">
                 <a href="{{route('employee.index')}}" class="nav-link {{ Request::is('employee') ? 'nav-link active' : ''}}" style="{{ Request::is('employee') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('employee') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('employee') ? 'color: white; !important' : ''}}">Employees</p>
                 </a>
               </li>
+              @endif
 
+              
+              @if(in_array(40, $permitted_menus_array))
               <li class="nav-item">
                 <a href="{{route('payroll.index')}}" class="nav-link {{ Request::is('payroll') ? 'nav-link active' : ''}}" style="{{ Request::is('payroll') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}">Add Payroll</p>
                 </a>
               </li>
+              @endif
 
 
+              @if(in_array(39, $permitted_menus_array))
               <li class="nav-item">
                 <a href="{{route('payroll_list')}}" class="nav-link {{ Request::is('payroll_list') ? 'nav-link active' : ''}}" style="{{ Request::is('payroll_list') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('payroll_list') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('payroll_list') ? 'color: white; !important' : ''}}">Payroll List</p>
                 </a>
               </li>
-             
+             @endif
       
               <li class="nav-item">
                 <a href="#" class="nav-link">
@@ -143,18 +161,25 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+
+              @if(in_array(18, $permitted_menus_array))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Customer Transaction</p>
                 </a>
               </li>
+              @endif
+
+              @if(in_array(27, $permitted_menus_array))
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Supplier Transaction</p>
                 </a>
               </li>
+              @endif
+
               <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
@@ -164,6 +189,7 @@
             </ul>
           </li>
 
+          @if(in_array(13, $permitted_menus_array))
           <li class="nav-item">
             <a href="#" class="nav-link">
               {{-- <i class="nav-icon fa-solid fa-arrow-trend-up"></i> --}}
@@ -173,6 +199,7 @@
               </p>
             </a>
           </li>
+          @endif
 
           <li class="nav-item @if(Request::is('product_category_list')) menu-open 
           @elseif(Request::is('today_rate_list')) menu-open
@@ -185,7 +212,10 @@
           @elseif(Request::is('booking_terms_and_conditions')) menu-open
           @elseif(Request::is('settings')) menu-open
           @elseif(Request::is('roles_and_permissions')) menu-open
+          @elseif(Request::is('user_list')) menu-open
           @endif">
+
+          {{-- @if(in_array(41, $permitted_menus_array))
             <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-gears"></i>
               <p>
@@ -193,13 +223,30 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            @endif --}}
+
+
+            @if(in_array(13, $permitted_menus_array))
+            <a href="#" class="nav-link">
+              <i class="nav-icon fa-solid fa-gears"></i>
+              <p>
+                Sale Settings
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            @endif
+           
+
             <ul class="nav nav-treeview">
+                   
               <li class="nav-item ">
                 <a href="{{route('product_category_list')}}" class="nav-link {{ Request::is('product_category_list') ? 'nav-link active' : ''}}" style="{{ Request::is('product_category_list') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('product_category_list') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('product_category_list') ? 'color: white; !important' : ''}}">Product Category</p>
                 </a>
               </li>
+              
+
               <li class="nav-item ">
                 <a href="{{route('today_rate_list')}}" class="nav-link {{ Request::is('today_rate_list') ? 'nav-link active' : ''}}" style="{{ Request::is('today_rate_list') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('today_rate_list') ? 'color: white; !important' : ''}}"></i>
@@ -279,14 +326,23 @@
                   <p style="{{ Request::is('roles_and_permissions') ? 'color: white; !important' : ''}}">Roles & Permissions</p>
                 </a>
               </li>
-        
+
+              @if((auth()->user()->role_id)==1)
+              <li class="nav-item ">
+                <a href="{{route('user_list')}}" class="nav-link {{ Request::is('user_list') ? 'nav-link active' : ''}}" style="{{ Request::is('user_list') ? 'background-color: #17a2b8; !important' : ''}}">
+                  <i class="far fa-circle nav-icon" style="{{ Request::is('user_list') ? 'color: white; !important' : ''}}"></i>
+                  <p style="{{ Request::is('user_list') ? 'color: white; !important' : ''}}">Users</p>
+                </a>
+              </li>
+              @endif
              
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Users</p>
                 </a>
-              </li>
+              </li> --}}
+
             </ul>
           </li>
 

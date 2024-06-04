@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class SettingController extends Controller
 {
@@ -12,9 +13,17 @@ class SettingController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $settings = DB::table('settings')->first();
         
-        return view('settings.index',compact('settings'));
+        return view('settings.index',compact('settings','permitted_menus_array'));
     }
 
     /**
@@ -22,7 +31,15 @@ class SettingController extends Controller
      */
     public function create()
     {
-        return view('settings.create');
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+        return view('settings.create',compact('permitted_menus_array'));
     }
 
     /**
@@ -61,6 +78,16 @@ class SettingController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+        
         $data = array();
         $data['company_name'] = $request->company_name;
         $data['company_cell'] = $request->company_cell;
@@ -73,7 +100,7 @@ class SettingController extends Controller
 
         $settings = DB::table('settings')->first();
 
-        return view('settings.index',compact('settings'))->withSuccess('Settings updated successfully');
+        return view('settings.index',compact('settings','permitted_menus_array'))->withSuccess('Settings updated successfully');
     }
 
     /**

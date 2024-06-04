@@ -5,16 +5,35 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use DB;
+use Auth;
 
 class ProductCategoryController extends Controller
 {
     public function index(){
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
         $product_categories = DB::table('product_categories')->get();                               
-        return view('product_categories.index',compact('product_categories'));
+        return view('product_categories.index',compact('product_categories','permitted_menus_array'));
     }
 
     public function add_product_category(){
-        return view('product_categories.create');
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+        return view('product_categories.create',compact('permitted_menus_array'));
     }
 
     public function submit_product_category(Request $request){
@@ -31,11 +50,21 @@ class ProductCategoryController extends Controller
     }
 
     public function edit_product_category($id){
+        
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $product_category = DB::table('product_categories')
                  ->where('id',$id)
                  ->first();
 
-        return view('product_categories.edit',compact('product_category'));
+        return view('product_categories.edit',compact('product_category','permitted_menus_array'));
 
     }
 

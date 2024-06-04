@@ -19,12 +19,11 @@ class ProductController extends Controller
         
         $user_role = Auth::user()->role_id;
 
-            $data = DB::table('menu_permissions')
-                    ->where('role',$user_role)
-                    ->first();
-            $permitted_menus = $data->menus;
-
-            $permitted_menus_array = explode(',', $permitted_menus);
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
         
         
         $products = DB::table('products')
@@ -40,10 +39,18 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $product_categories = DB::table('product_categories')->get();
         $suppliers = DB::table('suppliers')->get();
 
-        return view('products.create',compact('product_categories','suppliers'));
+        return view('products.create',compact('product_categories','suppliers','permitted_menus_array'));
     }
 
     /**
@@ -74,6 +81,15 @@ class ProductController extends Controller
  
     public function edit(string $id)
     {
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $product_categories = DB::table('product_categories')->get();
         $suppliers = DB::table('suppliers')->get();
 
@@ -84,7 +100,7 @@ class ProductController extends Controller
                 ->where('products.id',$id)
                 ->first();
     
-     return view('products.edit',compact('product_categories','suppliers','product'));
+     return view('products.edit',compact('product_categories','suppliers','product','permitted_menus_array'));
     }
 
     /**
@@ -125,7 +141,16 @@ class ProductController extends Controller
     }
 
     public function product_import_form(){
-        return view('products.import');
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+        return view('products.import',compact('permitted_menus_array'));
     }
 
     public function excel_file_import(Request $request){

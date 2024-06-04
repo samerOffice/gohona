@@ -4,16 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class TodayRateController extends Controller
 {
     public function index(){
+
+        $user_role = Auth::user()->role_id;
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
         $today_rates = DB::table('today_rates')->get();
-        return view('today_rates.index',compact('today_rates'));
+        return view('today_rates.index',compact('today_rates','permitted_menus_array'));
     }
 
     public function create(){
-        return view('today_rates.create');
+
+        $user_role = Auth::user()->role_id;
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+        return view('today_rates.create',compact('permitted_menus_array'));
     }
 
     public function store(Request $request){       
@@ -27,10 +44,18 @@ class TodayRateController extends Controller
     }
 
     public function edit($id){
+
+        $user_role = Auth::user()->role_id;
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
         $today_rate = DB::table('today_rates')
         ->where('id',$id)
         ->first();
-    return view('today_rates.edit',compact('today_rate'));
+    return view('today_rates.edit',compact('today_rate','permitted_menus_array'));
     }
 
     public function update(Request $request){

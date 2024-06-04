@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class SupplierController extends Controller
 {
@@ -12,8 +13,17 @@ class SupplierController extends Controller
      */
     public function index()
     {
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $suppliers = DB::table('suppliers')->get();
-        return view('suppliers.index',compact('suppliers'));
+        return view('suppliers.index',compact('suppliers','permitted_menus_array'));
     }
 
     /**
@@ -21,7 +31,15 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        return view('suppliers.create');
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+        return view('suppliers.create',compact('permitted_menus_array'));
     }
 
     /**
@@ -52,10 +70,18 @@ class SupplierController extends Controller
      */
     public function edit(string $id)
     {
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $supplier = DB::table('suppliers')
         ->where('id',$id)
         ->first();
-      return view('suppliers.edit',compact('supplier'));
+      return view('suppliers.edit',compact('supplier','permitted_menus_array'));
     }
 
     /**

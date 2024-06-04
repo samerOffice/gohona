@@ -79,6 +79,7 @@ class CustomAuthController extends Controller
                                     'name' => $request->name,
                                     'email' => $request->email,
                                     'role_id' => $request->role_id,
+                                    'status' => 1,
                                     'password' => Hash::make($request->password)
                                     ]);
 
@@ -106,13 +107,13 @@ class CustomAuthController extends Controller
 
             $user_role = Auth::user()->role_id;
 
-            $data = DB::table('menu_permissions')
+            $menu_data = DB::table('menu_permissions')
                     ->where('role',$user_role)
                     ->first();
-            $permitted_menus = $data->menus;
-
+            $permitted_menus = $menu_data->menus;
             $permitted_menus_array = explode(',', $permitted_menus);
-            // dd($permitted_menus_array);
+        
+            
             return view('auth.dashboard',compact('permitted_menus_array'));
         }
         return redirect("login")->withSuccess('You are not allowed to access');
@@ -129,4 +130,122 @@ class CustomAuthController extends Controller
         $request->session()->regenerateToken();
         return Redirect('login');
     }
+
+
+    public function password_reset(){
+
+        $user_role = Auth::user()->role_id;
+
+            $menu_data = DB::table('menu_permissions')
+                    ->where('role',$user_role)
+                    ->first();
+            $permitted_menus = $menu_data->menus;
+            $permitted_menus_array = explode(',', $permitted_menus);
+
+            return view('password_reset',compact('permitted_menus_array'));
+
+    }
+
+
+    public function new_password_set(Request $request){
+        $user = Auth::user();
+
+        // return $user;
+
+        $validator = \Validator::make($request->all(),[
+                'current_password' => 'required',
+                'new_password' => [
+                    'required',
+                    'string',
+                    'min:8',
+                    
+                    function ($attribute, $value, $fail) use ($user) {
+                        if (Hash::check($value, $user->password)) {
+                            $fail('The new password must be different from the current password.');
+                        }
+                    },
+                ],
+            ]);
+
+
+            if ($validator->fails()) {
+                // \Log::info('Validation failed.', ['errors' => $validator->errors()]);
+                return response()->json($validator->errors(), 422);
+            }
+
+            if (!Hash::check($request->current_password, $user->password)) {
+                return response()->json(['error' => 'Current password is incorrect'], 422);
+            }
+
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+
+            // Auth::guard('web')->logout();
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return response()->json(['message' => 'Password is changed successfully!']);
+    }
+
+
+    public function user_list(){
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+        $users = DB::table('users')
+                     ->leftJoin('roles','users.role_id','roles.id')
+                     ->select('users.*','roles.role_name')
+                     ->get();
+
+        return view('users.index',compact('permitted_menus_array','users'));
+    }
+
+
+    public function edit_user($id){
+    
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+        $roles = DB::table('roles')->get();
+           
+        $user = DB::table('users')
+                ->leftJoin('roles','users.role_id','roles.id')
+                ->select('users.*','roles.role_name as user_role_name')
+                ->where('users.id',$id)
+                ->first();
+                
+        return view('users.edit',compact('permitted_menus_array','user','roles'));     
+
+    }
+
+    
+    public function update_user(Request $request){
+
+        $user_id = $request->id;
+
+        $data = array();
+        $data['name'] = $request->name;
+        $data['role_id'] = $request->role_id;
+        $data['status'] = $request->status ? '1' : '2';
+
+        $updated = DB::table('users')
+                  ->where('id', $user_id)
+                  ->update($data);
+
+        return redirect()->route('user_list')->withSuccess('User Details is updated successfully');
+    }
+
+
+
 }
