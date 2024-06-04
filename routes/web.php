@@ -27,6 +27,9 @@ Route::post('/custom-login', [CustomAuthController::class, 'customLogin'])->name
 Route::get('/register', [CustomAuthController::class, 'registration'])->name('register')->middleware('guest');
 Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::post('/signout', [CustomAuthController::class, 'signOut'])->name('signout');
+Route::get('/password_reset', [CustomAuthController::class, 'password_reset'])->name('password_reset');
+//new password set
+Route::post('/new_password_set',[App\Http\Controllers\CustomAuthController::class,'new_password_set']);
 
 
 Route::middleware('auth')->group(function () {
@@ -103,6 +106,12 @@ Route::resource('roles_and_permissions',RoleAndPermissionController::class);
 Route::get('/delete_role/{delete_id}', [RoleAndPermissionController::class, 'delete_role'])->name('delete_role');
 Route::get('/menus/{role_id}', [RoleAndPermissionController::class, 'menus'])->name('menus');
 Route::post('/menu_permission_store', [RoleAndPermissionController::class, 'menu_permission_store'])->name('menu_permission_store');
+
+//users
+Route::get('/user_list', [CustomAuthController::class, 'user_list'])->name('user_list');
+Route::get('/edit_user/{user_id}', [CustomAuthController::class, 'edit_user'])->name('edit_user');
+Route::post('/update_user', [CustomAuthController::class, 'update_user'])->name('update_user');
+
 
 });
 

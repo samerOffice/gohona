@@ -14,10 +14,18 @@ class RoleAndPermissionController extends Controller
     public function index()
     {
         
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $roles = DB::table('roles')->get();
 
         // dd($roles);
-        return view('roles_and_permissions.index',compact('roles'));
+        return view('roles_and_permissions.index',compact('roles','permitted_menus_array'));
     }
 
     /**
@@ -25,7 +33,15 @@ class RoleAndPermissionController extends Controller
      */
     public function create()
     {
-        return view('roles_and_permissions.create');
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+        return view('roles_and_permissions.create',compact('permitted_menus_array'));
     }
 
     /**
@@ -54,10 +70,19 @@ class RoleAndPermissionController extends Controller
      */
     public function edit(string $id)
     {
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $role = DB::table('roles')
         ->where('id',$id)
         ->first();
-      return view('roles_and_permissions.edit',compact('role'));
+      return view('roles_and_permissions.edit',compact('role','permitted_menus_array'));
     }
 
     /**
@@ -82,7 +107,7 @@ class RoleAndPermissionController extends Controller
     }
 
     public function menus($role_id){
-
+        
         $menus = DB::table('menus')->get();
 
         $data = DB::table('menu_permissions')

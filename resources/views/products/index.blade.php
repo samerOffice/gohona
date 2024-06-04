@@ -104,8 +104,11 @@ Welcome
                             @endif
                           </td>
                           <td>
-                             <a href="{{route('product.edit', $product->id)}}" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a> | 
+                             <a href="{{route('product.edit', $product->id)}}" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a> 
 
+                             @if(in_array(12, $permitted_menus_array))
+                             |
+                             
                             <a onclick="Swal.fire({
                               title: 'Are You Sure?',
                               text: '',
@@ -125,6 +128,8 @@ Welcome
                                 });
                                 }
                             })" ><button class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i>  Delete </button></a>
+                            @endif
+
                         </td>
                         </tr> 
                         @endforeach              

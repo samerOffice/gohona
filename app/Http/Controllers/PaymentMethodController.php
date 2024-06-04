@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class PaymentMethodController extends Controller
 {
@@ -12,8 +13,16 @@ class PaymentMethodController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $payment_methods = DB::table('payment_methods')->get();
-        return view('payment_methods.index',compact('payment_methods'));
+        return view('payment_methods.index',compact('payment_methods','permitted_menus_array'));
     }
 
     /**
@@ -21,7 +30,15 @@ class PaymentMethodController extends Controller
      */
     public function create()
     {
-        return view('payment_methods.create');
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+        return view('payment_methods.create',compact('permitted_menus_array'));
     }
 
     /**
@@ -52,11 +69,19 @@ class PaymentMethodController extends Controller
     public function edit(string $id)
     {
         
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $payment_method = DB::table('payment_methods')
                         ->where('payment_methods.id',$id)
                         ->first();
      
-     return view('payment_methods.edit',compact('payment_method'));
+     return view('payment_methods.edit',compact('payment_method','permitted_menus_array'));
     }
 
     /**

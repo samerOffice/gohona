@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class EmployeeController extends Controller
 {
@@ -12,8 +13,16 @@ class EmployeeController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $employees = DB::table('employees')->get();
-        return view('employees.index',compact('employees'));
+        return view('employees.index',compact('employees','permitted_menus_array'));
     }
 
     /**
@@ -21,7 +30,15 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+        return view('employees.create',compact('permitted_menus_array'));
     }
 
     /**
@@ -77,10 +94,18 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $employee = DB::table('employees')
         ->where('id',$id)
         ->first();
-     return view('employees.edit',compact('employee'));
+     return view('employees.edit',compact('employee','permitted_menus_array'));
     }
 
     /**

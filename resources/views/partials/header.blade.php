@@ -23,7 +23,7 @@
           {{ Auth::user()->name }}&nbsp;<i class="far fa-user"></i>
         </a>
         <div class="dropdown-menu">
-          <a class="dropdown-item" href="#"><i class="fa fa-user"></i>&nbsp;Profile</a>
+          <a class="dropdown-item" href="{{route('password_reset')}}"><i class="fa fa-key"></i>&nbsp;Password Reset</a>
           <a class="dropdown-item" href="{{route('signout')}}" onclick="event.preventDefault();
                                                                        document.getElementById('logout-form').submit();"><i class="fas fa-sign-out-alt"></i>&nbsp;Logout</a>
                             <form id="logout-form" action="{{ route('signout') }}" method="POST">

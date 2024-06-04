@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class ZoneController extends Controller
 {
@@ -12,11 +13,18 @@ class ZoneController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->role_id;
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $zones = DB::table('zones')
                 ->leftJoin('districts', 'zones.district_id', '=', 'districts.id')
                 ->select('zones.*', 'districts.name as district_name')
                 ->get();
-        return view('zones.index',compact('zones'));
+        return view('zones.index',compact('zones','permitted_menus_array'));
     }
 
     /**
@@ -24,8 +32,15 @@ class ZoneController extends Controller
      */
     public function create()
     {
+        $user_role = Auth::user()->role_id;
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $districts = DB::table('districts')->get();
-        return view('zones.create',compact('districts'));
+        return view('zones.create',compact('districts','permitted_menus_array'));
     }
 
     /**
@@ -56,6 +71,13 @@ class ZoneController extends Controller
      */
     public function edit(string $id)
     {
+        $user_role = Auth::user()->role_id;
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $districts = DB::table('districts')->get();
         $zone = DB::table('zones')
               ->leftJoin('districts', 'zones.district_id', '=', 'districts.id')
@@ -64,7 +86,7 @@ class ZoneController extends Controller
               ->first();
 
         
-     return view('zones.edit',compact('zone','districts'));
+     return view('zones.edit',compact('zone','districts','permitted_menus_array'));
     }
 
     /**

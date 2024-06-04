@@ -75,7 +75,7 @@ Welcome
 
 @endsection
 
-@push('masterScripts')
+@push('myScripts')
 <script>
     $(function () {
       $("#example1").DataTable({

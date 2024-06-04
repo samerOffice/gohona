@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class CustomerCategoryController extends Controller
 {
@@ -12,8 +13,18 @@ class CustomerCategoryController extends Controller
      */
     public function index()
     {
+        
+        $user_role = Auth::user()->role_id;
+
+            $menu_data = DB::table('menu_permissions')
+                    ->where('role',$user_role)
+                    ->first();
+            $permitted_menus = $menu_data->menus;
+            $permitted_menus_array = explode(',', $permitted_menus);
+        
+        
         $customer_categories = DB::table('customer_categories')->get();
-        return view('customer_categories.index',compact('customer_categories'));
+        return view('customer_categories.index',compact('customer_categories','permitted_menus_array'));
         
     }
 
@@ -22,7 +33,17 @@ class CustomerCategoryController extends Controller
      */
     public function create()
     {
-        return view('customer_categories.create');
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+    
+
+        return view('customer_categories.create',compact('permitted_menus_array'));
     }
 
     /**
@@ -51,10 +72,21 @@ class CustomerCategoryController extends Controller
      */
     public function edit(string $id)
     {
+        
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+           
         $customer_category = DB::table('customer_categories')
                              ->where('id',$id)
                              ->first();
-        return view('customer_categories.edit',compact('customer_category'));
+        return view('customer_categories.edit',compact('customer_category','permitted_menus_array'));
     }
 
     /**

@@ -14,12 +14,31 @@ class PayrollController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
         $employees = DB::table('employees')->get();
-        return view('payrolls.index',compact('employees'));
+        return view('payrolls.index',compact('employees','permitted_menus_array'));
     }
 
 
     public function payroll_list(){
+        
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+        
         $payrolls = DB::table('payrolls')
                     ->leftJoin('employees','payrolls.employee','employees.id')
                     ->select(
@@ -29,7 +48,7 @@ class PayrollController extends Controller
                         )
                     ->get();
 
-        return view('payrolls.payroll_list',compact('payrolls'));
+        return view('payrolls.payroll_list',compact('payrolls','permitted_menus_array'));
     }
 
     public function employee_details_dependancy(Request $request){
@@ -133,6 +152,14 @@ class PayrollController extends Controller
 
     public function payroll_show_data(){
         
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         
         $last_inserted_data = DB::table('payrolls')
                              ->orderBy('id', 'desc')
@@ -165,7 +192,7 @@ class PayrollController extends Controller
 
         
 
-        return view('payrolls.show_data',compact('filteredData','emp_id','emp_name','emp_designation','emp_joining_date','emp_salary_date','last_inserted_id'));
+        return view('payrolls.show_data',compact('filteredData','emp_id','emp_name','emp_designation','emp_joining_date','emp_salary_date','last_inserted_id','permitted_menus_array'));
     }
 
 

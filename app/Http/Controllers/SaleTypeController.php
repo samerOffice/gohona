@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Auth;
 
 class SaleTypeController extends Controller
 {
@@ -12,8 +13,16 @@ class SaleTypeController extends Controller
      */
     public function index()
     {
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
         $sale_types = DB::table('sale_types')->get();                               
-        return view('sale_types.index',compact('sale_types'));
+        return view('sale_types.index',compact('sale_types','permitted_menus_array'));
     }
 
     /**
@@ -21,7 +30,15 @@ class SaleTypeController extends Controller
      */
     public function create()
     {
-        return view('sale_types.create');
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+        return view('sale_types.create',compact('permitted_menus_array'));
     }
 
     /**
@@ -44,10 +61,19 @@ class SaleTypeController extends Controller
      */
     public function edit(string $id)
     {
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus); 
+        
         $sale_type = DB::table('sale_types')
         ->where('id',$id)
         ->first();
-     return view('sale_types.edit',compact('sale_type'));
+     return view('sale_types.edit',compact('sale_type','permitted_menus_array'));
 
     }
 
