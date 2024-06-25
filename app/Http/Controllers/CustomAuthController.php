@@ -35,8 +35,20 @@ class CustomAuthController extends Controller
 
         if(Auth::attempt($credentials))
         {
-            $request->session()->regenerate();
-            return redirect()->route('dashboard')->withSuccess('You have successfully logged in!');
+            
+            $user = Auth::user();
+
+            if($user->status == 1){
+                $request->session()->regenerate();
+                return redirect()->route('dashboard')->withSuccess('You have successfully logged in!');
+            }else{
+                Auth::logout();
+                $request->session()->invalidate();
+                return back()->withErrors([
+            'email' => 'User is not activated.',
+        ])->onlyInput('email');
+            }
+            
         }
 
         return back()->withErrors([
