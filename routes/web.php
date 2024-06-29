@@ -9,6 +9,7 @@ use App\Http\Controllers\SaleTypeController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerCategoryController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\TermsAndConditionsController;
@@ -62,6 +63,10 @@ Route::get('/delete_supplier/{delete_id}', [SupplierController::class, 'delete_s
 //customer category
 Route::resource('customer_category', CustomerCategoryController::class);
 
+//customer
+Route::resource('customer', CustomerController::class);
+
+
 //product
 Route::resource('product', ProductController::class);
 Route::get('/delete_product/{delete_id}', [ProductController::class, 'delete_product'])->name('delete_product');
@@ -96,7 +101,7 @@ Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data']
 
 //dependencies
 Route::post('/employee_details_dependancy', [PayrollController::class, 'employee_details_dependancy']);
-
+Route::post('/customer/district_and_zone_dependancy', [CustomerController::class, 'districtAndZoneDependancy']);
 
 Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data'])->name('payroll_show_data');
 Route::post('/generate-csv', [PayrollController::class, 'generateCsv'])->name('generate-csv');

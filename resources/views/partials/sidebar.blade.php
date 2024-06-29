@@ -79,10 +79,11 @@
           @endif
 
           @if(in_array(6, $permitted_menus_array))
-          <li class="nav-item">
-            <a href="#" class="nav-link ">
-              <i class="nav-icon fa-solid fa-users"></i>
-              <p>
+      
+          <li  class="nav-item nav-link {{ Request::is('customer') ? 'nav-link active' : ''}}" style="{{ Request::is('customer') ? 'background-color: #17a2b8; !important' : ''}}">
+            <a href="{{url('/customer')}}" >
+              <i class="nav-icon fa-solid fa-users" {{ Request::is('customer') ? 'color: white; !important' : ''}}"></i>
+              <p style="{{ Request::is('customer') ? 'color: white; !important' : ''}}">
                 Customers
               </p>
             </a>

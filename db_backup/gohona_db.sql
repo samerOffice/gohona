@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 13, 2024 at 03:34 PM
+-- Generation Time: Jun 29, 2024 at 02:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -44,6 +44,33 @@ INSERT INTO `booking_terms_and_conditions` (`id`, `terms`, `created_at`, `update
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `mobile_number` varchar(100) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `customer_category_id` int(100) DEFAULT NULL,
+  `district_id` int(100) DEFAULT NULL,
+  `zone_id` int(100) DEFAULT NULL,
+  `fb_name` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `mobile_number`, `address`, `customer_category_id`, `district_id`, `zone_id`, `fb_name`, `created_at`, `updated_at`) VALUES
+(1, 'A.H. Mahmud', '01814750120', 'Mirpur 10, Dhaka<br>', 2, 47, 4, 'fb_mahmud', '2024-06-29 12:34:15', '2024-06-29 12:34:15'),
+(2, 'Qaisar Ahmed', '01213440120', 'mirpur 10', 2, 47, 5, 'ahmed_fb', '2024-06-29 12:36:12', '2024-06-29 12:36:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `customer_categories`
 --
 
@@ -60,9 +87,13 @@ CREATE TABLE `customer_categories` (
 --
 
 INSERT INTO `customer_categories` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'test category 11', 1, '2024-05-09 11:40:42', '2024-05-09 11:40:42'),
-(2, 'test category 2', 2, '2024-05-09 11:47:36', '2024-05-09 11:47:36'),
-(3, 'test category 3', 1, '2024-06-04 05:39:53', '2024-06-04 05:39:53');
+(1, 'Normal', 1, '2024-06-29 12:23:18', '2024-06-29 12:23:18'),
+(2, 'VIP', 1, '2024-06-29 12:23:26', '2024-06-29 12:23:26'),
+(3, '9597', 1, '2024-06-29 12:23:41', '2024-06-29 12:23:41'),
+(4, 'VVIP', 1, '2024-06-29 12:23:52', '2024-06-29 12:23:52'),
+(5, 'POLICE PLAZA', 1, '2024-06-29 12:24:04', '2024-06-29 12:24:04'),
+(6, 'CORPORATE', 1, '2024-06-29 12:24:25', '2024-06-29 12:24:25'),
+(7, 'SENCO', 1, '2024-06-29 12:24:36', '2024-06-29 12:24:36');
 
 -- --------------------------------------------------------
 
@@ -198,7 +229,7 @@ INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `yearl
 (1, 'Kamrul Hasan Uddin', 'Sales Executive', '2022-06-13', '2023-07-02', '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
 (2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', '2025-12-03', '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
 (3, 'Kartik Paul Kumar', 'Sales Manager', '2020-05-08', '2021-05-04', '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12'),
-(4, 'Salman Seikh', 'Sales Executive', '2022-07-05', '2022-10-04', '850', 'Mahmud Seikh', 'Halima Khatun', '01513470121', '3543515', '<p>laalbagh, dhaka<br></p>', '<p>laalbagh, dhaka<br></p>', '1996-06-05', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmud Seikh', '01513470120', 'Father', 'Rakib Seikh', '01814780120', 'Brother', NULL, NULL, NULL, NULL, '2024-06-04 06:26:23', '2024-06-04 06:26:23');
+(4, 'Salman Seikh', 'Sales Executive', '2022-07-05', '2023-01-29', '850', 'Mahmud Seikh', 'Halima Khatun', '01513470121', '3543515', '<p>laalbagh, dhaka<br></p>', '<p>laalbagh, dhaka<br></p>', '1996-06-05', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmud Seikh', '01513470120', 'Father', 'Rakib Seikh', '01814780120', 'Brother', NULL, NULL, NULL, NULL, '2024-06-04 06:26:23', '2024-06-04 06:26:23');
 
 -- --------------------------------------------------------
 
@@ -419,7 +450,8 @@ INSERT INTO `payrolls` (`id`, `employee`, `salary_date`, `joining_date`, `per_da
 (13, 3, '2024-06-03', '2020-05-08', '800', '39', '31200', '10-2020', '11-2020', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-03 09:51:18', '2024-06-03 09:51:18'),
 (14, 3, '2024-06-03', '2020-05-08', '800', '39', '31200', '01-2021', '02-2021', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-03 11:12:11', '2024-06-03 11:12:11'),
 (15, 3, '2024-06-04', '2020-05-08', '800', '39', '31200', '04-2021', '05-2021', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-04 05:47:42', '2024-06-04 05:47:42'),
-(16, 4, '2024-06-04', '2022-07-05', '850', '39', '33150', '09-2022', '10-2022', '8287.5', '26', '0', '26', '22100', '850', '0', '0', '0', '0', '0', '0', '0', '850', '22950', '0', '22950', '100', '0', '22850', NULL, '2024-06-04 06:26:36', '2024-06-04 06:26:36');
+(16, 4, '2024-06-04', '2022-07-05', '850', '39', '33150', '09-2022', '10-2022', '8287.5', '26', '0', '26', '22100', '850', '0', '0', '0', '0', '0', '0', '0', '850', '22950', '0', '22950', '100', '0', '22850', NULL, '2024-06-04 06:26:36', '2024-06-04 06:26:36'),
+(17, 4, '2024-06-29', '2022-07-05', '850', '39', '33150', '12-2022', '01-2023', '8287.5', '26', '1', '25', '21250', '850', '0', '0', '100', '0', '0', '0', '0', '950', '22200', '0', '22200', '0', '50', '22150', '100', '2024-06-29 09:50:33', '2024-06-29 09:50:33');
 
 -- --------------------------------------------------------
 
@@ -472,7 +504,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_nr`, `product_details`, `product_category`, `product_type`, `weight`, `carat`, `quantity`, `st_or_dia`, `st_or_dia_price`, `wage`, `wage_type`, `supplier`, `purchase_price`, `stock_type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'aa', 'asdffsdfsd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL),
+(1, 'aa', 'asdffsdfs', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL),
 (11, 'dsf', 'aa@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
 (12, 'qqq', 'qq@gmai', 9, NULL, '32kg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
 (60, 'R2', 'RING 18K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
@@ -691,8 +723,16 @@ CREATE TABLE `zones` (
 --
 
 INSERT INTO `zones` (`id`, `name`, `district_id`, `note`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'test1', 7, 'ggg', 1, '2024-05-09 09:28:29', '2024-05-09 09:28:29'),
-(2, 'test2', 47, 'ygyku', 2, '2024-05-09 09:43:11', '2024-05-09 09:43:11');
+(1, 'DHAKA', 47, NULL, 1, '2024-06-29 12:26:03', '2024-06-29 12:26:03'),
+(2, 'BANASREE', 47, NULL, 1, '2024-06-29 12:26:32', '2024-06-29 12:26:32'),
+(3, 'MIDDLE BADDA', 47, NULL, 1, '2024-06-29 12:26:47', '2024-06-29 12:26:47'),
+(4, 'NIKETON', 47, NULL, 1, '2024-06-29 12:27:02', '2024-06-29 12:27:02'),
+(5, 'GULSHAN-01', 47, NULL, 1, '2024-06-29 12:27:15', '2024-06-29 12:27:15'),
+(6, 'GULSHAN-02', 47, NULL, 1, '2024-06-29 12:27:30', '2024-06-29 12:27:30'),
+(7, 'MERUL BADDA', 47, NULL, 1, '2024-06-29 12:27:44', '2024-06-29 12:27:44'),
+(8, 'SOUTH BADDA', 47, NULL, 1, '2024-06-29 12:28:06', '2024-06-29 12:28:06'),
+(9, 'RAMPURA', 47, NULL, 1, '2024-06-29 12:28:26', '2024-06-29 12:28:26'),
+(10, 'DIT PROJECT,RAMPURA', 47, NULL, 1, '2024-06-29 12:28:39', '2024-06-29 12:28:39');
 
 --
 -- Indexes for dumped tables
@@ -702,6 +742,12 @@ INSERT INTO `zones` (`id`, `name`, `district_id`, `note`, `status`, `created_at`
 -- Indexes for table `booking_terms_and_conditions`
 --
 ALTER TABLE `booking_terms_and_conditions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -846,10 +892,16 @@ ALTER TABLE `booking_terms_and_conditions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `customer_categories`
 --
 ALTER TABLE `customer_categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `districts`
@@ -897,7 +949,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `payrolls`
 --
 ALTER TABLE `payrolls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -963,7 +1015,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `zones`
 --
 ALTER TABLE `zones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
