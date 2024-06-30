@@ -13,6 +13,10 @@ Welcome
         <br>
         <div class="row">
             <div class="col-12">
+
+                <a class="btn btn-outline-success float-right ml-2" href="{{route('customer_import')}}">
+                  <i class="fas fa-upload"></i> Import Customer
+              </a>
                 <a class="btn btn-outline-info float-right" href="{{route('customer.create')}}">
                     <i class="fas fa-plus"></i> Add Customer
                 </a>            
@@ -51,7 +55,6 @@ Welcome
                           <th>Name</th>
                           <th>FB Name</th>
                           <th>Mobile No.</th>
-                          <th>Address</th>
                           <th>Customer Category</th>                          
                           <th>District</th>
                           <th>Zone</th>
@@ -67,14 +70,13 @@ Welcome
                           <td></td>
                           <td>{{$customer->name}}</td>
                           <td>{{$customer->fb_name}}</td>
-                          <td>{{$customer->mobile_number}}</td>                        
-                          <td>{{$customer->address}}</td>
-                          <td>{{$customer->customer_category_id}}</td>
-                          <td>{{$customer->district_id}}</td>
-                          <td>{{$customer->zone_id}}</td>
+                          <td>{{$customer->mobile_number}}</td>                          
+                          <td>{{$customer->customer_category_name}}</td>
+                          <td>{{$customer->district_name}}</td>
+                          <td>{{$customer->zone_name}}</td>
                           <td>{{$customer->created_at}}</td>
                           <td>
-                             <a href="" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a>
+                             <a href="{{route('customer.edit', $customer->id)}}" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a>
                         </td>
                         </tr> 
                         @endforeach              

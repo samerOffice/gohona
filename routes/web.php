@@ -65,6 +65,9 @@ Route::resource('customer_category', CustomerCategoryController::class);
 
 //customer
 Route::resource('customer', CustomerController::class);
+Route::get('/customer_import', [CustomerController::class, 'customer_import_form'])->name('customer_import');
+Route::post('/customer_excel_file_import', [CustomerController::class, 'customer_excel_file_import'])->name('upload_customer_excel');
+// Route::post('/submit-data', [ProductController::class, 'submitData'])->name('submit.data');
 
 
 //product
@@ -101,7 +104,7 @@ Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data']
 
 //dependencies
 Route::post('/employee_details_dependancy', [PayrollController::class, 'employee_details_dependancy']);
-Route::post('/customer/district_and_zone_dependancy', [CustomerController::class, 'districtAndZoneDependancy']);
+Route::post('/district_and_zone_dependancy', [CustomerController::class, 'districtAndZoneDependancy']);
 
 Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data'])->name('payroll_show_data');
 Route::post('/generate-csv', [PayrollController::class, 'generateCsv'])->name('generate-csv');

@@ -19,8 +19,15 @@ class CustomerController extends Controller
                     ->where('role',$user_role)
                     ->first();
             $permitted_menus = $menu_data->menus;
-            $permitted_menus_array = explode(',', $permitted_menus);     
-        $customers = DB::table('customers')->get();
+            $permitted_menus_array = explode(',', $permitted_menus);
+
+        $customers = DB::table('customers')
+                    ->leftJoin('customer_categories','customers.customer_category_id','customer_categories.id')
+                    ->leftJoin('districts','customers.district_id','districts.id')
+                    ->leftJoin('zones','customers.zone_id','zones.id')
+                    ->select('customers.*','customer_categories.name as customer_category_name', 'districts.name as district_name','zones.name as zone_name' )
+                    ->get();
+
         return view('customers.index',compact('customers','permitted_menus_array'));
     }
 
@@ -91,7 +98,28 @@ class CustomerController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+        
+           
+        $customer = DB::table('customers')
+                    ->leftJoin('customer_categories','customers.customer_category_id','customer_categories.id')
+                    ->leftJoin('districts','customers.district_id','districts.id')
+                    ->leftJoin('zones','customers.zone_id','zones.id')
+                    ->select('customers.*','customer_categories.name as customer_category_name', 'districts.name as district_name','zones.name as zone_name' )
+                             ->where('customers.id',$id)
+                             ->first();
+
+
+        $customer_categories = DB::table('customer_categories')->get();
+        $districts= DB::table('districts')->get();
+        $zones= DB::table('zones')->get();
+        return view('customers.edit',compact('customer','customer_categories','districts','zones','permitted_menus_array'));
     }
 
     /**
@@ -99,7 +127,20 @@ class CustomerController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+         
+        $data = array();
+        $data['name'] = $request->name;
+        $data['mobile_number'] = $request->mobile_number;
+        $data['address'] = $request->address;
+        $data['customer_category_id'] = $request->customer_category_id;
+        $data['district_id'] = $request->district_id;
+        $data['zone_id'] = $request->zone_id;
+        $data['fb_name'] = $request->fb_name;
+       
+        $updated = DB::table('customers')
+                  ->where('id', $request->id)
+                  ->update($data);
+        return redirect()->route('customer.index')->withSuccess('Customer is updated successfully');
     }
 
     /**
@@ -108,5 +149,55 @@ class CustomerController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+
+    public function customer_import_form(){
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+        return view('customers.import',compact('permitted_menus_array'));
+    }
+
+
+    public function customer_excel_file_import(Request $request){
+        $request->validate([
+            'customer_excel_file' => 'required|mimes:csv',
+        ]);
+
+
+        $filePath = $request->file('customer_excel_file')->move(public_path('import_customer_csv_files'));
+
+        $file = fopen($filePath, 'r');
+
+
+        $csvData = [];
+        while (($row = fgetcsv($file)) !== false) {
+            $csvData[] = $row;
+        }
+        fclose($file);
+
+        unlink($filePath);
+
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+
+        return view('customers.import')->with([
+            'csvData' => $csvData,
+            'permitted_menus_array' => $permitted_menus_array
+        ]);
     }
 }

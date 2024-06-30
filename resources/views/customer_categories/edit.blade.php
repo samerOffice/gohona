@@ -86,7 +86,7 @@ input:checked + .slider:before {
                 <br>
                 <div class="card">
                   <div class="card-header">
-                    <h3 class="card-title">Update Today Rate</h3>
+                    <h3 class="card-title">Update Customer Category</h3>
                   </div>  
                     <div class="card-body">
                         <form method="post" action="{{route('customer_category.update',$customer_category->id) }}">  
