@@ -171,7 +171,19 @@ class ProductController extends Controller
 
         unlink($filePath);
 
-        return view('products.import')->with('csvData', $csvData);
+
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+        return view('products.import')->with([
+            'csvData' => $csvData,
+            'permitted_menus_array' => $permitted_menus_array
+        ]);
     }
 
 

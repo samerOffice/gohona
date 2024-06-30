@@ -39,7 +39,7 @@ Customer Create
 
                               <div class="form-group">
                                 <label>Address</label>
-                                <textarea name="address"  required></textarea>
+                                <textarea name="address" id="summernote"  required></textarea>
                               </div>
 
                               <div class="form-group">
@@ -129,8 +129,10 @@ function getCsrfToken() {
 axios.defaults.withCredentials = true;
 axios.defaults.headers.common['X-CSRF-TOKEN'] = getCsrfToken();
 
+const baseUrl = "{{ url('/') }}/";
+
 // axios.get('sanctum/csrf-cookie').then(response=>{
- axios.post('district_and_zone_dependancy',{
+ axios.post(baseUrl +'district_and_zone_dependancy',{
         data: selectedDistrict
       }).then(response=>{
       $('#zone_id').html(response.data);
