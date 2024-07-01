@@ -38,6 +38,9 @@ Welcome
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
                                       </div>  
                                     </div>
+                                    @if ($errors->has('excel_file'))
+                                        <span class="text-danger">{{ $errors->first('excel_file') }}</span>
+                                    @endif
                                 </div>                            
                             </div>
                             <!-- /.card-body -->
@@ -109,11 +112,9 @@ Welcome
 
 @push('myScripts')
 <script>
-    $(function () {
-    bsCustomFileInput.init();
-    });
-
-    
+    // $(function () {
+    // bsCustomFileInput.init();
+    // });
 
     $(function () {
       $("#example1").DataTable({
@@ -156,9 +157,9 @@ Welcome
             var product_details = $(this).find('td:eq(1)').text(); // Assuming product_details is in the second column
             var weight = $(this).find('td:eq(2)').text(); // Assuming weight is in the third column
             var st_or_dia = $(this).find('td:eq(3)').text(); // Assuming st_or_dia is in the forth column
-            var st_or_dia_price = $(this).find('td:eq(3)').text(); // Assuming st_or_dia_price is in the fifth column
-            var wage = $(this).find('td:eq(4)').text(); // Assuming wage is in the sixth column
-            var wage_type = $(this).find('td:eq(4)').text(); // Assuming wage_type is in the seven column
+            var st_or_dia_price = $(this).find('td:eq(4)').text(); // Assuming st_or_dia_price is in the fifth column
+            var wage = $(this).find('td:eq(5)').text(); // Assuming wage is in the sixth column
+            var wage_type = $(this).find('td:eq(6)').text(); // Assuming wage_type is in the seven column
           
 
           // Append values to hidden input fields

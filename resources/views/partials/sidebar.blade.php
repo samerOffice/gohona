@@ -153,7 +153,12 @@
           @endif
 
 
-          <li class="nav-item">
+
+
+
+          <li class="nav-item @if(Request::is('customer_transaction')) menu-open 
+                              @elseif(Request::is('supplier_transaction')) menu-open
+                              @endif">
             <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-diamond"></i>
               <p>
@@ -165,18 +170,18 @@
 
               @if(in_array(18, $permitted_menus_array))
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Customer Transaction</p>
+                <a href="{{route('customer_transaction.index')}}" class="nav-link {{ Request::is('customer_transaction') ? 'nav-link active' : ''}}" style="{{ Request::is('customer_transaction') ? 'background-color: #17a2b8; !important' : ''}}">
+                  <i class="far fa-circle nav-icon" style="{{ Request::is('customer_transaction') ? 'color: white; !important' : ''}}"></i>
+                  <p style="{{ Request::is('customer_transaction') ? 'color: white; !important' : ''}}">Customer Transaction</p>
                 </a>
               </li>
               @endif
 
               @if(in_array(27, $permitted_menus_array))
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Supplier Transaction</p>
+                <a href="{{route('supplier_transaction.index')}}" class="nav-link {{ Request::is('supplier_transaction') ? 'nav-link active' : ''}}" style="{{ Request::is('supplier_transaction') ? 'background-color: #17a2b8; !important' : ''}}">
+                  <i class="far fa-circle nav-icon" style="{{ Request::is('supplier_transaction') ? 'color: white; !important' : ''}}"></i>
+                  <p style="{{ Request::is('supplier_transaction') ? 'color: white; !important' : ''}}">Supplier Transaction</p>
                 </a>
               </li>
               @endif
@@ -189,6 +194,12 @@
               </li>
             </ul>
           </li>
+
+
+
+
+
+
 
           @if(in_array(13, $permitted_menus_array))
           <li class="nav-item">

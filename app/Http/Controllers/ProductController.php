@@ -155,8 +155,11 @@ class ProductController extends Controller
 
     public function excel_file_import(Request $request){
 
+    
         $request->validate([
             'excel_file' => 'required|mimes:csv',
+        ], [
+            'excel_file.mimes' => 'Please upload file with .csv format',
         ]);
 
         $filePath = $request->file('excel_file')->move(public_path('import_csv_files'));

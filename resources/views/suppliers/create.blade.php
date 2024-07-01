@@ -40,10 +40,10 @@ Welcome
                               </div>
 
                              
-                              <div class="form-group">
+                              {{-- <div class="form-group">
                                 <label for="product_category_name">Due Amount</label>
                                 <input type="text" class="form-control" id="due_amount" name="due_amount" >
-                              </div>
+                              </div> --}}
                             </div>
                             <!-- /.card-body -->
                             <button type="submit" id="ss"  class="btn btn-info float-right mr-4">Submit</button>

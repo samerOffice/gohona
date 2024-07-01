@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2024 at 02:36 PM
+-- Generation Time: Jul 01, 2024 at 03:31 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -65,8 +65,10 @@ CREATE TABLE `customers` (
 --
 
 INSERT INTO `customers` (`id`, `name`, `mobile_number`, `address`, `customer_category_id`, `district_id`, `zone_id`, `fb_name`, `created_at`, `updated_at`) VALUES
-(1, 'A.H. Mahmud', '01814750120', 'Mirpur 10, Dhaka<br>', 2, 47, 4, 'fb_mahmud', '2024-06-29 12:34:15', '2024-06-29 12:34:15'),
-(2, 'Qaisar Ahmed', '01213440120', 'mirpur 10', 2, 47, 5, 'ahmed_fb', '2024-06-29 12:36:12', '2024-06-29 12:36:12');
+(1, 'A.H. Mahmud', '01814750120', 'Mirpur 12, Dhaka<br>', 1, 47, 3, 'fb_mahmud', '2024-06-29 12:34:15', '2024-06-29 12:34:15'),
+(2, 'Qaisar Ahmed', '01213440120', 'mirpur 10', 2, 47, 5, 'ahmed_fb', '2024-06-29 12:36:12', '2024-06-29 12:36:12'),
+(3, 'Hamid Kauser', '1513470135', 'Dhanmondi 27', 1, 1, 1, 'Hamid', '2024-07-01 06:12:40', '2024-07-01 06:12:40'),
+(4, 'Sabuj Das', '1513470130', 'Betaga', 1, 1, 1, 'Sabuj', '2024-07-01 06:20:50', '2024-07-01 06:20:50');
 
 -- --------------------------------------------------------
 
@@ -94,6 +96,32 @@ INSERT INTO `customer_categories` (`id`, `name`, `status`, `created_at`, `update
 (5, 'POLICE PLAZA', 1, '2024-06-29 12:24:04', '2024-06-29 12:24:04'),
 (6, 'CORPORATE', 1, '2024-06-29 12:24:25', '2024-06-29 12:24:25'),
 (7, 'SENCO', 1, '2024-06-29 12:24:36', '2024-06-29 12:24:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customer_transactions`
+--
+
+CREATE TABLE `customer_transactions` (
+  `id` int(11) NOT NULL,
+  `transaction_date` date DEFAULT NULL,
+  `cash_memo_no` varchar(100) DEFAULT NULL,
+  `customer_id` int(100) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `bill_amount` varchar(100) DEFAULT NULL,
+  `paid_amount` varchar(100) DEFAULT NULL,
+  `due_amount` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `customer_transactions`
+--
+
+INSERT INTO `customer_transactions` (`id`, `transaction_date`, `cash_memo_no`, `customer_id`, `description`, `bill_amount`, `paid_amount`, `due_amount`, `created_at`, `updated_at`) VALUES
+(2, '2024-07-01', 'ref-77', 3, '<p>test transaction 2<br></p>', '52500', '500', '52000.00', '2024-07-01 11:45:39', '2024-07-01 11:45:39');
 
 -- --------------------------------------------------------
 
@@ -227,7 +255,7 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `yearly_bonus_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `yearly_bonus_status`, `created_at`, `updated_at`) VALUES
 (1, 'Kamrul Hasan Uddin', 'Sales Executive', '2022-06-13', '2023-07-02', '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
-(2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', '2025-12-03', '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
+(2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', '2026-03-01', '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
 (3, 'Kartik Paul Kumar', 'Sales Manager', '2020-05-08', '2021-05-04', '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12'),
 (4, 'Salman Seikh', 'Sales Executive', '2022-07-05', '2023-01-29', '850', 'Mahmud Seikh', 'Halima Khatun', '01513470121', '3543515', '<p>laalbagh, dhaka<br></p>', '<p>laalbagh, dhaka<br></p>', '1996-06-05', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmud Seikh', '01513470120', 'Father', 'Rakib Seikh', '01814780120', 'Brother', NULL, NULL, NULL, NULL, '2024-06-04 06:26:23', '2024-06-04 06:26:23');
 
@@ -451,7 +479,8 @@ INSERT INTO `payrolls` (`id`, `employee`, `salary_date`, `joining_date`, `per_da
 (14, 3, '2024-06-03', '2020-05-08', '800', '39', '31200', '01-2021', '02-2021', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-03 11:12:11', '2024-06-03 11:12:11'),
 (15, 3, '2024-06-04', '2020-05-08', '800', '39', '31200', '04-2021', '05-2021', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-04 05:47:42', '2024-06-04 05:47:42'),
 (16, 4, '2024-06-04', '2022-07-05', '850', '39', '33150', '09-2022', '10-2022', '8287.5', '26', '0', '26', '22100', '850', '0', '0', '0', '0', '0', '0', '0', '850', '22950', '0', '22950', '100', '0', '22850', NULL, '2024-06-04 06:26:36', '2024-06-04 06:26:36'),
-(17, 4, '2024-06-29', '2022-07-05', '850', '39', '33150', '12-2022', '01-2023', '8287.5', '26', '1', '25', '21250', '850', '0', '0', '100', '0', '0', '0', '0', '950', '22200', '0', '22200', '0', '50', '22150', '100', '2024-06-29 09:50:33', '2024-06-29 09:50:33');
+(17, 4, '2024-06-29', '2022-07-05', '850', '39', '33150', '12-2022', '01-2023', '8287.5', '26', '1', '25', '21250', '850', '0', '0', '100', '0', '0', '0', '0', '950', '22200', '0', '22200', '0', '50', '22150', '100', '2024-06-29 09:50:33', '2024-06-29 09:50:33'),
+(18, 2, '2024-07-01', '2024-02-01', '900', '39', '35100', '02-2026', '03-2026', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '100', '1000', '24400', '0', '24400', '0', '200', '24200', NULL, '2024-07-01 05:26:13', '2024-07-01 05:26:13');
 
 -- --------------------------------------------------------
 
@@ -507,8 +536,8 @@ INSERT INTO `products` (`id`, `product_nr`, `product_details`, `product_category
 (1, 'aa', 'asdffsdfs', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL),
 (11, 'dsf', 'aa@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
 (12, 'qqq', 'qq@gmai', 9, NULL, '32kg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
-(60, 'R2', 'RING 18K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
-(61, 'R3', 'RING 22K', 11, NULL, '1.77', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL);
+(64, 'R2', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '1000', 'Fixed', NULL, NULL, NULL, 1, NULL, NULL),
+(65, 'R3', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '10', 'Percentage', NULL, NULL, NULL, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -624,9 +653,34 @@ CREATE TABLE `suppliers` (
 --
 
 INSERT INTO `suppliers` (`id`, `name`, `mobile_no`, `due_amount`, `created_at`, `updated_at`) VALUES
-(2, 'test supplier ff', '01513470130', '15400', '2024-05-09 11:08:19', '2024-05-09 11:08:19'),
-(3, 'test supplier 2', '01513470137', '23,12343', '2024-05-11 07:09:25', '2024-05-11 07:09:25'),
-(4, 'test supplier 3', '01513470130', NULL, '2024-06-04 06:29:48', '2024-06-04 06:29:48');
+(5, 'test supplier 1', '01513470130', NULL, '2024-07-01 12:56:01', '2024-07-01 12:56:01'),
+(6, 'test supplier 2', '01313480120', NULL, '2024-07-01 12:56:24', '2024-07-01 12:56:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `supplier_transactions`
+--
+
+CREATE TABLE `supplier_transactions` (
+  `id` int(11) NOT NULL,
+  `transaction_date` date DEFAULT NULL,
+  `reference` varchar(100) DEFAULT NULL,
+  `supplier_id` int(100) DEFAULT NULL,
+  `description` varchar(100) DEFAULT NULL,
+  `bill_amount` varchar(100) DEFAULT NULL,
+  `paid_amount` varchar(100) DEFAULT NULL,
+  `due_amount` varchar(100) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `supplier_transactions`
+--
+
+INSERT INTO `supplier_transactions` (`id`, `transaction_date`, `reference`, `supplier_id`, `description`, `bill_amount`, `paid_amount`, `due_amount`, `created_at`, `updated_at`) VALUES
+(1, '2024-07-01', 'ref-3345', 6, '<p>transaction for test supplier 2<br></p>', '40500', '400', '40100.00', '2024-07-01 13:29:50', '2024-07-01 13:29:50');
 
 -- --------------------------------------------------------
 
@@ -757,6 +811,12 @@ ALTER TABLE `customer_categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `customer_transactions`
+--
+ALTER TABLE `customer_transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `districts`
 --
 ALTER TABLE `districts`
@@ -857,6 +917,12 @@ ALTER TABLE `suppliers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `supplier_transactions`
+--
+ALTER TABLE `supplier_transactions`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `terms_and_conditions`
 --
 ALTER TABLE `terms_and_conditions`
@@ -895,13 +961,19 @@ ALTER TABLE `booking_terms_and_conditions`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `customer_categories`
 --
 ALTER TABLE `customer_categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `customer_transactions`
+--
+ALTER TABLE `customer_transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `districts`
@@ -949,7 +1021,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `payrolls`
 --
 ALTER TABLE `payrolls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -961,7 +1033,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
 
 --
 -- AUTO_INCREMENT for table `product_categories`
@@ -991,7 +1063,13 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `suppliers`
 --
 ALTER TABLE `suppliers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `supplier_transactions`
+--
+ALTER TABLE `supplier_transactions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `terms_and_conditions`
