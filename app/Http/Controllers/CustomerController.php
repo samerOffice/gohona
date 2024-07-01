@@ -168,15 +168,17 @@ class CustomerController extends Controller
 
 
     public function customer_excel_file_import(Request $request){
+       
+
         $request->validate([
             'customer_excel_file' => 'required|mimes:csv',
+        ], [
+            'customer_excel_file.mimes' => 'Please upload file with .csv format',
         ]);
-
 
         $filePath = $request->file('customer_excel_file')->move(public_path('import_customer_csv_files'));
 
         $file = fopen($filePath, 'r');
-
 
         $csvData = [];
         while (($row = fgetcsv($file)) !== false) {
@@ -199,5 +201,47 @@ class CustomerController extends Controller
             'csvData' => $csvData,
             'permitted_menus_array' => $permitted_menus_array
         ]);
+    }
+
+    public function submitCustomerData(Request $request)
+    {
+        
+        $names = $request->input('name');
+        $mobile_numbers = $request->input('mobile_number');
+        $addresses = $request->input('address');
+        $customer_category_ids = $request->input('customer_category_id');
+        $district_ids = $request->input('district_id');
+        $zone_ids = $request->input('zone_id');
+        $fb_names = $request->input('fb_name');
+
+
+        // dd($customer_category_ids);
+
+
+        foreach($names as $index => $name) {
+              if(!empty($name)){
+
+                $mobile_number = $mobile_numbers[$index];
+                $address = $addresses[$index];
+                $customer_category_id = $customer_category_ids[$index];
+                $district_id = $district_ids[$index];
+                $zone_id = $zone_ids[$index];
+                $fb_name = $fb_names[$index];
+               
+                $customer = DB::table('customers')
+                            ->insertGetId([
+                            'name'=>$name,
+                            'mobile_number'=>$mobile_number, 
+                            'address'=>$address, 
+                            'customer_category_id'=>$customer_category_id, 
+                            'district_id'=>$district_id, 
+                            'zone_id'=>$zone_id, 
+                            'fb_name'=>$fb_name 
+                            ]);
+              }
+                
+        }
+        // return response()->json(['message' => 'Data submitted successfully']);
+        return redirect()->route('customer.index')->withSuccess('Customers are added successfully');
     }
 }

@@ -39,10 +39,10 @@ Welcome
                                     <input type="text" required class="form-control" id="mobile_no" name="mobile_no" value="{{$supplier->mobile_no}}">
                                 </div>
                                 
-                                <div class="form-group">
+                                {{-- <div class="form-group">
                                     <label for="">Due Amount</label>
                                     <input type="text" class="form-control" id="due_amount" name="due_amount" value="{{$supplier->due_amount}}">
-                                </div>
+                                </div> --}}
                             </div>  
                              
                             <!-- /.card-body -->

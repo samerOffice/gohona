@@ -19,6 +19,9 @@ use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\RoleAndPermissionController;
 
+use App\Http\Controllers\CustomerTransactionController;
+use App\Http\Controllers\SupplierTransactionController;
+
 
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('guest');
@@ -67,8 +70,14 @@ Route::resource('customer_category', CustomerCategoryController::class);
 Route::resource('customer', CustomerController::class);
 Route::get('/customer_import', [CustomerController::class, 'customer_import_form'])->name('customer_import');
 Route::post('/customer_excel_file_import', [CustomerController::class, 'customer_excel_file_import'])->name('upload_customer_excel');
-// Route::post('/submit-data', [ProductController::class, 'submitData'])->name('submit.data');
+Route::post('/submit_customer_data', [CustomerController::class, 'submitCustomerData'])->name('submit_customer.data');
 
+//customer transaction
+Route::resource('customer_transaction', CustomerTransactionController::class);
+Route::get('/delete_customer_transaction/{delete_id}', [CustomerTransactionController::class, 'delete_customer_transaction'])->name('delete_customer_transaction');
+
+//supplier transaction
+Route::resource('supplier_transaction', SupplierTransactionController::class);
 
 //product
 Route::resource('product', ProductController::class);

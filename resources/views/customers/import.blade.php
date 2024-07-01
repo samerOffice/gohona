@@ -36,8 +36,11 @@ Welcome
                                       <div class="custom-file">
                                         <input type="file" required class="custom-file-input form-control" name="customer_excel_file" id="exampleInputFile">
                                         <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                      </div>  
+                                      </div> 
                                     </div>
+                                    @if ($errors->has('customer_excel_file'))
+                                        <span class="text-danger">{{ $errors->first('customer_excel_file') }}</span>
+                                    @endif
                                 </div>                            
                             </div>
                             <!-- /.card-body -->
@@ -71,7 +74,7 @@ Welcome
                         </tfoot>
                           </table>
                           <br>
-                          <form id="myForm" method="post" action="">
+                          <form id="myForm" method="post" action="{{ route('submit_customer.data') }}">
                             @csrf
                             <input type="hidden" name="name[]" id="name">
                             <input type="hidden" name="mobile_number[]" id="mobile_number">
@@ -109,12 +112,11 @@ Welcome
 
 @push('myScripts')
 <script>
-    $(function () {
-    bsCustomFileInput.init();
-    });
+    // $(function () {
+    // bsCustomFileInput.init();
+    // });
 
-    
-
+  
     $(function () {
       $("#example1").DataTable({
         "responsive": true, "lengthChange": false, "autoWidth": false,
@@ -156,9 +158,9 @@ Welcome
             var mobile_number = $(this).find('td:eq(1)').text(); // Assuming mobile_number is in the second column
             var address = $(this).find('td:eq(2)').text(); // Assuming address is in the third column
             var customer_category_id = $(this).find('td:eq(3)').text(); // Assuming customer_category_id is in the forth column
-            var district_id = $(this).find('td:eq(3)').text(); // Assuming district_id is in the fifth column
-            var zone_id = $(this).find('td:eq(4)').text(); // Assuming zone_id is in the sixth column
-            var fb_name = $(this).find('td:eq(4)').text(); // Assuming fb_name is in the seven column
+            var district_id = $(this).find('td:eq(4)').text(); // Assuming district_id is in the fifth column
+            var zone_id = $(this).find('td:eq(5)').text(); // Assuming zone_id is in the sixth column
+            var fb_name = $(this).find('td:eq(6)').text(); // Assuming fb_name is in the seven column
           
 
           // Append values to hidden input fields
