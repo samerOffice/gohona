@@ -78,6 +78,8 @@ Route::get('/delete_customer_transaction/{delete_id}', [CustomerTransactionContr
 
 //supplier transaction
 Route::resource('supplier_transaction', SupplierTransactionController::class);
+Route::get('/supplier_transaction_list', [SupplierTransactionController::class, 'supplier_transaction_list'])->name('supplier_transaction.transaction_list');
+
 
 //product
 Route::resource('product', ProductController::class);
@@ -105,6 +107,7 @@ Route::resource('settings', SettingController::class);
 
 //employees
 Route::resource('employee', EmployeeController::class);
+Route::get('/employee_renew/{emp_id}', [EmployeeController::class, 'renew'])->name('employee.renew');
 
 //payrolls
 Route::resource('payroll', PayrollController::class);

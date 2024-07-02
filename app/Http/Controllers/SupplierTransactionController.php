@@ -22,6 +22,49 @@ class SupplierTransactionController extends Controller
         $permitted_menus = $menu_data->menus;
         $permitted_menus_array = explode(',', $permitted_menus);
 
+
+        $supplier_transactions = DB::table('supplier_transactions')
+        ->leftJoin('suppliers','supplier_transactions.supplier_id','suppliers.id')
+        ->select('supplier_transactions.*','suppliers.name as supplier_name', 'suppliers.mobile_no as supplier_mobile_no')
+        ->groupBy('supplier_transactions.id',
+        'supplier_transactions.transaction_date',
+        'supplier_transactions.reference',
+        'supplier_transactions.supplier_id',
+        'supplier_transactions.description',
+        'supplier_transactions.bill_amount',
+        'supplier_transactions.paid_amount',
+        'supplier_transactions.due_amount',
+        'supplier_transactions.created_at',
+        'supplier_transactions.updated_at',
+        'suppliers.name',
+        'suppliers.mobile_no')
+        ->get();
+       
+         
+        // foreach($supplier_ids as $supplier_id){
+        //     $bill_amount = DB::table('supplier_transactions')
+        //                              ->where('supplier_id',$supplier_id->supplier_id)
+        //                              ->sum('bill_amount');
+        //     dd($bill_amount);
+        // }
+
+    // $supplier_transactions = DB::table('supplier_transactions')
+    //             ->leftJoin('suppliers','supplier_transactions.supplier_id','suppliers.id')
+    //             ->select('supplier_transactions.*','suppliers.name as supplier_name', 'suppliers.mobile_no as supplier_mobile_no')
+    //             ->get();
+
+     return view('supplier_transactions.index',compact('supplier_transactions','permitted_menus_array'));
+    }
+
+    public function supplier_transaction_list(){
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
     $supplier_transactions = DB::table('supplier_transactions')
                 ->leftJoin('suppliers','supplier_transactions.supplier_id','suppliers.id')
                 ->select('supplier_transactions.*','suppliers.name as supplier_name', 'suppliers.mobile_no as supplier_mobile_no' )

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 01, 2024 at 03:31 PM
+-- Generation Time: Jul 02, 2024 at 10:40 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -221,6 +221,8 @@ CREATE TABLE `employees` (
   `designation` varchar(100) DEFAULT NULL,
   `joining_date` date DEFAULT NULL,
   `yearly_bonus_date` date DEFAULT NULL,
+  `renew_date` date DEFAULT NULL,
+  `renewed_yearly_bonus_date` date DEFAULT NULL,
   `per_day_salary` varchar(100) DEFAULT NULL,
   `father_name` varchar(100) DEFAULT NULL,
   `mother_name` varchar(100) DEFAULT NULL,
@@ -253,11 +255,12 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `yearly_bonus_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `yearly_bonus_status`, `created_at`, `updated_at`) VALUES
-(1, 'Kamrul Hasan Uddin', 'Sales Executive', '2022-06-13', '2023-07-02', '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
-(2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', '2026-03-01', '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
-(3, 'Kartik Paul Kumar', 'Sales Manager', '2020-05-08', '2021-05-04', '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12'),
-(4, 'Salman Seikh', 'Sales Executive', '2022-07-05', '2023-01-29', '850', 'Mahmud Seikh', 'Halima Khatun', '01513470121', '3543515', '<p>laalbagh, dhaka<br></p>', '<p>laalbagh, dhaka<br></p>', '1996-06-05', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmud Seikh', '01513470120', 'Father', 'Rakib Seikh', '01814780120', 'Brother', NULL, NULL, NULL, NULL, '2024-06-04 06:26:23', '2024-06-04 06:26:23');
+INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `yearly_bonus_date`, `renew_date`, `renewed_yearly_bonus_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `yearly_bonus_status`, `created_at`, `updated_at`) VALUES
+(1, 'Kamrul Hasan Uddin', 'Sales Executive', '2024-04-02', NULL, NULL, NULL, '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
+(2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', '2026-03-01', NULL, NULL, '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
+(3, 'Kartik Paul Kumar', 'Sales Manager', '2020-05-08', '2021-05-04', NULL, NULL, '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12'),
+(4, 'Salman Seikh', 'Sales Executive gg', '2022-07-05', '2023-01-29', '2024-07-02', NULL, '850', 'Mahmud Seikh', 'Halima Khatun', '01513470121', '3543515', '<p>laalbagh, dhaka<br></p>', '<p>laalbagh, dhaka<br></p>', '1996-06-05', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmud Seikh', '01513470120', 'Father', 'Rakib Seikh', '01814780120', 'Brother', NULL, NULL, NULL, NULL, '2024-06-04 06:26:23', '2024-06-04 06:26:23'),
+(5, 'Farhan Ahmed', 'Sales Officer', '2024-04-03', '2024-07-02', '2024-07-02', '2025-01-02', '750', 'Imran Ahmed', 'Hasina Begum', '01814750120', '354353363', 'Dhanmondi 27, Dhaka, Bangladesh<br>', '<p>Dhanmondi 27, Dhaka, Bangladesh</p>', '1991-07-11', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Imran Ahmed', '01715470120', 'Father', 'Halima Begum', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-07-02 07:29:22', '2024-07-02 07:29:22');
 
 -- --------------------------------------------------------
 
@@ -480,7 +483,11 @@ INSERT INTO `payrolls` (`id`, `employee`, `salary_date`, `joining_date`, `per_da
 (15, 3, '2024-06-04', '2020-05-08', '800', '39', '31200', '04-2021', '05-2021', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-04 05:47:42', '2024-06-04 05:47:42'),
 (16, 4, '2024-06-04', '2022-07-05', '850', '39', '33150', '09-2022', '10-2022', '8287.5', '26', '0', '26', '22100', '850', '0', '0', '0', '0', '0', '0', '0', '850', '22950', '0', '22950', '100', '0', '22850', NULL, '2024-06-04 06:26:36', '2024-06-04 06:26:36'),
 (17, 4, '2024-06-29', '2022-07-05', '850', '39', '33150', '12-2022', '01-2023', '8287.5', '26', '1', '25', '21250', '850', '0', '0', '100', '0', '0', '0', '0', '950', '22200', '0', '22200', '0', '50', '22150', '100', '2024-06-29 09:50:33', '2024-06-29 09:50:33'),
-(18, 2, '2024-07-01', '2024-02-01', '900', '39', '35100', '02-2026', '03-2026', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '100', '1000', '24400', '0', '24400', '0', '200', '24200', NULL, '2024-07-01 05:26:13', '2024-07-01 05:26:13');
+(18, 2, '2024-07-01', '2024-02-01', '900', '39', '35100', '02-2026', '03-2026', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '100', '1000', '24400', '0', '24400', '0', '200', '24200', NULL, '2024-07-01 05:26:13', '2024-07-01 05:26:13'),
+(19, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '06-2024', '07-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '11700', '44100', '0', '0', '44100', NULL, '2024-07-02 06:02:26', '2024-07-02 06:02:26'),
+(20, 5, '2024-07-02', '2024-04-03', '750', '39', '29250', '06-2024', '07-2024', '7312.5', '26', '0', '26', '19500', '750', '0', '0', '0', '0', '0', '0', '0', '750', '20250', '7312.5', '27562.5', '0', '0', '27562.5', NULL, '2024-07-02 07:30:32', '2024-07-02 07:30:32'),
+(21, 5, '2024-07-02', '2024-04-03', '750', '39', '29250', '09-2024', '10-2024', '7312.5', '26', '5', '21', '15750', '750', '0', '0', '0', '0', '0', '0', '0', '750', '16500', '0', '16500', '0', '0', '16500', NULL, '2024-07-02 07:36:17', '2024-07-02 07:36:17'),
+(22, 5, '2024-07-02', '2024-04-03', '750', '39', '29250', '12-2024', '01-2025', '7312.5', '26', '1', '25', '18750', '750', '0', '0', '0', '0', '0', '0', '0', '750', '19500', '0', '19500', '0', '0', '19500', NULL, '2024-07-02 07:52:10', '2024-07-02 07:52:10');
 
 -- --------------------------------------------------------
 
@@ -985,7 +992,7 @@ ALTER TABLE `districts`
 -- AUTO_INCREMENT for table `employees`
 --
 ALTER TABLE `employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1021,7 +1028,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `payrolls`
 --
 ALTER TABLE `payrolls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

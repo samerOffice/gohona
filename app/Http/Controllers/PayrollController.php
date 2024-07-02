@@ -46,6 +46,7 @@ class PayrollController extends Controller
                         'employees.emp_name as employee_name',
                         'employees.designation as employee_designation'
                         )
+                    ->orderBy('payrolls.id', 'desc')
                     ->get();
 
         return view('payrolls.payroll_list',compact('payrolls','permitted_menus_array'));
@@ -63,6 +64,8 @@ class PayrollController extends Controller
         $data = [
             'joining_date' => $employeeInfo->joining_date,
             'yearly_bonus_date' => $employeeInfo->yearly_bonus_date,
+            'renew_date' => $employeeInfo->renew_date,
+            'renewed_yearly_bonus_date' => $employeeInfo->renewed_yearly_bonus_date,
             'joining_month' => $joining_month,
             'per_day_salary' => $employeeInfo->per_day_salary
         ];
@@ -125,28 +128,71 @@ class PayrollController extends Controller
         });
 
 
-        //retrieve employee name
+        //retrieve employee
         $emp = DB::table('payrolls')
                ->where('id',$payroll)
                ->first();
         $employee_id = $emp->employee;
 
 
-       //for yearly bonus update
-       $carbonDate = Carbon::createFromFormat('m-Y', $request->bonus_pay_month);
+       //.......for (yearly_bonus_date) or (renewed_yearly_bonus_date) update..........
 
-       // Format the date to dd-mm-yyyy
+       // current date in 'mm-YYYY' format
+       $todayDate = Carbon::now();
+       $formattedTodayDate = $todayDate->format('m-Y');
+ 
+       $bonus_pay_date = $request->bonus_pay_month;
+       $carbonDate = Carbon::createFromFormat('m-Y', $request->bonus_pay_month);
+       // Format the date to yyyy-mm-dd
        $formattedDate = $carbonDate->format('Y-m-d');
 
+       $my_employee = DB::table('employees')
+                      ->where('id',$employee_id)
+                      ->first();
 
-       $data = array();
-       $data['yearly_bonus_date'] = $formattedDate;
-       $updated = DB::table('employees')
-                  ->where('id', $employee_id)
-                  ->update($data);
+        $my_employee_renew_date = $my_employee->renew_date;
+        $my_employee_renewed_yearly_bonus_date = $my_employee->renewed_yearly_bonus_date;
+        $my_employee_yearly_bonus_date = $my_employee->yearly_bonus_date;
 
+       if($my_employee_renew_date != null){
+            if($formattedTodayDate === $bonus_pay_date){
+                //update renewed yearly bonus date in employee table
+                $data = array();
+                $data['renewed_yearly_bonus_date'] = $formattedDate;
+                $updated = DB::table('employees')
+                            ->where('id', $employee_id)
+                            ->update($data);
+                return redirect()->route('payroll_show_data');
+            }else{
+               //update renewed yearly bonus date in employee table
+               $data = array();
+               $data['renewed_yearly_bonus_date'] = $my_employee_renewed_yearly_bonus_date;
+               $updated = DB::table('employees')
+                           ->where('id', $employee_id)
+                           ->update($data);
+               return redirect()->route('payroll_show_data');
+            }     
+       }else{
 
-       return redirect()->route('payroll_show_data');
+            if($formattedTodayDate === $bonus_pay_date){
+                //update yearly bonus date in employee table
+                $data = array();
+                $data['yearly_bonus_date'] = $formattedDate;
+                $updated = DB::table('employees')
+                            ->where('id', $employee_id)
+                            ->update($data);
+                return redirect()->route('payroll_show_data');
+            }else{
+                //update yearly bonus date in employee table
+                $data = array();
+                $data['yearly_bonus_date'] = $my_employee_yearly_bonus_date;
+                $updated = DB::table('employees')
+                            ->where('id', $employee_id)
+                            ->update($data);
+                return redirect()->route('payroll_show_data');
+            }
+        
+       }  
     }
 
 
@@ -173,7 +219,7 @@ class PayrollController extends Controller
                                 'employees.id as emp_id',
                                 'employees.emp_name as emp_name',
                                 'employees.designation as emp_designation',
-                                'employees.joining_date as emp_joining_date',
+                                // 'employees.joining_date as emp_joining_date',
                                 'payrolls.*',        
                                 'payrolls.salary_date as emp_salary_date')
                                 ->where('payrolls.id', $last_inserted_id)
