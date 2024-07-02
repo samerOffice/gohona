@@ -51,6 +51,7 @@ Welcome
                           <th>Name</th>
                           <th>Designation</th>
                           <th>Joining Date</th>
+                          <th>Renew Date</th>
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -62,8 +63,14 @@ Welcome
                           <td>{{$employee->emp_name}}</td>
                           <td>{{$employee->designation}}</td>
                           <td>{{$employee->joining_date}}</td>
-                          
+                          <td>{{$employee->renew_date}}</td>      
                           <td>
+                            @if($employee->yearly_bonus_date == null)
+                             <button class="btn btn-secondary"><i class="fa-solid fa-arrows-rotate"></i> Renew</button>
+                             @else
+                             <a href="{{route('employee.renew', $employee->id)}}" style="color: white"><button class="btn btn-danger"><i class="fa-solid fa-arrows-rotate"></i> Renew</button></a>
+                             @endif
+                              | 
                              <a href="{{route('employee.edit', $employee->id)}}" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a>
                         </td>
                         </tr> 

@@ -104,7 +104,7 @@
             <ul class="nav nav-treeview">
 
               @if(in_array(35, $permitted_menus_array))
-              <li class="nav-item">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('employee.index')}}" class="nav-link {{ Request::is('employee') ? 'nav-link active' : ''}}" style="{{ Request::is('employee') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('employee') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('employee') ? 'color: white; !important' : ''}}">Employees</p>
@@ -114,7 +114,7 @@
 
               
               @if(in_array(40, $permitted_menus_array))
-              <li class="nav-item">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('payroll.index')}}" class="nav-link {{ Request::is('payroll') ? 'nav-link active' : ''}}" style="{{ Request::is('payroll') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('payroll') ? 'color: white; !important' : ''}}">Add Payroll</p>
@@ -124,7 +124,7 @@
 
 
               @if(in_array(39, $permitted_menus_array))
-              <li class="nav-item">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('payroll_list')}}" class="nav-link {{ Request::is('payroll_list') ? 'nav-link active' : ''}}" style="{{ Request::is('payroll_list') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('payroll_list') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('payroll_list') ? 'color: white; !important' : ''}}">Payroll List</p>
@@ -132,7 +132,7 @@
               </li>
              @endif
       
-              <li class="nav-item">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Report</p>
@@ -169,7 +169,7 @@
             <ul class="nav nav-treeview">
 
               @if(in_array(18, $permitted_menus_array))
-              <li class="nav-item">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('customer_transaction.index')}}" class="nav-link {{ Request::is('customer_transaction') ? 'nav-link active' : ''}}" style="{{ Request::is('customer_transaction') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('customer_transaction') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('customer_transaction') ? 'color: white; !important' : ''}}">Customer Transaction</p>
@@ -178,7 +178,7 @@
               @endif
 
               @if(in_array(27, $permitted_menus_array))
-              <li class="nav-item">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('supplier_transaction.index')}}" class="nav-link {{ Request::is('supplier_transaction') ? 'nav-link active' : ''}}" style="{{ Request::is('supplier_transaction') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('supplier_transaction') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('supplier_transaction') ? 'color: white; !important' : ''}}">Supplier Transaction</p>
@@ -186,7 +186,7 @@
               </li>
               @endif
 
-              <li class="nav-item">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Report</p>
@@ -194,12 +194,6 @@
               </li>
             </ul>
           </li>
-
-
-
-
-
-
 
           @if(in_array(13, $permitted_menus_array))
           <li class="nav-item">
@@ -242,7 +236,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fa-solid fa-gears"></i>
               <p>
-                Sale Settings
+                Settings
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -251,7 +245,7 @@
 
             <ul class="nav nav-treeview">
                    
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('product_category_list')}}" class="nav-link {{ Request::is('product_category_list') ? 'nav-link active' : ''}}" style="{{ Request::is('product_category_list') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('product_category_list') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('product_category_list') ? 'color: white; !important' : ''}}">Product Category</p>
@@ -259,56 +253,56 @@
               </li>
               
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('today_rate_list')}}" class="nav-link {{ Request::is('today_rate_list') ? 'nav-link active' : ''}}" style="{{ Request::is('today_rate_list') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('today_rate_list') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('today_rate_list') ? 'color: white; !important' : ''}}">Today Rate</p>
                 </a>
               </li>
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('sale_type.index')}}" class="nav-link {{ Request::is('sale_type') ? 'nav-link active' : ''}}" style="{{ Request::is('sale_type') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('sale_type') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('sale_type') ? 'color: white; !important' : ''}}">Sale Type</p>
                 </a>
               </li>
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('zone.index')}}" class="nav-link {{ Request::is('zone') ? 'nav-link active' : ''}}" style="{{ Request::is('zone') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('zone') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('zone') ? 'color: white; !important' : ''}}">Zones</p>
                 </a>
               </li>
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('supplier.index')}}" class="nav-link {{ Request::is('supplier') ? 'nav-link active' : ''}}" style="{{ Request::is('supplier') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('supplier') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('supplier') ? 'color: white; !important' : ''}}">Suppliers</p>
                 </a>
               </li>
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('customer_category.index')}}" class="nav-link {{ Request::is('customer_category') ? 'nav-link active' : ''}}" style="{{ Request::is('customer_category') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('customer_category') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('customer_category') ? 'color: white; !important' : ''}}">Customer Category</p>
                 </a>
               </li>
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('payment_method.index')}}" class="nav-link {{ Request::is('payment_method') ? 'nav-link active' : ''}}" style="{{ Request::is('payment_method') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('payment_method') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('payment_method') ? 'color: white; !important' : ''}}">Payment Methods</p>
                 </a>
               </li>
                      
-              <li class="nav-item">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Wage Settings</p>
                 </a>
               </li>
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('terms_and_conditions.index')}}" class="nav-link {{ Request::is('terms_and_conditions') ? 'nav-link active' : ''}}" style="{{ Request::is('terms_and_conditions') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('terms_and_conditions') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('terms_and_conditions') ? 'color: white; !important' : ''}}">Terms & Conditions</p>
@@ -316,7 +310,7 @@
               </li>
 
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('booking_terms_and_conditions.index')}}" class="nav-link {{ Request::is('booking_terms_and_conditions') ? 'nav-link active' : ''}}" style="{{ Request::is('booking_terms_and_conditions') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('booking_terms_and_conditions') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('booking_terms_and_conditions') ? 'color: white; !important' : ''}}">Booking T&C</p>
@@ -324,7 +318,7 @@
               </li>
 
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('settings.index')}}" class="nav-link {{ Request::is('settings') ? 'nav-link active' : ''}}" style="{{ Request::is('settings') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('settings') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('settings') ? 'color: white; !important' : ''}}">Settings</p>
@@ -332,7 +326,7 @@
               </li>
 
 
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('roles_and_permissions.index')}}" class="nav-link {{ Request::is('roles_and_permissions') ? 'nav-link active' : ''}}" style="{{ Request::is('roles_and_permissions') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('roles_and_permissions') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('roles_and_permissions') ? 'color: white; !important' : ''}}">Roles & Permissions</p>
@@ -340,14 +334,15 @@
               </li>
 
               @if((auth()->user()->role_id)==1)
-              <li class="nav-item ">
+              <li class="nav-item" style="padding-left: 10px">
                 <a href="{{route('user_list')}}" class="nav-link {{ Request::is('user_list') ? 'nav-link active' : ''}}" style="{{ Request::is('user_list') ? 'background-color: #17a2b8; !important' : ''}}">
                   <i class="far fa-circle nav-icon" style="{{ Request::is('user_list') ? 'color: white; !important' : ''}}"></i>
                   <p style="{{ Request::is('user_list') ? 'color: white; !important' : ''}}">Users</p>
                 </a>
               </li>
               @endif
-             
+             <br>
+             <br>
               {{-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>

@@ -12,6 +12,25 @@ Payroll
         }
     }
 </style>
+
+
+<style>
+  .table-container {
+      /* display: flex; */
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+  table {
+      border-collapse: collapse;
+  }
+  table, th, td {
+      border: 1px solid black;
+  }
+  th, td {
+      padding: 10px;
+  }
+</style>
 @endpush
 
 @section('content')
@@ -27,13 +46,13 @@ Payroll
                     <br>
                     <div class="card">
 
-                        <div class="card-header">
+                        <div class="card-header" style="padding-left: 10%">
                           <h3 class="card-title">{{$emp_name}}</h3><br>
                           <h3 class="card-title">{{$emp_designation}}</h3>
                         </div>
 
-                        <div class="card-body">
-                            <table id="" class="table table-bordered table-striped">
+                        <div class="table-container">
+                            <table id="" class="table table-bordered table-striped" style="">
                                 <thead>
                                     @foreach($filteredData as $key => $value)
                                     @if( ($key !== '_token') 
@@ -67,10 +86,10 @@ Payroll
                                     ($key !== 'updated_at')
                                     )
                                     <tr>
-                                        <th>
-                                            @if($key === 'emp_joining_date')
-                                            Joining Date
-                                            @elseif($key === 'salary_date')
+                                        <td style="width: 50%; padding-left : 10%" >
+                                            {{-- @if($key === 'emp_joining_date')
+                                            Joining Date --}}
+                                            @if($key === 'salary_date')
                                             Salary Date
                                             @elseif($key === 'total_working_day')
                                             Total Working Days (Days)
@@ -117,7 +136,7 @@ Payroll
                                             @else
                                             {{$key}}
                                             @endif
-                                        </th>
+                                        </td>
                                         <td>{{ $value }}</td>
                                     </tr>
                                     @endif

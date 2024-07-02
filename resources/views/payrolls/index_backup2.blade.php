@@ -330,8 +330,7 @@ axios.get('sanctum/csrf-cookie').then(response=>{
         
        }
 
-       //**************************** Yearly Bonus Count start ***********************************
-
+       
         //to check yearly bonus is first time given or not
         if((response.data.yearly_bonus_date) == null){
 
@@ -358,11 +357,11 @@ axios.get('sanctum/csrf-cookie').then(response=>{
             return results;
           }
 
+      
           let dates = calculateDates(response.data.joining_date);  //passing joining date if it is first time
 
         const firstDate = dates[0]; 
         console.log("Dates for 1 year if yearly bonus not exist:");
-
         //.......eligible mm-yyyy starts.......
         var eligibleDateFormatted = new Date(firstDate.eligibleDate);
         var eligibleMonth = eligibleDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
@@ -389,6 +388,7 @@ axios.get('sanctum/csrf-cookie').then(response=>{
         console.log("");
         $('#bonus_eligible_month').val(eligible_mm_yyyy);
         $('#bonus_pay_month').val(payMonth_mm_yyyy);
+
         var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').val();
 
         //........current mm-yyyy starts............
@@ -437,320 +437,108 @@ axios.get('sanctum/csrf-cookie').then(response=>{
 
         }else{
 
+          //.....................bonus count...................
+          function calculateDates(joiningDateStr) {
+            let joiningDate = new Date(joiningDateStr);
+            let currentDate = new Date(joiningDate);
+            let endDate = new Date(joiningDate);      
+            endDate.setFullYear(endDate.getFullYear() + 1); // Set end date to 1 year after joining date       
+            let results = [];    
+            while (currentDate < endDate) {
+              let eligibleDate = new Date(currentDate);
+              eligibleDate.setMonth(eligibleDate.getMonth() +2);          
+              let payDate = new Date(eligibleDate);
+              payDate.setMonth(payDate.getMonth() + 1);
+              
+              results.push({
+                joiningDate: currentDate.toISOString().split('T')[0],
+                eligibleDate: eligibleDate.toISOString().split('T')[0],
+                payDate: payDate.toISOString().split('T')[0]
+              });         
+              currentDate = new Date(payDate);
+            }       
+            return results;
+          }
+          
+          let dates = calculateDates(response.data.yearly_bonus_date); //passing last yearly bonus date
 
-               if(((response.data.renew_date) == null) && ((response.data.renewed_yearly_bonus_date) == null)){
-                    //.....................bonus count...................
-                    function calculateDates(joiningDateStr) {
-                    let joiningDate = new Date(joiningDateStr);
-                    let currentDate = new Date(joiningDate);
-                    let endDate = new Date(joiningDate);      
-                    endDate.setFullYear(endDate.getFullYear() + 1); // Set end date to 1 year after joining date       
-                    let results = [];    
-                    while (currentDate < endDate) {
-                      let eligibleDate = new Date(currentDate);
-                      eligibleDate.setMonth(eligibleDate.getMonth() +2);          
-                      let payDate = new Date(eligibleDate);
-                      payDate.setMonth(payDate.getMonth() + 1);
-                      
-                      results.push({
-                        joiningDate: currentDate.toISOString().split('T')[0],
-                        eligibleDate: eligibleDate.toISOString().split('T')[0],
-                        payDate: payDate.toISOString().split('T')[0]
-                      });         
-                      currentDate = new Date(payDate);
-                    }       
-                    return results;
-                  }
-                  
-                  let dates = calculateDates(response.data.yearly_bonus_date); //passing latest yearly bonus date
+        const firstDate = dates[0]; 
+        console.log("Dates for 1 year if yearly bonus exist:");
+        console.log(response.data.yearly_bonus);
+        //.......eligible mm-yyyy starts.......
+        var eligibleDateFormatted = new Date(firstDate.eligibleDate);
+        var eligibleMonth = eligibleDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
+        var eligibleYear = eligibleDateFormatted.getFullYear();
+        // Format month as two digits
+        var eligibleMonthString = eligibleMonth < 10 ? '0' + eligibleMonth : '' + eligibleMonth;
+        // Combine month and year in "mm-yyyy" format
+        var eligible_mm_yyyy = eligibleMonthString + '-' + eligibleYear;
+        //........eligible mm-yyyy ends........
 
-                const firstDate = dates[0]; 
-                console.log("Dates for 1 year if yearly bonus exist:");
-                // console.log(response.data.yearly_bonus);
-                //.......eligible mm-yyyy starts.......
-                var eligibleDateFormatted = new Date(firstDate.eligibleDate);
-                var eligibleMonth = eligibleDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var eligibleYear = eligibleDateFormatted.getFullYear();
-                // Format month as two digits
-                var eligibleMonthString = eligibleMonth < 10 ? '0' + eligibleMonth : '' + eligibleMonth;
-                // Combine month and year in "mm-yyyy" format
-                var eligible_mm_yyyy = eligibleMonthString + '-' + eligibleYear;
-                //........eligible mm-yyyy ends........
+        //.......bonus pay mm-yyyy starts....
+        var payDateFormatted = new Date(firstDate.payDate);
+        var payMonth = payDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
+        var payYear = payDateFormatted.getFullYear();
+        // Format month as two digits
+        var payMonthString = payMonth < 10 ? '0' + payMonth : '' + payMonth;
+        // Combine month and year in "mm-yyyy" format
+        var payMonth_mm_yyyy = payMonthString + '-' + payYear;
+        //........bonus pay mm-yyyy ends.....
 
-                //.......bonus pay mm-yyyy starts....
-                var payDateFormatted = new Date(firstDate.payDate);
-                var payMonth = payDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var payYear = payDateFormatted.getFullYear();
-                // Format month as two digits
-                var payMonthString = payMonth < 10 ? '0' + payMonth : '' + payMonth;
-                // Combine month and year in "mm-yyyy" format
-                var payMonth_mm_yyyy = payMonthString + '-' + payYear;
-                //........bonus pay mm-yyyy ends.....
+        console.log("Joining Date:", firstDate.joiningDate);
+        console.log("Eligible Date:", eligible_mm_yyyy);
+        console.log("Bonus Pay Date:", payMonth_mm_yyyy);
+        console.log("");
+        $('#bonus_eligible_month').val(eligible_mm_yyyy);
+        $('#bonus_pay_month').val(payMonth_mm_yyyy);
 
-                console.log("Last Yearly Bonus Date:", firstDate.joiningDate);
-                console.log("Eligible Date:", eligible_mm_yyyy);
-                console.log("Bonus Pay Date:", payMonth_mm_yyyy);
-                console.log("");
-                $('#bonus_eligible_month').val(eligible_mm_yyyy);
-                $('#bonus_pay_month').val(payMonth_mm_yyyy);
+        var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').val();
 
-                var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').val();
+        //........current mm-yyyy starts............
+        var currentDateFormatted = new Date();
+        var currentMonth = currentDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
+        var currentYear = currentDateFormatted.getFullYear();
+        // Format month as two digits
+        var currentMonthString = currentMonth < 10 ? '0' + currentMonth : '' + currentMonth;
+        // Combine month and year in "mm-yyyy" format
+        var current_mm_yyyy = currentMonthString + '-' + currentYear;
+        //.........current mm-yyyy ends..............
 
-                //........current mm-yyyy starts............
-                var currentDateFormatted = new Date();
-                var currentMonth = currentDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var currentYear = currentDateFormatted.getFullYear();
-                // Format month as two digits
-                var currentMonthString = currentMonth < 10 ? '0' + currentMonth : '' + currentMonth;
-                // Combine month and year in "mm-yyyy" format
-                var current_mm_yyyy = currentMonthString + '-' + currentYear;
-                //.........current mm-yyyy ends..............
+        if(current_mm_yyyy == innerHTMLValueOfBonusPayMonth){ 
+          $('#yearly_bonus').val(bonus_pay_amount);
+        }else{
+          $('#yearly_bonus').val('0');
+        }
 
-                if(current_mm_yyyy == innerHTMLValueOfBonusPayMonth){ 
-                  $('#yearly_bonus').val(bonus_pay_amount);
-                }else{
-                  $('#yearly_bonus').val('0');
-                }
+        var total_daily_allowance = parseFloat($('#total_daily_allowance').val());
+        var total_travel_allowance = parseFloat($('#total_travel_allowance').val());
+        var rental_cost_allowance = parseFloat($('#rental_cost_allowance').val());
+        var hospital_bill_allowance = parseFloat($('#hospital_bill_allowance').val());
+        var insurance_allowance = parseFloat($('#insurance_allowance').val());
+        var sales_commission = parseFloat($('#sales_commission').val());
+        var retail_commission = parseFloat($('#retail_commission').val());
+        var monthly_salary = parseFloat($('#monthly_salary').val());
+        var monthly_holiday_bonus = parseFloat($('#monthly_holiday_bonus').val());
+        var advance_less = parseFloat($('#advance_less').val());
+        var any_deduction = parseFloat($('#any_deduction').val());
 
-                var total_daily_allowance = parseFloat($('#total_daily_allowance').val());
-                var total_travel_allowance = parseFloat($('#total_travel_allowance').val());
-                var rental_cost_allowance = parseFloat($('#rental_cost_allowance').val());
-                var hospital_bill_allowance = parseFloat($('#hospital_bill_allowance').val());
-                var insurance_allowance = parseFloat($('#insurance_allowance').val());
-                var sales_commission = parseFloat($('#sales_commission').val());
-                var retail_commission = parseFloat($('#retail_commission').val());
-                var monthly_salary = parseFloat($('#monthly_salary').val());
-                var monthly_holiday_bonus = parseFloat($('#monthly_holiday_bonus').val());
-                var advance_less = parseFloat($('#advance_less').val());
-                var any_deduction = parseFloat($('#any_deduction').val());
+        //total others result
+        var total_others = (monthly_holiday_bonus+total_daily_allowance+total_travel_allowance+rental_cost_allowance+hospital_bill_allowance+insurance_allowance+sales_commission+retail_commission);
+        $('#total_others').val(total_others);
+        
+        //total salary result
+        var total_salary = (monthly_salary+total_others);
+        $('#total_salary').val(total_salary);
 
-                //total others result
-                var total_others = (monthly_holiday_bonus+total_daily_allowance+total_travel_allowance+rental_cost_allowance+hospital_bill_allowance+insurance_allowance+sales_commission+retail_commission);
-                $('#total_others').val(total_others);
-                
-                //total salary result
-                var total_salary = (monthly_salary+total_others);
-                $('#total_salary').val(total_salary);
+        //total payable salary result
+        var yearly_bonus = parseFloat($('#yearly_bonus').val());
+        var total_payable_salary = (total_salary+yearly_bonus);
+        $('#total_payable_salary').val(total_payable_salary);
 
-                //total payable salary result
-                var yearly_bonus = parseFloat($('#yearly_bonus').val());
-                var total_payable_salary = (total_salary+yearly_bonus);
-                $('#total_payable_salary').val(total_payable_salary);
+        //final pay amount result
+        var final_pay_amount = (total_payable_salary-(advance_less+any_deduction));
+        $('#final_pay_amount').val(final_pay_amount);
 
-                //final pay amount result
-                var final_pay_amount = (total_payable_salary-(advance_less+any_deduction));
-                $('#final_pay_amount').val(final_pay_amount);
-               }
-
-               else if(((response.data.renew_date) != null) && ((response.data.renewed_yearly_bonus_date) == null))
-               {
-                      //.....................bonus count...................
-                      function calculateDates(joiningDateStr) {
-                    let joiningDate = new Date(joiningDateStr);
-                    let currentDate = new Date(joiningDate);
-                    let endDate = new Date(joiningDate);      
-                    endDate.setFullYear(endDate.getFullYear() + 1); // Set end date to 1 year after joining date       
-                    let results = [];    
-                    while (currentDate < endDate) {
-                      let eligibleDate = new Date(currentDate);
-                      eligibleDate.setMonth(eligibleDate.getMonth() +2);          
-                      let payDate = new Date(eligibleDate);
-                      payDate.setMonth(payDate.getMonth() + 1);
-                      
-                      results.push({
-                        joiningDate: currentDate.toISOString().split('T')[0],
-                        eligibleDate: eligibleDate.toISOString().split('T')[0],
-                        payDate: payDate.toISOString().split('T')[0]
-                      });         
-                      currentDate = new Date(payDate);
-                    }       
-                    return results;
-                  }
-                  
-                  let dates = calculateDates(response.data.renew_date); //passing renew date
-
-                const firstDate = dates[0]; 
-                console.log("Dates for 1 year if renew date exist:");
-                // console.log(response.data.yearly_bonus);
-
-                //.......eligible mm-yyyy starts.......
-                var eligibleDateFormatted = new Date(firstDate.eligibleDate);
-                var eligibleMonth = eligibleDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var eligibleYear = eligibleDateFormatted.getFullYear();
-                // Format month as two digits
-                var eligibleMonthString = eligibleMonth < 10 ? '0' + eligibleMonth : '' + eligibleMonth;
-                // Combine month and year in "mm-yyyy" format
-                var eligible_mm_yyyy = eligibleMonthString + '-' + eligibleYear;
-                //........eligible mm-yyyy ends........
-
-                //.......bonus pay mm-yyyy starts....
-                var payDateFormatted = new Date(firstDate.payDate);
-                var payMonth = payDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var payYear = payDateFormatted.getFullYear();
-                // Format month as two digits
-                var payMonthString = payMonth < 10 ? '0' + payMonth : '' + payMonth;
-                // Combine month and year in "mm-yyyy" format
-                var payMonth_mm_yyyy = payMonthString + '-' + payYear;
-                //........bonus pay mm-yyyy ends.....
-
-                console.log("Renew Date:", firstDate.joiningDate);
-                console.log("Eligible Date:", eligible_mm_yyyy);
-                console.log("Bonus Pay Date:", payMonth_mm_yyyy);
-                console.log("");
-                $('#bonus_eligible_month').val(eligible_mm_yyyy);
-                $('#bonus_pay_month').val(payMonth_mm_yyyy);
-
-                var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').val();
-
-                //........current mm-yyyy starts............
-                var currentDateFormatted = new Date();
-                var currentMonth = currentDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var currentYear = currentDateFormatted.getFullYear();
-                // Format month as two digits
-                var currentMonthString = currentMonth < 10 ? '0' + currentMonth : '' + currentMonth;
-                // Combine month and year in "mm-yyyy" format
-                var current_mm_yyyy = currentMonthString + '-' + currentYear;
-                //.........current mm-yyyy ends..............
-
-                if(current_mm_yyyy == innerHTMLValueOfBonusPayMonth){ 
-                  $('#yearly_bonus').val(bonus_pay_amount);
-                }else{
-                  $('#yearly_bonus').val('0');
-                }
-
-                var total_daily_allowance = parseFloat($('#total_daily_allowance').val());
-                var total_travel_allowance = parseFloat($('#total_travel_allowance').val());
-                var rental_cost_allowance = parseFloat($('#rental_cost_allowance').val());
-                var hospital_bill_allowance = parseFloat($('#hospital_bill_allowance').val());
-                var insurance_allowance = parseFloat($('#insurance_allowance').val());
-                var sales_commission = parseFloat($('#sales_commission').val());
-                var retail_commission = parseFloat($('#retail_commission').val());
-                var monthly_salary = parseFloat($('#monthly_salary').val());
-                var monthly_holiday_bonus = parseFloat($('#monthly_holiday_bonus').val());
-                var advance_less = parseFloat($('#advance_less').val());
-                var any_deduction = parseFloat($('#any_deduction').val());
-
-                //total others result
-                var total_others = (monthly_holiday_bonus+total_daily_allowance+total_travel_allowance+rental_cost_allowance+hospital_bill_allowance+insurance_allowance+sales_commission+retail_commission);
-                $('#total_others').val(total_others);
-                
-                //total salary result
-                var total_salary = (monthly_salary+total_others);
-                $('#total_salary').val(total_salary);
-
-                //total payable salary result
-                var yearly_bonus = parseFloat($('#yearly_bonus').val());
-                var total_payable_salary = (total_salary+yearly_bonus);
-                $('#total_payable_salary').val(total_payable_salary);
-
-                //final pay amount result
-                var final_pay_amount = (total_payable_salary-(advance_less+any_deduction));
-                $('#final_pay_amount').val(final_pay_amount);
-               }
-               else{
-                    //.....................bonus count...................
-                    function calculateDates(joiningDateStr) {
-                    let joiningDate = new Date(joiningDateStr);
-                    let currentDate = new Date(joiningDate);
-                    let endDate = new Date(joiningDate);      
-                    endDate.setFullYear(endDate.getFullYear() + 1); // Set end date to 1 year after joining date       
-                    let results = [];    
-                    while (currentDate < endDate) {
-                      let eligibleDate = new Date(currentDate);
-                      eligibleDate.setMonth(eligibleDate.getMonth() +2);          
-                      let payDate = new Date(eligibleDate);
-                      payDate.setMonth(payDate.getMonth() + 1);
-                      
-                      results.push({
-                        joiningDate: currentDate.toISOString().split('T')[0],
-                        eligibleDate: eligibleDate.toISOString().split('T')[0],
-                        payDate: payDate.toISOString().split('T')[0]
-                      });         
-                      currentDate = new Date(payDate);
-                    }       
-                    return results;
-                  }
-                  
-                  let dates = calculateDates(response.data.renewed_yearly_bonus_date); //passing latest renewed yearly bonus date
-
-                const firstDate = dates[0]; 
-                console.log("Dates for 1 year if renewed yearly bonus date exist:");
-                // console.log(response.data.yearly_bonus);
-
-                //.......eligible mm-yyyy starts.......
-                var eligibleDateFormatted = new Date(firstDate.eligibleDate);
-                var eligibleMonth = eligibleDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var eligibleYear = eligibleDateFormatted.getFullYear();
-                // Format month as two digits
-                var eligibleMonthString = eligibleMonth < 10 ? '0' + eligibleMonth : '' + eligibleMonth;
-                // Combine month and year in "mm-yyyy" format
-                var eligible_mm_yyyy = eligibleMonthString + '-' + eligibleYear;
-                //........eligible mm-yyyy ends........
-
-                //.......bonus pay mm-yyyy starts....
-                var payDateFormatted = new Date(firstDate.payDate);
-                var payMonth = payDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var payYear = payDateFormatted.getFullYear();
-                // Format month as two digits
-                var payMonthString = payMonth < 10 ? '0' + payMonth : '' + payMonth;
-                // Combine month and year in "mm-yyyy" format
-                var payMonth_mm_yyyy = payMonthString + '-' + payYear;
-                //........bonus pay mm-yyyy ends.....
-
-                console.log("Latest Renewed Yearly Bonus Date:", firstDate.joiningDate);
-                console.log("Eligible Date:", eligible_mm_yyyy);
-                console.log("Bonus Pay Date:", payMonth_mm_yyyy);
-                console.log("");
-                $('#bonus_eligible_month').val(eligible_mm_yyyy);
-                $('#bonus_pay_month').val(payMonth_mm_yyyy);
-
-                var innerHTMLValueOfBonusPayMonth = $('#bonus_pay_month').val();
-
-                //........current mm-yyyy starts............
-                var currentDateFormatted = new Date();
-                var currentMonth = currentDateFormatted.getMonth() + 1; // Adding 1 because getMonth() returns zero-based month index
-                var currentYear = currentDateFormatted.getFullYear();
-                // Format month as two digits
-                var currentMonthString = currentMonth < 10 ? '0' + currentMonth : '' + currentMonth;
-                // Combine month and year in "mm-yyyy" format
-                var current_mm_yyyy = currentMonthString + '-' + currentYear;
-                //.........current mm-yyyy ends..............
-
-                if(current_mm_yyyy == innerHTMLValueOfBonusPayMonth){ 
-                  $('#yearly_bonus').val(bonus_pay_amount);
-                }else{
-                  $('#yearly_bonus').val('0');
-                }
-
-                var total_daily_allowance = parseFloat($('#total_daily_allowance').val());
-                var total_travel_allowance = parseFloat($('#total_travel_allowance').val());
-                var rental_cost_allowance = parseFloat($('#rental_cost_allowance').val());
-                var hospital_bill_allowance = parseFloat($('#hospital_bill_allowance').val());
-                var insurance_allowance = parseFloat($('#insurance_allowance').val());
-                var sales_commission = parseFloat($('#sales_commission').val());
-                var retail_commission = parseFloat($('#retail_commission').val());
-                var monthly_salary = parseFloat($('#monthly_salary').val());
-                var monthly_holiday_bonus = parseFloat($('#monthly_holiday_bonus').val());
-                var advance_less = parseFloat($('#advance_less').val());
-                var any_deduction = parseFloat($('#any_deduction').val());
-
-                //total others result
-                var total_others = (monthly_holiday_bonus+total_daily_allowance+total_travel_allowance+rental_cost_allowance+hospital_bill_allowance+insurance_allowance+sales_commission+retail_commission);
-                $('#total_others').val(total_others);
-                
-                //total salary result
-                var total_salary = (monthly_salary+total_others);
-                $('#total_salary').val(total_salary);
-
-                //total payable salary result
-                var yearly_bonus = parseFloat($('#yearly_bonus').val());
-                var total_payable_salary = (total_salary+yearly_bonus);
-                $('#total_payable_salary').val(total_payable_salary);
-
-                //final pay amount result
-                var final_pay_amount = (total_payable_salary-(advance_less+any_deduction));
-                $('#final_pay_amount').val(final_pay_amount);
-               }
         }
        
 

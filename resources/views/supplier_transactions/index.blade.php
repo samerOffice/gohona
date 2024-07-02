@@ -14,7 +14,7 @@ Customer Transaction
         <div class="row">
             <div class="col-12">
 
-                <a class="btn btn-outline-info float-right ml-2" href="">
+                <a class="btn btn-outline-info float-right ml-2" href="{{route('supplier_transaction.transaction_list')}}">
                     <i class="fas fa-list"></i> Transaction List
                 </a> 
                 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Auth;
+use Carbon\Carbon;
 
 class EmployeeController extends Controller
 {
@@ -148,6 +149,18 @@ class EmployeeController extends Controller
                   ->where('id', $request->id)
                   ->update($data);
         return redirect()->route('employee.index')->withSuccess('Employee information is updated successfully');
+    }
+
+
+    public function renew(string $id){
+       $data = array();
+       $data['renew_date'] = Carbon::now()->toDateString();
+       $updated = DB::table('employees')
+                  ->where('id', $id)
+                  ->update($data);
+
+      return redirect()->route('employee.index')->withSuccess('Employee renewed date is updated successfully');
+
     }
 
     /**
