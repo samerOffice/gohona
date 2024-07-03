@@ -26,6 +26,7 @@ class CustomerController extends Controller
                     ->leftJoin('districts','customers.district_id','districts.id')
                     ->leftJoin('zones','customers.zone_id','zones.id')
                     ->select('customers.*','customer_categories.name as customer_category_name', 'districts.name as district_name','zones.name as zone_name' )
+                    ->orderBy('customers.id','DESC')
                     ->get();
 
         return view('customers.index',compact('customers','permitted_menus_array'));

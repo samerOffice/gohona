@@ -18,7 +18,7 @@ Customer Transaction
                     <i class="fas fa-list"></i> Transaction List
                 </a> 
                 
-                <a class="btn btn-outline-primary float-right" href="{{route('supplier_transaction.create')}}">
+                <a class="btn btn-outline-primary float-right ml-2" href="{{route('supplier_transaction.create')}}">
                     <i class="fas fa-plus"></i> Add Supplier Transaction
                 </a> 
             </div>
@@ -54,7 +54,7 @@ Customer Transaction
                           <th>Serial No.</th>                 
                           <th>Supplier Name</th>
                           <th>Mobile No.</th>
-                          {{-- <th>Due Amount</th> --}}
+                          <th>Total Due Amount (BDT)</th>
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -65,9 +65,13 @@ Customer Transaction
                           <td>{{$i++}}</td>
                           <td>{{$supplier_transaction->supplier_name}}</td>                          
                           <td>{{$supplier_transaction->supplier_mobile_no}}</td>
-                          {{-- <td>{{$supplier_transaction->supplier_total_due_amount}}</td> --}}
                           <td>
-                             <a href="" style="color: white"><button class="btn btn-outline-success"><i class="fa-solid fa-eye"></i> View</button></a>
+                            @php
+                            echo number_format($supplier_transaction->total_due_amount, 2, '.', '')
+                            @endphp
+                          </td>
+                          <td>
+                             <a href="{{route('supplier_transaction.view',$supplier_transaction->supplier_id)}}" style="color: white"><button class="btn btn-outline-success"><i class="fa-solid fa-eye"></i> View</button></a>
                         </td>
                         </tr> 
                         @endforeach              

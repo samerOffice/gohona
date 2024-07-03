@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 02, 2024 at 10:40 AM
+-- Generation Time: Jul 03, 2024 at 03:38 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,67 @@ SET time_zone = "+00:00";
 --
 -- Database: `gohona_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+CREATE TABLE `bookings` (
+  `id` int(11) NOT NULL,
+  `booking_number` varchar(255) DEFAULT NULL,
+  `booking_date` date DEFAULT NULL,
+  `client_no` int(255) DEFAULT NULL,
+  `client_id` int(255) DEFAULT NULL,
+  `user_id` int(100) DEFAULT NULL,
+  `product_id` int(255) DEFAULT NULL,
+  `weight` varchar(100) DEFAULT NULL,
+  `unit_price_amount` varchar(255) DEFAULT NULL,
+  `wage` varchar(100) DEFAULT NULL,
+  `item_wise_subtotal_amount` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_calculations`
+--
+
+CREATE TABLE `booking_calculations` (
+  `id` int(11) NOT NULL,
+  `booking_number` varchar(255) DEFAULT NULL,
+  `booking_date` date DEFAULT NULL,
+  `client_id` int(255) DEFAULT NULL,
+  `item_total_amount` varchar(255) DEFAULT NULL,
+  `vat_amount` varchar(100) DEFAULT NULL,
+  `sub_total_amount` varchar(255) DEFAULT NULL,
+  `discount_amount` varchar(255) DEFAULT NULL,
+  `total_amount` varchar(255) DEFAULT NULL,
+  `paid_amount` varchar(255) DEFAULT NULL,
+  `due_amount` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `booking_payment_calculations`
+--
+
+CREATE TABLE `booking_payment_calculations` (
+  `id` int(11) NOT NULL,
+  `booking_number` varchar(255) DEFAULT NULL,
+  `payment_type` int(100) DEFAULT NULL,
+  `payment_info` int(100) DEFAULT NULL,
+  `reference` varchar(100) DEFAULT NULL,
+  `payment_amount` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -256,11 +317,11 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `yearly_bonus_date`, `renew_date`, `renewed_yearly_bonus_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `yearly_bonus_status`, `created_at`, `updated_at`) VALUES
-(1, 'Kamrul Hasan Uddin', 'Sales Executive', '2024-04-02', NULL, NULL, NULL, '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
-(2, 'Hamid Mahmud', 'Sales Executive', '2024-02-01', '2026-03-01', NULL, NULL, '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
-(3, 'Kartik Paul Kumar', 'Sales Manager', '2020-05-08', '2021-05-04', NULL, NULL, '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12'),
-(4, 'Salman Seikh', 'Sales Executive gg', '2022-07-05', '2023-01-29', '2024-07-02', NULL, '850', 'Mahmud Seikh', 'Halima Khatun', '01513470121', '3543515', '<p>laalbagh, dhaka<br></p>', '<p>laalbagh, dhaka<br></p>', '1996-06-05', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmud Seikh', '01513470120', 'Father', 'Rakib Seikh', '01814780120', 'Brother', NULL, NULL, NULL, NULL, '2024-06-04 06:26:23', '2024-06-04 06:26:23'),
-(5, 'Farhan Ahmed', 'Sales Officer', '2024-04-03', '2024-07-02', '2024-07-02', '2025-01-02', '750', 'Imran Ahmed', 'Hasina Begum', '01814750120', '354353363', 'Dhanmondi 27, Dhaka, Bangladesh<br>', '<p>Dhanmondi 27, Dhaka, Bangladesh</p>', '1991-07-11', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Imran Ahmed', '01715470120', 'Father', 'Halima Begum', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-07-02 07:29:22', '2024-07-02 07:29:22');
+(1, 'Kamrul Hasan Uddin', 'Sales Executive', '2024-04-02', '2024-07-02', '2024-07-02', NULL, '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
+(2, 'Hamid Mahmud', 'Sales Executive', '2024-04-02', NULL, NULL, NULL, '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
+(3, 'Kartik Paul Kumar', 'Sales Manager', '2020-05-08', NULL, NULL, NULL, '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12'),
+(4, 'Salman Seikh', 'Sales Executive gg', '2022-07-05', NULL, NULL, NULL, '850', 'Mahmud Seikh', 'Halima Khatun', '01513470121', '3543515', '<p>laalbagh, dhaka<br></p>', '<p>laalbagh, dhaka<br></p>', '1996-06-05', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmud Seikh', '01513470120', 'Father', 'Rakib Seikh', '01814780120', 'Brother', NULL, NULL, NULL, NULL, '2024-06-04 06:26:23', '2024-06-04 06:26:23'),
+(5, 'Farhan Ahmed', 'Sales Officer', '2024-04-03', NULL, NULL, NULL, '750', 'Imran Ahmed', 'Hasina Begum', '01814750120', '354353363', 'Dhanmondi 27, Dhaka, Bangladesh<br>', '<p>Dhanmondi 27, Dhaka, Bangladesh</p>', '1991-07-11', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Imran Ahmed', '01715470120', 'Father', 'Halima Begum', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-07-02 07:29:22', '2024-07-02 07:29:22');
 
 -- --------------------------------------------------------
 
@@ -466,28 +527,14 @@ CREATE TABLE `payrolls` (
 --
 
 INSERT INTO `payrolls` (`id`, `employee`, `salary_date`, `joining_date`, `per_day_salary`, `emp_total_bonus_day`, `emp_total_bonus_amount`, `bonus_eligible_month`, `bonus_pay_month`, `bonus_pay_amount`, `total_working_day`, `total_leave`, `total_number_of_pay_day`, `monthly_salary`, `monthly_holiday_bonus`, `total_daily_allowance`, `total_travel_allowance`, `rental_cost_allowance`, `hospital_bill_allowance`, `insurance_allowance`, `sales_commission`, `retail_commission`, `total_others`, `total_salary`, `yearly_bonus`, `total_payable_salary`, `advance_less`, `any_deduction`, `final_pay_amount`, `loan_advance`, `created_at`, `updated_at`) VALUES
-(1, 2, '2024-05-28', '2024-02-01', '900', '39', '35100', '04-2024', '05-2024', '8775', '26', '1', '25', '22500', '900', '0', '0', '0', '0', '0', '0', '0', '900', '23400', '8775', '32175', '0', '0', '32175', NULL, '2024-05-28 11:37:27', '2024-05-28 11:37:27'),
-(2, 2, '2024-05-28', '2024-02-01', '900', '39', '35100', '07-2024', '08-2024', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '0', '24300', '0', '0', '24300', NULL, '2024-05-28 12:39:44', '2024-05-28 12:39:44'),
-(3, 1, '2024-05-30', '2022-06-13', '1200', '39', '46800', '08-2022', '09-2022', '11700', '26', '1', '25', '30000', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '31200', '0', '31200', '0', '0', '31200', NULL, '2024-05-30 08:33:19', '2024-05-30 08:33:19'),
-(4, 2, '2024-05-30', '2024-02-01', '900', '39', '35100', '10-2024', '11-2024', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '0', '24300', '0', '0', '24300', NULL, '2024-05-30 08:34:21', '2024-05-30 08:34:21'),
-(5, 2, '2024-05-30', '2024-02-01', '900', '39', '35100', '01-2025', '03-2025', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '0', '24300', '0', '0', '24300', NULL, '2024-05-30 08:34:54', '2024-05-30 08:34:54'),
-(6, 1, '2024-05-30', '2022-06-13', '1200', '39', '46800', '11-2022', '12-2022', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '0', '32400', NULL, '2024-05-30 08:35:21', '2024-05-30 08:35:21'),
-(7, 1, '2024-06-01', '2022-06-13', '1200', '39', '46800', '03-2023', '04-2023', '11700', '26', '1', '25', '30000', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '31200', '0', '31200', '0', '0', '31200', NULL, '2024-06-01 12:05:00', '2024-06-01 12:05:00'),
-(8, 2, '2024-06-02', '2024-02-01', '900', '39', '35100', '05-2025', '06-2025', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '0', '24300', '0', '0', '24300', NULL, '2024-06-02 11:52:35', '2024-06-02 11:52:35'),
-(9, 2, '2024-06-02', '2024-02-01', '900', '39', '35100', '08-2025', '09-2025', '8775', '26', '1', '25', '22500', '900', '0', '0', '0', '0', '0', '0', '0', '900', '23400', '0', '23400', '0', '0', '23400', NULL, '2024-06-02 12:56:39', '2024-06-02 12:56:39'),
-(10, 1, '2024-06-02', '2022-06-13', '1200', '39', '46800', '06-2023', '07-2023', '11700', '26', '0', '26', '31200', '1200', '10', '10', '10', '20', '20', '10', '20', '1300', '32500', '0', '32500', '100', '100', '32300', NULL, '2024-06-02 13:06:03', '2024-06-02 13:06:03'),
-(11, 3, '2024-06-02', '2020-05-08', '800', '39', '31200', '07-2020', '08-2020', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-02 13:11:27', '2024-06-02 13:11:27'),
-(12, 2, '2024-06-03', '2024-02-01', '900', '39', '35100', '11-2025', '12-2025', '8775', '26', '1', '25', '22500', '900', '0', '0', '0', '0', '0', '0', '0', '900', '23400', '0', '23400', '0', '100', '23300', NULL, '2024-06-03 04:49:23', '2024-06-03 04:49:23'),
-(13, 3, '2024-06-03', '2020-05-08', '800', '39', '31200', '10-2020', '11-2020', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-03 09:51:18', '2024-06-03 09:51:18'),
-(14, 3, '2024-06-03', '2020-05-08', '800', '39', '31200', '01-2021', '02-2021', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-03 11:12:11', '2024-06-03 11:12:11'),
-(15, 3, '2024-06-04', '2020-05-08', '800', '39', '31200', '04-2021', '05-2021', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-06-04 05:47:42', '2024-06-04 05:47:42'),
-(16, 4, '2024-06-04', '2022-07-05', '850', '39', '33150', '09-2022', '10-2022', '8287.5', '26', '0', '26', '22100', '850', '0', '0', '0', '0', '0', '0', '0', '850', '22950', '0', '22950', '100', '0', '22850', NULL, '2024-06-04 06:26:36', '2024-06-04 06:26:36'),
-(17, 4, '2024-06-29', '2022-07-05', '850', '39', '33150', '12-2022', '01-2023', '8287.5', '26', '1', '25', '21250', '850', '0', '0', '100', '0', '0', '0', '0', '950', '22200', '0', '22200', '0', '50', '22150', '100', '2024-06-29 09:50:33', '2024-06-29 09:50:33'),
-(18, 2, '2024-07-01', '2024-02-01', '900', '39', '35100', '02-2026', '03-2026', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '100', '1000', '24400', '0', '24400', '0', '200', '24200', NULL, '2024-07-01 05:26:13', '2024-07-01 05:26:13'),
-(19, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '06-2024', '07-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '11700', '44100', '0', '0', '44100', NULL, '2024-07-02 06:02:26', '2024-07-02 06:02:26'),
-(20, 5, '2024-07-02', '2024-04-03', '750', '39', '29250', '06-2024', '07-2024', '7312.5', '26', '0', '26', '19500', '750', '0', '0', '0', '0', '0', '0', '0', '750', '20250', '7312.5', '27562.5', '0', '0', '27562.5', NULL, '2024-07-02 07:30:32', '2024-07-02 07:30:32'),
-(21, 5, '2024-07-02', '2024-04-03', '750', '39', '29250', '09-2024', '10-2024', '7312.5', '26', '5', '21', '15750', '750', '0', '0', '0', '0', '0', '0', '0', '750', '16500', '0', '16500', '0', '0', '16500', NULL, '2024-07-02 07:36:17', '2024-07-02 07:36:17'),
-(22, 5, '2024-07-02', '2024-04-03', '750', '39', '29250', '12-2024', '01-2025', '7312.5', '26', '1', '25', '18750', '750', '0', '0', '0', '0', '0', '0', '0', '750', '19500', '0', '19500', '0', '0', '19500', NULL, '2024-07-02 07:52:10', '2024-07-02 07:52:10');
+(1, 3, '2024-07-02', '2020-05-08', '800', '39', '31200', '07-2020', '08-2020', '7800', '26', '0', '26', '20800', '800', '0', '0', '0', '0', '0', '0', '0', '800', '21600', '0', '21600', '0', '0', '21600', NULL, '2024-07-02 09:57:39', '2024-07-02 09:57:39'),
+(2, 4, '2024-07-02', '2022-07-05', '850', '39', '33150', '09-2022', '10-2022', '8287.5', '26', '0', '26', '22100', '850', '0', '0', '0', '0', '0', '0', '0', '850', '22950', '0', '22950', '0', '0', '22950', NULL, '2024-07-02 10:02:21', '2024-07-02 10:02:21'),
+(3, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '06-2024', '07-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '11700', '44100', '0', '0', '44100', NULL, '2024-07-02 10:04:31', '2024-07-02 10:04:31'),
+(4, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '09-2024', '10-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '0', '32400', NULL, '2024-07-02 10:05:05', '2024-07-02 10:05:05'),
+(5, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '09-2024', '10-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '0', '32400', NULL, '2024-07-02 10:06:38', '2024-07-02 10:06:38'),
+(6, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '09-2024', '10-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '0', '32400', NULL, '2024-07-02 10:06:54', '2024-07-02 10:06:54'),
+(7, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '06-2024', '07-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '11700', '44100', '0', '0', '44100', NULL, '2024-07-02 10:08:15', '2024-07-02 10:08:15'),
+(8, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '09-2024', '10-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '50', '32350', NULL, '2024-07-02 10:08:34', '2024-07-02 10:08:34');
 
 -- --------------------------------------------------------
 
@@ -687,7 +734,11 @@ CREATE TABLE `supplier_transactions` (
 --
 
 INSERT INTO `supplier_transactions` (`id`, `transaction_date`, `reference`, `supplier_id`, `description`, `bill_amount`, `paid_amount`, `due_amount`, `created_at`, `updated_at`) VALUES
-(1, '2024-07-01', 'ref-3345', 6, '<p>transaction for test supplier 2<br></p>', '40500', '400', '40100.00', '2024-07-01 13:29:50', '2024-07-01 13:29:50');
+(1, '2024-07-01', 'ref-3345', 6, '<p>transaction for test supplier 2<br></p>', '40500', '400', '40100.00', '2024-07-01 13:29:50', '2024-07-01 13:29:50'),
+(3, '2024-07-02', 're-564', 5, '<p>tttt<br></p>', '200', '100', '100.00', '2024-07-02 13:13:11', '2024-07-02 13:13:11'),
+(4, '2024-07-03', 'uhgkj', 5, 'aaaaaaaaaaaaaaa', '400', '20', '380.00', '2024-07-03 06:40:16', '2024-07-03 06:40:16'),
+(5, '2024-07-03', 'aaa-3q24', 6, '<p>lhgjk<br></p>', '100', '50', '50.00', '2024-07-03 08:39:14', '2024-07-03 08:39:14'),
+(6, '2024-07-03', 'sss-32', 5, '<p>kkk<br></p>', '200', '0', '200.00', '2024-07-03 09:49:48', '2024-07-03 09:49:48');
 
 -- --------------------------------------------------------
 
@@ -798,6 +849,24 @@ INSERT INTO `zones` (`id`, `name`, `district_id`, `note`, `status`, `created_at`
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `booking_calculations`
+--
+ALTER TABLE `booking_calculations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `booking_payment_calculations`
+--
+ALTER TABLE `booking_payment_calculations`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `booking_terms_and_conditions`
@@ -959,6 +1028,24 @@ ALTER TABLE `zones`
 --
 
 --
+-- AUTO_INCREMENT for table `bookings`
+--
+ALTER TABLE `bookings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_calculations`
+--
+ALTER TABLE `booking_calculations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `booking_payment_calculations`
+--
+ALTER TABLE `booking_payment_calculations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `booking_terms_and_conditions`
 --
 ALTER TABLE `booking_terms_and_conditions`
@@ -1028,7 +1115,7 @@ ALTER TABLE `payment_methods`
 -- AUTO_INCREMENT for table `payrolls`
 --
 ALTER TABLE `payrolls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -1076,7 +1163,7 @@ ALTER TABLE `suppliers`
 -- AUTO_INCREMENT for table `supplier_transactions`
 --
 ALTER TABLE `supplier_transactions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `terms_and_conditions`

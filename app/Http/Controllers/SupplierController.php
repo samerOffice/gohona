@@ -22,7 +22,9 @@ class SupplierController extends Controller
         $permitted_menus = $menu_data->menus;
         $permitted_menus_array = explode(',', $permitted_menus);
         
-        $suppliers = DB::table('suppliers')->get();
+        $suppliers = DB::table('suppliers')
+                    ->orderBy('id','DESC')
+                    ->get();
         return view('suppliers.index',compact('suppliers','permitted_menus_array'));
     }
 

@@ -68,11 +68,11 @@
           @endif
 
           @if(in_array(3, $permitted_menus_array))
-          <li class="nav-item">
-            <a href="#" class="nav-link ">
-              <i class="nav-icon fa-solid fa-book-bookmark"></i>
-              <p>
-                Booking List
+          <li  class="nav-item nav-link {{ Request::is('booking') ? 'nav-link active' : ''}}" style="{{ Request::is('booking') ? 'background-color: #17a2b8; !important' : ''}}">
+            <a href="{{url('/booking')}}" >
+              <i class="nav-icon fa-regular fa-gem" {{ Request::is('booking') ? 'color: white; !important' : ''}}"></i>
+              <p style="{{ Request::is('booking') ? 'color: white; !important' : ''}}">
+                Bookings
               </p>
             </a>
           </li>
@@ -343,18 +343,8 @@
               @endif
              <br>
              <br>
-              {{-- <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Users</p>
-                </a>
-              </li> --}}
-
             </ul>
-          </li>
-
-
-     
+          </li>  
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

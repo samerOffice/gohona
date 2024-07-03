@@ -52,7 +52,7 @@ Customer Transaction
                           <th>Memo No.</th>
                           <th>Customer Name</th>
                           <th>Mobile No.</th>
-                          {{-- <th>Description</th>--}}
+                          <th>Description</th>
                           <th>Bill Amount</th>
                           <th>Paid Amount</th>
                           <th>Action</th>
@@ -67,9 +67,17 @@ Customer Transaction
                           <td>{{$customer_transaction->cash_memo_no}}</td>
                           <td>{{$customer_transaction->customer_name}}</td>                          
                           <td>{{$customer_transaction->customer_mobile_no}}</td>
-                          {{-- <td>{{$customer_transaction->description}}</td> --}}
-                          <td>{{$customer_transaction->bill_amount}}</td>
-                          <td>{{$customer_transaction->paid_amount}}</td>
+                          <td>{{$customer_transaction->description}}</td>
+                          <td>
+                            @php
+                            echo number_format($customer_transaction->bill_amount, 2, '.', '')
+                            @endphp
+                          </td>
+                          <td>
+                            @php
+                            echo number_format($customer_transaction->paid_amount, 2, '.', '')
+                            @endphp
+                          </td>
                           <td>
                              <a href="{{route('customer_transaction.edit', $customer_transaction->id)}}" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a> | 
                              <a onclick="Swal.fire({
