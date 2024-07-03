@@ -22,7 +22,9 @@ class RoleAndPermissionController extends Controller
         $permitted_menus = $menu_data->menus;
         $permitted_menus_array = explode(',', $permitted_menus);
         
-        $roles = DB::table('roles')->get();
+        $roles = DB::table('roles')
+                // ->orderBy('id','DESC')        
+                ->get();
 
         // dd($roles);
         return view('roles_and_permissions.index',compact('roles','permitted_menus_array'));

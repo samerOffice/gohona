@@ -30,6 +30,7 @@ class ProductController extends Controller
                   ->leftJoin('product_categories','products.product_category','=','product_categories.id')
                   ->leftJoin('suppliers','products.supplier','=','suppliers.id')
                   ->select('products.*','suppliers.name as supplier_name','product_categories.product_category_name as product_category_name')
+                  ->orderBy('products.id','DESC')
                   ->get();
         return view('products.index',compact('products','permitted_menus_array'));
     }

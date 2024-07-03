@@ -23,6 +23,7 @@ class ZoneController extends Controller
         $zones = DB::table('zones')
                 ->leftJoin('districts', 'zones.district_id', '=', 'districts.id')
                 ->select('zones.*', 'districts.name as district_name')
+                ->orderBy('zones.id','DESC')
                 ->get();
         return view('zones.index',compact('zones','permitted_menus_array'));
     }

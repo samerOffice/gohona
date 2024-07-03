@@ -43,7 +43,7 @@ Customer Create
 
                               <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="description" id="summernote"  required></textarea>
+                                <textarea name="description" id="" required class="form-control"></textarea>
                               </div>
 
                               <div class="form-group">

@@ -17,7 +17,9 @@ class TodayRateController extends Controller
         $permitted_menus = $menu_data->menus;
         $permitted_menus_array = explode(',', $permitted_menus);
 
-        $today_rates = DB::table('today_rates')->get();
+        $today_rates = DB::table('today_rates')
+                        ->orderBy('id','DESC')
+                        ->get();
         return view('today_rates.index',compact('today_rates','permitted_menus_array'));
     }
 

@@ -24,7 +24,8 @@ class CustomerTransactionController extends Controller
 
     $customer_transactions = DB::table('customer_transactions')
                 ->leftJoin('customers','customer_transactions.customer_id','customers.id')
-                ->select('customer_transactions.*','customers.name as customer_name', 'customers.mobile_number as customer_mobile_no' )
+                ->select('customer_transactions.*','customers.name as customer_name', 'customers.mobile_number as customer_mobile_no')
+                ->orderBy('customer_transactions.id','DESC')
                 ->get();
 
     return view('customer_transactions.index',compact('customer_transactions','permitted_menus_array'));

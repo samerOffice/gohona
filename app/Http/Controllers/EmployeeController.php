@@ -22,7 +22,9 @@ class EmployeeController extends Controller
         $permitted_menus = $menu_data->menus;
         $permitted_menus_array = explode(',', $permitted_menus);
         
-        $employees = DB::table('employees')->get();
+        $employees = DB::table('employees')
+                    ->orderBy('id','DESC')
+                    ->get();
         return view('employees.index',compact('employees','permitted_menus_array'));
     }
 

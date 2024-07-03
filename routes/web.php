@@ -13,12 +13,12 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\TermsAndConditionsController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\BookingTermsAndConditionsController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\PayrollController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\RoleAndPermissionController;
-
 use App\Http\Controllers\CustomerTransactionController;
 use App\Http\Controllers\SupplierTransactionController;
 
@@ -35,6 +35,10 @@ Route::get('/password_reset', [CustomAuthController::class, 'password_reset'])->
 //new password set
 Route::post('/new_password_set',[App\Http\Controllers\CustomAuthController::class,'new_password_set']);
 
+
+
+//booking
+Route::resource('booking', BookingController::class);
 
 Route::middleware('auth')->group(function () {
 //product-category
@@ -79,7 +83,8 @@ Route::get('/delete_customer_transaction/{delete_id}', [CustomerTransactionContr
 //supplier transaction
 Route::resource('supplier_transaction', SupplierTransactionController::class);
 Route::get('/supplier_transaction_list', [SupplierTransactionController::class, 'supplier_transaction_list'])->name('supplier_transaction.transaction_list');
-
+Route::get('/delete_supplier_transaction/{delete_id}', [SupplierTransactionController::class, 'delete_supplier_transaction'])->name('delete_supplier_transaction');
+Route::get('/view_supplier_transaction/{supplier_id}', [SupplierTransactionController::class, 'view_supplier_transaction'])->name('supplier_transaction.view');
 
 //product
 Route::resource('product', ProductController::class);

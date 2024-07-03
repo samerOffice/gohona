@@ -21,7 +21,9 @@ class SaleTypeController extends Controller
         $permitted_menus = $menu_data->menus;
         $permitted_menus_array = explode(',', $permitted_menus);
         
-        $sale_types = DB::table('sale_types')->get();                               
+        $sale_types = DB::table('sale_types')
+                        ->orderBy('id','DESC')
+                        ->get();                               
         return view('sale_types.index',compact('sale_types','permitted_menus_array'));
     }
 

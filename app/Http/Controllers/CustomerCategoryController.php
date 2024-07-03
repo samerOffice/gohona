@@ -23,7 +23,9 @@ class CustomerCategoryController extends Controller
             $permitted_menus_array = explode(',', $permitted_menus);
         
         
-        $customer_categories = DB::table('customer_categories')->get();
+        $customer_categories = DB::table('customer_categories')
+                                ->orderBy('id','DESC')
+                                ->get();
         return view('customer_categories.index',compact('customer_categories','permitted_menus_array'));
         
     }
