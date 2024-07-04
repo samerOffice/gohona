@@ -25,55 +25,36 @@ Booking Create
                     <!-- end page title -->
         
                     <div class="row">
-                    <div class="col-lg-12">
-                    <div class="card">
-                    <div class="card-header">                                   
-                        <h4 class="card-title ">Add Booking</h4>
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-header">                                   
+                                    <h4 class="card-title ">Add Booking</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form method="POST" action="https://sencotest.xstreambd.com/booking" id="order-form" role="form" enctype="multipart/form-data">
+                                        <input type="hidden" name="_token" value="8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr">                                <div class="row">
+            <div class="col-12 col-md-12">
+                <div class="mb-3 row">
+                    <div class="col-md-4">
+                        <label for="client" class="col-form-label text-start">Client</label>
+        
+                        
+                        <select required id="client" class="form-control" name="client"><option selected="selected" value="">Select client</option></select>
+                        
                     </div>
-
-                    <div class="card-body">
-                    <form method="POST" action="https://sencotest.xstreambd.com/booking" id="order-form" role="form" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr">
-                        <div class="row">
-                    <div class="col-12 col-md-12">
-                        <div class="mb-3 row">
-                            <div class="col-md-4">
-                                <label for="client" class="col-form-label text-start">Client</label>         
-                                {{-- <select required id="client" class="form-control" name="client"><option selected="selected" value="">Select client</option></select> --}}
-                                <select class="form-control select2bs4" id="client" required name="client" style="width: 100%;">
-                                    @foreach($customers as $customer)
-                                    <option value="{{$customer->id}}">{{$customer->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="booked_by" class="col-form-label text-start">Client</label>
-                                {{-- <select required id="client" class="form-control" name="booked_by">
-                                    <option selected="selected" value="">Select Booked By</option>
-                                    <option value="1">SAJAL</option>
-                                    <option value="2">MANAGER</option>
-                                    <option value="3">KARTIK</option>
-                                    <option value="4">MODHU</option>
-                                    <option value="5">SUDARSHAN</option>
-                                    <option value="6">PRADIP</option>
-                                    <option value="7">BISHOWJIT</option>
-                                    <option value="8">RANA</option>
-                                    <option value="9">APP</option>
-                                </select> --}}
-                                <select class="form-control select2bs4" id="booked_by" required name="booked_by" style="width: 100%;">
-                                    @foreach($users as $user)
-                                    <option value="{{$user->id}}">{{$user->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-12 mt-4">
-                                <table>
-                                    <tbody id="selected_client">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    <div class="col-md-4">
+                        <label for="booked_by" class="col-form-label text-start">Client</label>
+                        <select required id="client" class="form-control" name="booked_by"><option selected="selected" value="">Select Booked By</option><option value="1">SAJAL</option><option value="2">MANAGER</option><option value="3">KARTIK</option><option value="4">MODHU</option><option value="5">SUDARSHAN</option><option value="6">PRADIP</option><option value="7">BISHOWJIT</option><option value="8">RANA</option><option value="9">APP</option></select>
+                        
                     </div>
+                    <div class="col-md-12 mt-4">
+                        <table>
+                            <tbody id="selected_client">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
             <div class="col-12 col-md-12">
                 <div class="mb-3 row">
                     <div class="col-md-12">
@@ -83,9 +64,9 @@ Booking Create
                         {{-- <select id="product_nr" class="form-control" name="product_nr"><option selected="selected" value="">Product Nr</option></select> --}}
                         <select class="form-control select2bs4" id="product_nr" required name="product_nr" style="width: 100%;">
                             @foreach($products as $product)
-                            <option value="{{$product->id}}">{{$product->product_nr}}</option>
+                            <option value="{{$product->id}}" selected="selected">{{$product->product_nr}}</option>
                             @endforeach
-                        </select>
+                          </select>
                     </div>
                     <div class="col-md-12 mt-4">
                         <table class="table table-bordered nowrap"
@@ -105,10 +86,10 @@ Booking Create
                             </thead>
                             <tbody id="selected_product_list">
                                                             
-                            </tbody>
+                                                    </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="2" class="text-end" style="padding-left: 900px">Total Weight</td>
+                                    <td colspan="2" class="text-end">Total Weight</td>
                                     <td id="total_weight"></td>
                                     <td></td>
                                     <td></td>
@@ -125,17 +106,17 @@ Booking Create
                                     <td colspan="2" id="vat_amount"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end" style="padding-left: 1400px">Subtotal</td>
+                                    <td colspan="7" class="text-end">Subtotal</td>
                                     <td colspan="2" id="subtotal_with_vat"></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end" style="padding-left: 1400px">Discount</td>
+                                    <td colspan="7" class="text-end">Discount</td>
                                     <td colspan="2" style="padding: 1px;">
                                         <input id="discount" class="form-control" name="discount" type="text" value="">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end" style="padding-left: 1400px">Total</td>
+                                    <td colspan="7" class="text-end">Total</td>
                                     <td colspan="2" id="total"></td>
                                 </tr>
                                 <tr>
@@ -146,27 +127,13 @@ Booking Create
                                         <div class="row">
                                             <div class="col-md-3" id="payment_type_0">
                                                 <label for="payment_type" class="col-form-label text-start">Payment type</label>
-                                                <select required class="form-control" onchange="paymentTypeChange(this, 0)" name="payment[]">
-                                                    <option value="cash">Cash</option>
-                                                    <option value="gold">Gold</option>
-                                                    <option value="card">Card</option>
-                                                    <option value="bank">Bank</option>
-                                                    <option value="mobile_banking">Mobile Banking</option>
-                                                    <option value="other">Other</option>
-                                                </select>
+                                                <select required class="form-control" onchange="paymentTypeChange(this, 0)" name="payment[]"><option value="cash">Cash</option><option value="gold">Gold</option><option value="card">Card</option><option value="bank">Bank</option><option value="mobile_banking">Mobile Banking</option><option value="other">Other</option></select>
                                                 
                                             </div>
         
                                             <div class="col-md-3 paymentinfo_0">
                                                 <label for="payment_info" class="col-form-label text-start">Payment Info</label>
-                                                <select required class="form-control" name="payment_info[]">
-                                                    <option selected="selected" value="">Payment Info</option>
-                                                    <option value="CASH">CASH</option>
-                                                    <option value="ADVANCE">ADVANCE</option>
-                                                    <option value="SALES RETURN">SALES RETURN</option>
-                                                    <option value="BY CHEQUE">BY CHEQUE</option>
-                                                    <option value="CASH BACK">CASH BACK</option>
-                                                </select>
+                                                <select required class="form-control" name="payment_info[]"><option selected="selected" value="">Payment Info</option><option value="CASH">CASH</option><option value="ADVANCE">ADVANCE</option><option value="SALES RETURN">SALES RETURN</option><option value="BY CHEQUE">BY CHEQUE</option><option value="CASH BACK">CASH BACK</option></select>
                                                 
                                             </div>
                                             <div class="col-md-3 reference_{index}">
@@ -180,9 +147,9 @@ Booking Create
                                                 
                                             </div>
                                         </div>
-                                        <div id="payments_container">
-                                        </div>
-                                        <div class="row mt-2">
+                                                                                                                    <div id="payments_container">
+                                                </div>
+                                                                            <div class="row mt-2">
                                             <div class="col-md-3">
                                                 <a href="#" id="addNewPayment" class="btn btn-info">Add</a>
                                             </div>
@@ -190,7 +157,7 @@ Booking Create
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-end" colspan="7" style="padding-left: 1400px">
+                                    <td class="text-end" colspan="7">
                                         Paid
                                     </td>
                                     <td id="paid" style="padding: 1px;" colspan="2">
@@ -198,7 +165,7 @@ Booking Create
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-end" colspan="7" style="padding-left: 1400px">
+                                    <td class="text-end" colspan="7">
                                         Due
                                     </td>
                                     <td id="due" style="padding: 1px;" colspan="2">
@@ -272,11 +239,11 @@ Booking Create
                 <td>: </td>
                 <td style="padding-left: 5px">{name}</td>
             </tr>
-            {{-- <tr>
+            <tr>
                 <th>Client No</th>
                 <td>: </td>
                 <th style="padding-left: 5px">{client_no}</th>
-            </tr> --}}
+            </tr>
             <tr>
                 <th>Mobile</th>
                 <td>: </td>
@@ -294,26 +261,12 @@ Booking Create
         <div class="row" id="payment_row_id_{index}">
             <div class="col-md-3" id="payment_type_{index}">
                 <label for="payment_type" class="col-form-label text-start">Payment type</label>
-                <select required class="form-control" onchange="paymentTypeChange(this,{index})" name="payment[]">
-                    <option value="cash">Cash</option>
-                    <option value="gold">Gold</option>
-                    <option value="card">Card</option>
-                    <option value="bank">Bank</option>
-                    <option value="mobile_banking">Mobile Banking</option>
-                    <option value="other">Other</option>
-                </select>
+                <select required class="form-control" onchange="paymentTypeChange(this,{index})" name="payment[]"><option value="cash">Cash</option><option value="gold">Gold</option><option value="card">Card</option><option value="bank">Bank</option><option value="mobile_banking">Mobile Banking</option><option value="other">Other</option></select>
                 
-            </div>
+            </div>            
             <div class="col-md-3 paymentinfo_{index}">
                 <label for="payment_info" class="col-form-label text-start">Payment Info</label>
-                <select required class="form-control" name="payment_info[]">
-                    <option selected="selected" value="">Payment Info</option>
-                    <option value="CASH">CASH</option>
-                    <option value="ADVANCE">ADVANCE</option>
-                    <option value="SALES RETURN">SALES RETURN</option>
-                    <option value="BY CHEQUE">BY CHEQUE</option>
-                    <option value="CASH BACK">CASH BACK</option>
-                </select>
+                <select required class="form-control" name="payment_info[]"><option selected="selected" value="">Payment Info</option><option value="CASH">CASH</option><option value="ADVANCE">ADVANCE</option><option value="SALES RETURN">SALES RETURN</option><option value="BY CHEQUE">BY CHEQUE</option><option value="CASH BACK">CASH BACK</option></select>
                 
             </div>
             <div class="col-md-3 reference_{index}">
@@ -338,13 +291,7 @@ Booking Create
     <div id="paymentinfo-template-cash" style="display:none">
         <div class="col-md-3 paymentinfo_{index}">
             <label for="payment_info" class="col-form-label text-start">Payment Info</label>
-            <select required class="form-control" name="payment_info[]">
-            <option value="CASH">CASH</option>
-            <option value="ADVANCE">ADVANCE</option>
-            <option value="SALES RETURN">SALES RETURN</option>
-            <option value="BY CHEQUE">BY CHEQUE</option>
-            <option value="CASH BACK">CASH BACK</option>
-        </select>
+            <select required class="form-control" name="payment_info[]"><option value="CASH">CASH</option><option value="ADVANCE">ADVANCE</option><option value="SALES RETURN">SALES RETURN</option><option value="BY CHEQUE">BY CHEQUE</option><option value="CASH BACK">CASH BACK</option></select>
             
         </div>
     </div>
@@ -352,57 +299,35 @@ Booking Create
     <div id="paymentinfo-template-mobile-banking" style="display:none">
         <div class="col-md-3 paymentinfo_{index}">
             <label for="payment_info" class="col-form-label text-start">Mobile Banking</label>
-            <select required class="form-control" name="payment_info[]">
-            <option selected="selected" value="">Select Operator</option>
-            <option value="BKASH-CITY BANK">BKASH-CITY BANK</option>
-            </select>
+            <select required class="form-control" name="payment_info[]"><option selected="selected" value="">Select Operator</option><option value="BKASH-CITY BANK">BKASH-CITY BANK</option></select>
             
         </div>
     </div>
     <div id="paymentinfo-template-banks" style="display:none">
         <div class="col-md-3 paymentinfo_{index}">
             <label for="payment_info" class="col-form-label text-start">Bank</label>
-            <select required class="form-control" name="payment_info[]">
-            <option selected="selected" value="">Select Operator</option>
-            <option value="DBBL-TRANSFER">DBBL-TRANSFER</option>
-            <option value="CITY-TRANSFER">CITY-TRANSFER</option>
-            <option value="CBBL-TRANSFER">CBBL-TRANSFER</option>
-            <option value="COMMUNITY BANK">COMMUNITY BANK</option>
-            </select>
+            <select required class="form-control" name="payment_info[]"><option selected="selected" value="">Select Operator</option><option value="DBBL-TRANSFER">DBBL-TRANSFER</option><option value="CITY-TRANSFER">CITY-TRANSFER</option><option value="CBBL-TRANSFER">CBBL-TRANSFER</option><option value="COMMUNITY BANK">COMMUNITY BANK</option></select>
             
         </div>
     </div>
     <div id="paymentinfo-template-others" style="display:none">
         <div class="col-md-3 paymentinfo_{index}">
             <label for="payment_info" class="col-form-label text-start">Payment Info</label>
-            <select required class="form-control" name="payment_info[]">
-            <option selected="selected" value="">Select</option>
-            <option value="EMI-SSL">EMI-SSL</option>
-            </select>
+            <select required class="form-control" name="payment_info[]"><option selected="selected" value="">Select</option><option value="EMI-SSL">EMI-SSL</option></select>
             
         </div>
     </div>
     <div id="paymentinfo-template-golds" style="display:none">
         <div class="col-md-3 paymentinfo_{index}">
             <label for="payment_info" class="col-form-label text-start">Payment Info</label>
-            <select required class="form-control" name="payment_info[]">
-                <option selected="selected" value="">Select</option>
-                <option value="EXCHANGE GOLD (SENCO)">EXCHANGE GOLD (SENCO)</option>
-                <option value="SENCO OLD GOLD">SENCO OLD GOLD</option>
-                <option value="CUSTOMER OWN GOLD">CUSTOMER OWN GOLD</option>
-            </select>
+            <select required class="form-control" name="payment_info[]"><option selected="selected" value="">Select</option><option value="EXCHANGE GOLD (SENCO)">EXCHANGE GOLD (SENCO)</option><option value="SENCO OLD GOLD">SENCO OLD GOLD</option><option value="CUSTOMER OWN GOLD">CUSTOMER OWN GOLD</option></select>
             
         </div>
     </div>
     <div id="paymentinfo-template-cards" style="display:none">
         <div class="col-md-3 paymentinfo_{index}">
             <label for="payment_info" class="col-form-label text-start">Payment Info</label>
-            <select required class="form-control" name="payment_info[]">
-                <option selected="selected" value="">Select</option>
-                <option value="DBBL-CARD">DBBL-CARD</option>
-                <option value="CITY-CARD">CITY-CARD</option>
-                <option value="CBBL-CARD">CBBL-CARD</option>
-            </select>
+            <select required class="form-control" name="payment_info[]"><option selected="selected" value="">Select</option><option value="DBBL-CARD">DBBL-CARD</option><option value="CITY-CARD">CITY-CARD</option><option value="CBBL-CARD">CBBL-CARD</option></select>
             
         </div>
     </div>
@@ -422,43 +347,12 @@ $('.select2bs4').select2({
 $('#summernote').summernote();
 });
 
-    var selectedProduct = [];
+var selectedProduct = [];
 
-  //client dependancy dropdown logic start
-   $('#client').on('change',function(event){
-        event.preventDefault();
-        var selectedClient = $('#client').val();
-
-        // Function to get CSRF token from meta tag
-        function getCsrfToken() {
-        return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        }
-        // Set up Axios defaults
-        axios.defaults.withCredentials = true;
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = getCsrfToken();
-
-        const baseUrl = "{{ url('/') }}/";
-
-        axios.post(baseUrl +'client_dependancy',{
-                data: selectedClient
-            }).then(response=>{
-                var template = $("#client-template").html();
-                template = template.replace(/{name}/g, response.data.name);
-                template = template.replace(/{client_no}/g, response.data.client_no);
-                template = template.replace(/{mobile_number}/g, response.data.mobile_number);
-                template = template.replace(/{address}/g, response.data.address);
-                $("#selected_client").html(template);
-                console.log(response.data);
-            });
-        });
-    //client dependancy dropdown logic end
-
-
-   //product dependancy dropdown logic start
+   //district and zone dependancy dropdown logic start
    $('#product_nr').on('change',function(event){
         event.preventDefault();
         var selectedTheProduct = $('#product_nr').val();
-
         // Function to get CSRF token from meta tag
         function getCsrfToken() {
         return document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -469,17 +363,237 @@ $('#summernote').summernote();
 
         const baseUrl = "{{ url('/') }}/";
 
+        //  axios.get('sanctum/csrf-cookie').then(response=>{
         axios.post(baseUrl +'product_dependancy',{
                 data: selectedTheProduct
             }).then(response=>{
-                // selectedProduct = response.data.id;
-                selectedProduct.push(response.data.id);
-                addRow(response.data)
-                // $("#product_nr").val('').trigger('change')
+                selectedProduct = response.id;
+                addRow(response)
+                $("#product_nr").val('').trigger('change')
                 console.log(response.data);
             });
+        //  });
         });
-        //product dependancy dropdown logic end
+        //district and zone dependancy dropdown logic end
+
+
+
+///******************************** test start ************************
+function buildSearchData(object) {
+            if (object.start > 0) {
+                object.page = (object.start / object.length) + 1;
+            }
+                        return object;
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': "8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr"
+            }
+        });
+
+        function formatted_amount(amount) {
+            const symbol = "BDT";
+            return symbol + " " + (Math.round(amount * 100) / 100).toFixed(2);
+        }
+
+        function isInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+
+            );
+        }
+
+
+        function onClickShowHandeler(element) {
+            $('#showMoreModal').modal('show');
+            $.ajax({
+                    url: $(element).data('route'),
+                    type: 'get',
+                })
+                .done(function(response) {
+                    $("#showMoreModal .modal-title").html(response.title);
+                    $("#showMoreModal .modal-body").html(response.body);
+                })
+                .fail(function(response) {
+                    $('#showMoreModal').modal('hide');
+                    if (response.status === 419) {
+                        Swal.fire("Cancelled!", response.responseJSON.message, "error")
+                    } else {
+                        Swal.fire("Cancelled!", response.statusText, "error")
+                    }
+                });
+        }
+
+        function onClickDeleteHandeler(element) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: $(element).data('desc') ?? "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: !0,
+                confirmButtonColor: "#1cbb8c",
+                cancelButtonColor: "#ff3d60",
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function(t) {
+                if (t.isConfirmed) {
+                    $.ajax({
+                            url: $(element).data('route'),
+                            type: 'POST',
+                            data: {
+                                _token: "8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr",
+                                _method: "DELETE"
+                            },
+                        })
+                        .done(function() {
+                            Swal.fire("Deleted!", "Your item has been deleted.", "success");
+                            if ($(element).data('redirect')) {
+                                location.href = $(element).data('redirect');
+                            } else {
+                                table.ajax.reload(null, false);
+                            }
+                        })
+                        .fail(function(response) {
+                            if (response.status === 419) {
+                                Swal.fire("Cancelled!", response.responseJSON.message, "error")
+                            } else {
+                                Swal.fire("Cancelled!", response.statusText, "error")
+                            }
+                        });
+                }
+            })
+        }
+
+        $(document).ready(function() {
+            $("input[required]").parents('.form-group').find('label').addClass('required');
+            $("select[required]").parents('.form-group').find('label').addClass('required');
+
+            $(document).on('keypress', '.numberonly', function(e) {
+
+                var charCode = (e.which) ? e.which : event.keyCode
+
+                if (String.fromCharCode(charCode).match(/[^0-9.]/g))
+
+                    return false;
+
+            });
+        });
+
+        function bd_money_format(x) {
+            x = parseFloat(x).toFixed(2)
+            if (isNaN(x)) return x;
+
+            x = x.toString();
+            var afterPoint = '';
+            if (x.indexOf('.') > 0)
+                afterPoint = x.substring(x.indexOf('.'), x.length);
+            x = Math.floor(x);
+            x = x.toString();
+            var lastThree = x.substring(x.length - 3);
+            var otherNumbers = x.substring(0, x.length - 3);
+            if (otherNumbers != '')
+                lastThree = ',' + lastThree;
+            var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + afterPoint;
+            return res;
+        }
+    </script>
+
+
+
+
+
+        <script>
+        // var selectedProduct = [];
+
+        $('#client').select2bs4({
+            placeholder: "Select client",
+            allowClear: true,
+            ajax: {
+                url: 'https://sencotest.xstreambd.com/select2-client',
+                dataType: 'json'
+            }
+        });
+
+        $('#client').on('change', function(e) {
+            if ($(this).val()) {
+                $.ajax({
+                        url: "https://sencotest.xstreambd.com/clients/" + $(this).val(),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .done(function(resp) {
+                        var template = $("#client-template").html();
+                        template = template.replace(/{name}/g, resp.name);
+                        template = template.replace(/{client_no}/g, resp.client_no);
+                        template = template.replace(/{mobile_number}/g, resp.mobile_number);
+                        template = template.replace(/{address}/g, resp.address);
+                        $("#selected_client").html(template);
+                    })
+                    .fail(function(response) {
+                        if (response.status === 419) {
+                            Swal.fire("Error!", response.responseJSON.message, "error")
+                        } else {
+                            Swal.fire("Error!", response.statusText, "error")
+                        }
+                    });
+            } else {
+                $("#selected_client").html("");
+            }
+        });
+
+        // $('#product_nr').select2({
+        //     theme: 'bootstrap4',
+        //     placeholder: "Select Product",
+        //     allowClear: true,
+        //     ajax: {
+        //         url: 'https://sencotest.xstreambd.com/select2-product',
+        //         dataType: 'json',
+        //         data: function(params) {
+        //             var query = {
+        //                 term: params.term,
+        //                 selectedProduct: selectedProduct
+        //             }
+        //             return query;
+        //         }
+        //     }
+        // });
+
+
+
+        // $('#product_nr').on('change', function(e) {
+
+        //     if (!$(this).val()) {
+        //         return;
+        //     }
+        //     $.ajax({
+        //             url: "https://localhost/gohona/product/" + $(this).val(),
+        //             headers: {
+        //                 'Accept': 'application/json'
+        //             }
+        //         })
+        //         .done(function(resp) {
+        //             console.log(resp);
+        //             selectedProduct.push(resp.id);
+        //             addRow(resp)
+        //             $("#product_nr").val('').trigger('change')
+        //         })
+        //         .fail(function(response) {
+        //             if (response.status === 419) {
+        //                 Swal.fire("Error!", response.responseJSON.message, "error")
+        //             } else {
+        //                 Swal.fire("Error!", response.statusText, "error")
+        //             }
+        //         });
+        // });
+
+
+     
+                var row = 1;
+                var dirtyWage = [];
 
         function addRow(resp) {
             console.log(resp.st_dia ? resp.st_dia : '');
@@ -496,10 +610,8 @@ $('#summernote').summernote();
             template = template.replace(/{unit_price}/g, resp.price ? resp.price : '');
             template = template.replace(/{st_dia_price}/g, resp.st_dia_price ? resp.st_dia_price : '');
 
-
-            //wage calculation start
             var wage;
-            var wage_type = 'Fixed';
+            var wage_type = 'fixed';
 
             if (parseFloat(resp.wage) > 0) {
                 if (resp.wage_type == 'Percentage') {
@@ -509,9 +621,8 @@ $('#summernote').summernote();
                     wage = resp.wage;
                 }
             }
-            //wage calculation end
 
-            template = template.replace(/{wage}/g, wage ? wage : '');
+            template = template.replace(/{wage}/g, resp.wage ? wage : '');
             template = template.replace(/{wage_type}/g, wage_type);
             template = template.replace(/{subtotal}/g, '');
             $("#selected_product_list").append(template.replace(/{index}/g, row));
@@ -523,33 +634,15 @@ $('#summernote').summernote();
             row++;
             recalculate()
         }
-    
-        var row = 1;
-        var dirtyWage = {};
-        var selectedProduct = []; // Ensure this is an array
 
         function removeRow(id) {
-            console.log('selectedProduct before filtering:', selectedProduct);
-            console.log('Type of selectedProduct:', typeof selectedProduct);
-            console.log('Is selectedProduct an array?', Array.isArray(selectedProduct));
-
             var elem = $("#row_id_" + id + " .product_id").val();
-
-            // Ensure selectedProduct is an array before filtering
-            if (Array.isArray(selectedProduct)) {
-                selectedProduct = selectedProduct.filter(function(e) {
-                    return e != elem;
-                });
-            } else {
-                console.error('selectedProduct is not an array:', selectedProduct);
-                return;
-            }
-
+            selectedProduct = selectedProduct.filter(function(e) {
+                return e != elem
+            })
             $("#row_id_" + id).remove();
             delete dirtyWage["row_id_" + id];
-            recalculate();
-
-            console.log('selectedProduct after filtering:', selectedProduct);
+            recalculate()
         }
 
         $("#discount").on('keyup', function() {
@@ -669,12 +762,6 @@ $('#summernote').summernote();
             }
         }
 
-
-
-
-
-
-
         function paymentTypeChange(elem, id) {
             if ($(elem).val() === 'mobile_banking') {
                 var template = $("#paymentinfo-template-mobile-banking").html();
@@ -693,18 +780,6 @@ $('#summernote').summernote();
             $("#payment_type_" + id).after(template.replace(/{index}/g, id));
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
         $("#preview").on("click", function(e) {
             e.preventDefault();
             var formData = $("#order-form").serialize();
@@ -717,128 +792,11 @@ $('#summernote').summernote();
             return window.open(url, title, 'width=900,height=500,left=' + left + ',top=' + top + ',screenX=' + left +
                 ',screenY=' + top + ',status=no,scrollbars=yes');
         }
-
-        function buildSearchData(object) {
-                    if (object.start > 0) {
-                        object.page = (object.start / object.length) + 1;
-                    }
-                                return object;
-                }
-
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': "8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr"
-            }
-        });
-
-        function formatted_amount(amount) {
-            const symbol = "BDT";
-            return symbol + " " + (Math.round(amount * 100) / 100).toFixed(2);
-        }
-
-        function isInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-
-            );
-        }
+///******************************** test end ************************
 
 
-        function onClickShowHandeler(element) {
-            $('#showMoreModal').modal('show');
-            $.ajax({
-                    url: $(element).data('route'),
-                    type: 'get',
-                })
-                .done(function(response) {
-                    $("#showMoreModal .modal-title").html(response.title);
-                    $("#showMoreModal .modal-body").html(response.body);
-                })
-                .fail(function(response) {
-                    $('#showMoreModal').modal('hide');
-                    if (response.status === 419) {
-                        Swal.fire("Cancelled!", response.responseJSON.message, "error")
-                    } else {
-                        Swal.fire("Cancelled!", response.statusText, "error")
-                    }
-                });
-        }
+</script>
 
-        function onClickDeleteHandeler(element) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: $(element).data('desc') ?? "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: !0,
-                confirmButtonColor: "#1cbb8c",
-                cancelButtonColor: "#ff3d60",
-                confirmButtonText: 'Yes, delete it!'
-            }).then(function(t) {
-                if (t.isConfirmed) {
-                    $.ajax({
-                            url: $(element).data('route'),
-                            type: 'POST',
-                            data: {
-                                _token: "8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr",
-                                _method: "DELETE"
-                            },
-                        })
-                        .done(function() {
-                            Swal.fire("Deleted!", "Your item has been deleted.", "success");
-                            if ($(element).data('redirect')) {
-                                location.href = $(element).data('redirect');
-                            } else {
-                                table.ajax.reload(null, false);
-                            }
-                        })
-                        .fail(function(response) {
-                            if (response.status === 419) {
-                                Swal.fire("Cancelled!", response.responseJSON.message, "error")
-                            } else {
-                                Swal.fire("Cancelled!", response.statusText, "error")
-                            }
-                        });
-                }
-            })
-        }
-
-        $(document).ready(function() {
-            $("input[required]").parents('.form-group').find('label').addClass('required');
-            $("select[required]").parents('.form-group').find('label').addClass('required');
-
-            $(document).on('keypress', '.numberonly', function(e) {
-
-                var charCode = (e.which) ? e.which : event.keyCode
-
-                if (String.fromCharCode(charCode).match(/[^0-9.]/g))
-
-                    return false;
-
-            });
-        });
-
-        function bd_money_format(x) {
-            x = parseFloat(x).toFixed(2)
-            if (isNaN(x)) return x;
-
-            x = x.toString();
-            var afterPoint = '';
-            if (x.indexOf('.') > 0)
-                afterPoint = x.substring(x.indexOf('.'), x.length);
-            x = Math.floor(x);
-            x = x.toString();
-            var lastThree = x.substring(x.length - 3);
-            var otherNumbers = x.substring(0, x.length - 3);
-            if (otherNumbers != '')
-                lastThree = ',' + lastThree;
-            var res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + lastThree + afterPoint;
-            return res;
-        }
-    </script>
 
  @endpush
 

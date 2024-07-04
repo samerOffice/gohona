@@ -50,7 +50,7 @@ Welcome
                           <th>Serial No.</th>
                           <th>Name</th>
                           <th>Mobile Number</th>
-                          <th>Due Amount</th>
+                          {{-- <th>Due Amount</th> --}}
                           <th>Action</th>
                         </tr>
                         </thead>
@@ -61,9 +61,9 @@ Welcome
                           <td>{{$i++}}</td>
                           <td>{{$supplier->name}}</td>
                           <td>{{$supplier->mobile_no}}</td>
-                          <td>{{$supplier->due_amount}}</td>                    
+                          {{-- <td>{{$supplier->due_amount}}</td>                --}}
                           <td>
-                            <a href="#" style="color: white"><button class="btn btn-outline-info"><i class="fa-regular fa-window-maximize"></i> View</button></a> | 
+                            {{-- <a href="#" style="color: white"><button class="btn btn-outline-info"><i class="fa-regular fa-window-maximize"></i> View</button></a> |--}}
                             <a href="{{route('supplier.edit', $supplier->id)}}" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-pen-to-square"></i> Edit</button></a> | 
                                <a onclick="Swal.fire({
                                  title: 'Are You Sure?',
