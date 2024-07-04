@@ -122,6 +122,8 @@ Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data']
 //dependencies
 Route::post('/employee_details_dependancy', [PayrollController::class, 'employee_details_dependancy']);
 Route::post('/district_and_zone_dependancy', [CustomerController::class, 'districtAndZoneDependancy']);
+Route::post('/product_dependancy', [BookingController::class, 'productDependancy']);
+Route::post('/client_dependancy', [BookingController::class, 'clientDependancy']);
 
 Route::get('/payroll_show_data', [PayrollController::class, 'payroll_show_data'])->name('payroll_show_data');
 Route::post('/generate-csv', [PayrollController::class, 'generateCsv'])->name('generate-csv');

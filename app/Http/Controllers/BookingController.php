@@ -37,8 +37,58 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        $user_role = Auth::user()->role_id;
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+         $products = DB::table('products')->get();
+         $customers = DB::table('customers')->get();
+         $users = DB::table('users')->get();
+       
+        return view('bookings.create',compact('permitted_menus_array','products','customers','users'));
     }
+
+
+    public function productDependancy(Request $request){
+        
+        $selectedProductId = $request->input('data');
+        $product = DB::table('products')
+                    ->where('id',$selectedProductId)
+                    ->first();
+
+
+        return response()->json([
+            'status' => 'success',
+            'id' => $product->id,
+            'product_nr' => $product->product_nr,
+            'product_details' => $product->product_details,
+            'weight' => $product->weight,
+            'wage' => $product->wage,
+            'wage_type' => $product->wage_type
+        ], 200);
+      }
+
+
+      public function clientDependancy(Request $request){
+        
+        $selectedClientId = $request->input('data');
+        $client = DB::table('customers')
+                    ->where('id',$selectedClientId)
+                    ->first();
+
+
+        return response()->json([
+            'status' => 'success',
+            'id' => $client->id,
+            'name' => $client->name,
+            'mobile_number' => $client->mobile_number,
+            'address' => $client->address
+            
+        ], 200);
+      }
 
     /**
      * Store a newly created resource in storage.
