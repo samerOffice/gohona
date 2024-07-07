@@ -32,8 +32,9 @@ Booking Create
                     </div>
 
                     <div class="card-body">
-                    <form method="POST" action="https://sencotest.xstreambd.com/booking" id="order-form" role="form" enctype="multipart/form-data">
-                        <input type="hidden" name="_token" value="8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr">
+                    <form method="POST" action="{{route('booking.store')}}" id="order-form" role="form" enctype="multipart/form-data">
+                        {{-- <input type="hidden" name="_token" value="8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr"> --}}
+                        @csrf
                         <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="mb-3 row">
@@ -47,19 +48,8 @@ Booking Create
                                 </select>
                             </div>
                             <div class="col-md-4">
-                                <label for="booked_by" class="col-form-label text-start">Client</label>
-                                {{-- <select required id="client" class="form-control" name="booked_by">
-                                    <option selected="selected" value="">Select Booked By</option>
-                                    <option value="1">SAJAL</option>
-                                    <option value="2">MANAGER</option>
-                                    <option value="3">KARTIK</option>
-                                    <option value="4">MODHU</option>
-                                    <option value="5">SUDARSHAN</option>
-                                    <option value="6">PRADIP</option>
-                                    <option value="7">BISHOWJIT</option>
-                                    <option value="8">RANA</option>
-                                    <option value="9">APP</option>
-                                </select> --}}
+                                <label for="booked_by" class="col-form-label text-start">Booked By</label>
+                            
                                 <select class="form-control select2bs4" id="booked_by" required name="booked_by" style="width: 100%;">
                                     @foreach($users as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
@@ -108,13 +98,14 @@ Booking Create
                             </tbody>
                             <tfoot>
                                 <tr>
-                                    <td colspan="2" class="text-end" style="padding-left: 900px">Total Weight</td>
+                                    <td colspan="2" class="text-end">Total Weight</td>
                                     <td id="total_weight"></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td colspan="2" id="subtotal_without_vat"></td>
+                                    <td colspan="2" id="subtotal_without_vat" ></td>
+                                    <input id="subtotal_without_vat_input_value" type="hidden" name="item_total_amount">
                                 </tr>
                                 <tr>
                                     <td colspan="7" class="text-end justify-end" style="padding: 1px;">
@@ -123,26 +114,26 @@ Booking Create
                                         </div>
                                     </td>
                                     <td colspan="2" id="vat_amount"></td>
+                                    <input type="hidden" name="total_vat_amount" id="total_vat_amount_input_value">
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end" style="padding-left: 1400px">Subtotal</td>
+                                    <td colspan="7" class="text-end" >Subtotal</td>
                                     <td colspan="2" id="subtotal_with_vat"></td>
+                                    <input type="hidden" id="subtotal_amount_with_vat_input_value" name="subtotal_amount">
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end" style="padding-left: 1400px">Discount</td>
+                                    <td colspan="7" class="text-end" >Discount</td>
                                     <td colspan="2" style="padding: 1px;">
                                         <input id="discount" class="form-control" name="discount" type="text" value="">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="7" class="text-end" style="padding-left: 1400px">Total</td>
+                                    <td colspan="7" class="text-end" >Total</td>
                                     <td colspan="2" id="total"></td>
+                                    <input type="hidden" id="total_amount_input_value" name="total_amount_after_discount">
                                 </tr>
                                 <tr>
-                                    <td colspan="7">
-                                                                                                                
-                                                                        
-                                                                                
+                                    <td colspan="7">                                                                             
                                         <div class="row">
                                             <div class="col-md-3" id="payment_type_0">
                                                 <label for="payment_type" class="col-form-label text-start">Payment type</label>
@@ -154,6 +145,7 @@ Booking Create
                                                     <option value="mobile_banking">Mobile Banking</option>
                                                     <option value="other">Other</option>
                                                 </select>
+
                                                 
                                             </div>
         
@@ -167,7 +159,8 @@ Booking Create
                                                     <option value="BY CHEQUE">BY CHEQUE</option>
                                                     <option value="CASH BACK">CASH BACK</option>
                                                 </select>
-                                                
+
+                                                 
                                             </div>
                                             <div class="col-md-3 reference_{index}">
                                                 <label for="reference" class="col-form-label text-start">Reference</label>
@@ -190,7 +183,7 @@ Booking Create
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-end" colspan="7" style="padding-left: 1400px">
+                                    <td class="text-end" colspan="7">
                                         Paid
                                     </td>
                                     <td id="paid" style="padding: 1px;" colspan="2">
@@ -198,7 +191,7 @@ Booking Create
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="text-end" colspan="7" style="padding-left: 1400px">
+                                    <td class="text-end" colspan="7" >
                                         Due
                                     </td>
                                     <td id="due" style="padding: 1px;" colspan="2">
@@ -294,7 +287,7 @@ Booking Create
         <div class="row" id="payment_row_id_{index}">
             <div class="col-md-3" id="payment_type_{index}">
                 <label for="payment_type" class="col-form-label text-start">Payment type</label>
-                <select required class="form-control" onchange="paymentTypeChange(this,{index})" name="payment[]">
+                <select required class="form-control"  onchange="paymentTypeChange(this,{index})" name="payment[]">
                     <option value="cash">Cash</option>
                     <option value="gold">Gold</option>
                     <option value="card">Card</option>
@@ -302,7 +295,7 @@ Booking Create
                     <option value="mobile_banking">Mobile Banking</option>
                     <option value="other">Other</option>
                 </select>
-                
+       
             </div>
             <div class="col-md-3 paymentinfo_{index}">
                 <label for="payment_info" class="col-form-label text-start">Payment Info</label>
@@ -421,6 +414,7 @@ $('.select2bs4').select2({
 //summernote   
 $('#summernote').summernote();
 });
+
 
     var selectedProduct = [];
 
@@ -574,21 +568,25 @@ $('#summernote').summernote();
             subtotal_without_vat = subtotal;
 
             $("#subtotal_without_vat").text(subtotal_without_vat ? bd_money_format(subtotal_without_vat.toFixed(0)) : '--');
+            $("#subtotal_without_vat_input_value").val(subtotal_without_vat ? bd_money_format(subtotal_without_vat.toFixed(0)) : '--');
 
             var vat_percent = parseFloat($('#vat').val());
             vat = subtotal_without_vat * (vat_percent / 100);
 
             $("#vat_amount").text(vat ? bd_money_format(vat.toFixed(0)) : '--');
+            $("#total_vat_amount_input_value").val(vat ? bd_money_format(vat.toFixed(0)) : '--');
 
             var total = subtotal_without_vat + vat;
 
             $("#subtotal_with_vat").text(total ? bd_money_format(total.toFixed(0)) : '--');
+            $("#subtotal_amount_with_vat_input_value").val(total ? bd_money_format(total.toFixed(0)) : '--');
 
             var discount = parseFloat($("#discount").val() ? $("#discount").val() : 0);
 
             var payable = total - discount;
 
             $("#total").text(payable ? bd_money_format(payable.toFixed(0)) : '--');
+            $("#total_amount_input_value").val(payable ? bd_money_format(payable.toFixed(0)) : '--');
             calculatePaid();
         }
 
@@ -670,11 +668,6 @@ $('#summernote').summernote();
         }
 
 
-
-
-
-
-
         function paymentTypeChange(elem, id) {
             if ($(elem).val() === 'mobile_banking') {
                 var template = $("#paymentinfo-template-mobile-banking").html();
@@ -692,17 +685,6 @@ $('#summernote').summernote();
             $(".paymentinfo_" + id).remove();
             $("#payment_type_" + id).after(template.replace(/{index}/g, id));
         }
-
-
-
-
-
-
-
-
-
-
-
 
 
         $("#preview").on("click", function(e) {
@@ -725,11 +707,11 @@ $('#summernote').summernote();
                                 return object;
                 }
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': "8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr"
-            }
-        });
+        // $.ajaxSetup({
+        //     headers: {
+        //         'X-CSRF-TOKEN': "8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr"
+        //     }
+        // });
 
         function formatted_amount(amount) {
             const symbol = "BDT";
@@ -748,63 +730,63 @@ $('#summernote').summernote();
         }
 
 
-        function onClickShowHandeler(element) {
-            $('#showMoreModal').modal('show');
-            $.ajax({
-                    url: $(element).data('route'),
-                    type: 'get',
-                })
-                .done(function(response) {
-                    $("#showMoreModal .modal-title").html(response.title);
-                    $("#showMoreModal .modal-body").html(response.body);
-                })
-                .fail(function(response) {
-                    $('#showMoreModal').modal('hide');
-                    if (response.status === 419) {
-                        Swal.fire("Cancelled!", response.responseJSON.message, "error")
-                    } else {
-                        Swal.fire("Cancelled!", response.statusText, "error")
-                    }
-                });
-        }
+        // function onClickShowHandeler(element) {
+        //     $('#showMoreModal').modal('show');
+        //     $.ajax({
+        //             url: $(element).data('route'),
+        //             type: 'get',
+        //         })
+        //         .done(function(response) {
+        //             $("#showMoreModal .modal-title").html(response.title);
+        //             $("#showMoreModal .modal-body").html(response.body);
+        //         })
+        //         .fail(function(response) {
+        //             $('#showMoreModal').modal('hide');
+        //             if (response.status === 419) {
+        //                 Swal.fire("Cancelled!", response.responseJSON.message, "error")
+        //             } else {
+        //                 Swal.fire("Cancelled!", response.statusText, "error")
+        //             }
+        //         });
+        // }
 
-        function onClickDeleteHandeler(element) {
-            Swal.fire({
-                title: 'Are you sure?',
-                text: $(element).data('desc') ?? "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: !0,
-                confirmButtonColor: "#1cbb8c",
-                cancelButtonColor: "#ff3d60",
-                confirmButtonText: 'Yes, delete it!'
-            }).then(function(t) {
-                if (t.isConfirmed) {
-                    $.ajax({
-                            url: $(element).data('route'),
-                            type: 'POST',
-                            data: {
-                                _token: "8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr",
-                                _method: "DELETE"
-                            },
-                        })
-                        .done(function() {
-                            Swal.fire("Deleted!", "Your item has been deleted.", "success");
-                            if ($(element).data('redirect')) {
-                                location.href = $(element).data('redirect');
-                            } else {
-                                table.ajax.reload(null, false);
-                            }
-                        })
-                        .fail(function(response) {
-                            if (response.status === 419) {
-                                Swal.fire("Cancelled!", response.responseJSON.message, "error")
-                            } else {
-                                Swal.fire("Cancelled!", response.statusText, "error")
-                            }
-                        });
-                }
-            })
-        }
+        // function onClickDeleteHandeler(element) {
+        //     Swal.fire({
+        //         title: 'Are you sure?',
+        //         text: $(element).data('desc') ?? "You won't be able to revert this!",
+        //         icon: "warning",
+        //         showCancelButton: !0,
+        //         confirmButtonColor: "#1cbb8c",
+        //         cancelButtonColor: "#ff3d60",
+        //         confirmButtonText: 'Yes, delete it!'
+        //     }).then(function(t) {
+        //         if (t.isConfirmed) {
+        //             $.ajax({
+        //                     url: $(element).data('route'),
+        //                     type: 'POST',
+        //                     data: {
+        //                         _token: "8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr",
+        //                         _method: "DELETE"
+        //                     },
+        //                 })
+        //                 .done(function() {
+        //                     Swal.fire("Deleted!", "Your item has been deleted.", "success");
+        //                     if ($(element).data('redirect')) {
+        //                         location.href = $(element).data('redirect');
+        //                     } else {
+        //                         table.ajax.reload(null, false);
+        //                     }
+        //                 })
+        //                 .fail(function(response) {
+        //                     if (response.status === 419) {
+        //                         Swal.fire("Cancelled!", response.responseJSON.message, "error")
+        //                     } else {
+        //                         Swal.fire("Cancelled!", response.statusText, "error")
+        //                     }
+        //                 });
+        //         }
+        //     })
+        // }
 
         $(document).ready(function() {
             $("input[required]").parents('.form-group').find('label').addClass('required');
