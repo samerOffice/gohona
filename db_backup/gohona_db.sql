@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 03, 2024 at 03:38 PM
+-- Generation Time: Jul 07, 2024 at 02:26 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,18 +30,29 @@ SET time_zone = "+00:00";
 CREATE TABLE `bookings` (
   `id` int(11) NOT NULL,
   `booking_number` varchar(255) DEFAULT NULL,
+  `bin_no` varchar(100) DEFAULT NULL,
   `booking_date` date DEFAULT NULL,
   `client_no` int(255) DEFAULT NULL,
   `client_id` int(255) DEFAULT NULL,
   `user_id` int(100) DEFAULT NULL,
-  `product_id` int(255) DEFAULT NULL,
-  `weight` varchar(100) DEFAULT NULL,
-  `unit_price_amount` varchar(255) DEFAULT NULL,
-  `wage` varchar(100) DEFAULT NULL,
-  `item_wise_subtotal_amount` varchar(255) DEFAULT NULL,
+  `item_total_amount` varchar(255) DEFAULT NULL,
+  `vat_amount` varchar(255) DEFAULT NULL,
+  `subtotal_amount` varchar(255) DEFAULT NULL,
+  `discount_amount` varchar(100) DEFAULT NULL,
+  `total_amount` varchar(255) DEFAULT NULL,
+  `total_paid_amount` varchar(255) DEFAULT NULL,
+  `total_due_amount` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`id`, `booking_number`, `bin_no`, `booking_date`, `client_no`, `client_id`, `user_id`, `item_total_amount`, `vat_amount`, `subtotal_amount`, `discount_amount`, `total_amount`, `total_paid_amount`, `total_due_amount`, `created_at`, `updated_at`) VALUES
+(1, '211975', '314136554-9327', '2024-07-07', NULL, 3, 1, '2,057.00', '103.00', '2,160.00', '160', '2,000.00', '1,700.00', '300.00', '2024-07-07 10:49:53', '2024-07-07 10:49:53'),
+(2, '909074', '086156301-3070', '2024-07-07', NULL, 4, 4, '3,210.00', '161.00', '3,371.00', '20', '3,351.00', '2,200.00', '1,151.00', '2024-07-07 11:20:02', '2024-07-07 11:20:02');
 
 -- --------------------------------------------------------
 
@@ -53,17 +64,25 @@ CREATE TABLE `booking_calculations` (
   `id` int(11) NOT NULL,
   `booking_number` varchar(255) DEFAULT NULL,
   `booking_date` date DEFAULT NULL,
-  `client_id` int(255) DEFAULT NULL,
-  `item_total_amount` varchar(255) DEFAULT NULL,
-  `vat_amount` varchar(100) DEFAULT NULL,
-  `sub_total_amount` varchar(255) DEFAULT NULL,
-  `discount_amount` varchar(255) DEFAULT NULL,
-  `total_amount` varchar(255) DEFAULT NULL,
-  `paid_amount` varchar(255) DEFAULT NULL,
-  `due_amount` varchar(255) DEFAULT NULL,
+  `product_id` int(255) DEFAULT NULL,
+  `unit_price_amount` varchar(255) DEFAULT NULL,
+  `wage` varchar(255) DEFAULT NULL,
+  `payment_type` varchar(100) DEFAULT NULL,
+  `payment_info` varchar(100) DEFAULT NULL,
+  `reference` varchar(100) DEFAULT NULL,
+  `payment_amount` varchar(255) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `booking_calculations`
+--
+
+INSERT INTO `booking_calculations` (`id`, `booking_number`, `booking_date`, `product_id`, `unit_price_amount`, `wage`, `payment_type`, `payment_info`, `reference`, `payment_amount`, `created_at`, `updated_at`) VALUES
+(1, '211975', '2024-07-07', 64, '200', '4.8', 'cash', 'CASH', NULL, '500', '2024-07-07 10:49:53', '2024-07-07 10:49:53'),
+(2, '211975', '2024-07-07', 65, '540', '69', 'bank', 'DBBL-TRANSFER', 'testing ref.', '1200', '2024-07-07 10:49:53', '2024-07-07 10:49:53'),
+(3, '909074', '2024-07-07', 12, '100', '10', 'cash', 'BY CHEQUE', NULL, '2200', '2024-07-07 11:20:02', '2024-07-07 11:20:02');
 
 -- --------------------------------------------------------
 
@@ -318,7 +337,7 @@ CREATE TABLE `employees` (
 
 INSERT INTO `employees` (`id`, `emp_name`, `designation`, `joining_date`, `yearly_bonus_date`, `renew_date`, `renewed_yearly_bonus_date`, `per_day_salary`, `father_name`, `mother_name`, `mobile_number`, `nid_number`, `present_address`, `permanent_address`, `birth_date`, `blood_group`, `nationality`, `marital_status`, `religion`, `gender`, `profile_pic`, `emergency_contact_name_one`, `emergency_contact_number_one`, `emergency_contact_relation_one`, `emergency_contact_name_two`, `emergency_contact_number_two`, `emergency_contact_relation_two`, `emergency_contact_name_three`, `emergency_contact_number_three`, `emergency_contact_relation_three`, `yearly_bonus_status`, `created_at`, `updated_at`) VALUES
 (1, 'Kamrul Hasan Uddin', 'Sales Executive', '2024-04-02', '2024-07-02', '2024-07-02', NULL, '1200', 'Mahmudul Hasan', 'Halima Khatun', '01513470121', '34534456', '<p>laalbagh<br></p>', '<p>laalbagh, dhaka<br></p>', '1995-09-10', 'A+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmudul', '01513470130', 'Father', 'Halima Khantun', '01514450127', 'Mother', NULL, NULL, NULL, NULL, '2024-05-16 13:28:47', '2024-05-16 13:28:47'),
-(2, 'Hamid Mahmud', 'Sales Executive', '2024-04-02', NULL, NULL, NULL, '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
+(2, 'Hamid Mahmud', 'Sales Executive', '2024-04-02', '2024-07-04', NULL, NULL, '900', 'Almas Mahmud', 'Hasina Begum', '01513470121', '634135485', 'Dhanmondi 2, Dhaka<br>', '<p>Dhanmondi 2, Dhaka</p>', '1994-04-07', 'B+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Almas Mahmud', '01715470120', 'Father', 'Kawser Mahmud', '01514450127', 'Brother', NULL, NULL, NULL, NULL, '2024-05-23 06:02:15', '2024-05-23 06:02:15'),
 (3, 'Kartik Paul Kumar', 'Sales Manager', '2020-05-08', NULL, NULL, NULL, '800', 'Suvra Paul', 'Priya Paul', '01513470127', '35464124', '<p>Tantibazar, Dhaka<br></p>', '<p>Tantibazar, Dhaka<br></p><p></p>', '1992-04-08', 'O+', 'Bangladeshi', 'Married', 'Hindu', 'Male', NULL, 'Suvra Paul', '01513470120', 'Father', 'Priya Paul', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-05-23 11:40:12', '2024-05-23 11:40:12'),
 (4, 'Salman Seikh', 'Sales Executive gg', '2022-07-05', NULL, NULL, NULL, '850', 'Mahmud Seikh', 'Halima Khatun', '01513470121', '3543515', '<p>laalbagh, dhaka<br></p>', '<p>laalbagh, dhaka<br></p>', '1996-06-05', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Mahmud Seikh', '01513470120', 'Father', 'Rakib Seikh', '01814780120', 'Brother', NULL, NULL, NULL, NULL, '2024-06-04 06:26:23', '2024-06-04 06:26:23'),
 (5, 'Farhan Ahmed', 'Sales Officer', '2024-04-03', NULL, NULL, NULL, '750', 'Imran Ahmed', 'Hasina Begum', '01814750120', '354353363', 'Dhanmondi 27, Dhaka, Bangladesh<br>', '<p>Dhanmondi 27, Dhaka, Bangladesh</p>', '1991-07-11', 'O+', 'Bangladeshi', 'Single', 'Islam', 'Male', NULL, 'Imran Ahmed', '01715470120', 'Father', 'Halima Begum', '01413470150', 'Mother', NULL, NULL, NULL, NULL, '2024-07-02 07:29:22', '2024-07-02 07:29:22');
@@ -479,7 +498,23 @@ CREATE TABLE `payment_methods` (
 --
 
 INSERT INTO `payment_methods` (`id`, `name`, `under_type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'ADVANCE', 'Cash', 1, '2024-05-13 10:40:11', '2024-05-13 10:40:11');
+(1, 'ADVANCE', 'Cash', 1, '2024-05-13 10:40:11', '2024-05-13 10:40:11'),
+(2, 'CASH', 'Cash', 1, '2024-07-04 12:04:10', '2024-07-04 12:04:10'),
+(3, 'DBBL-TRANSFER', 'Bank', 1, '2024-07-04 12:04:42', '2024-07-04 12:04:42'),
+(4, 'CITY-TRANSFER', 'Bank', 1, '2024-07-04 12:04:58', '2024-07-04 12:04:58'),
+(5, 'CBBL-TRANSFER', 'Bank', 1, '2024-07-04 12:05:10', '2024-07-04 12:05:10'),
+(6, 'EXCHANGE GOLD (SENCO)', 'Gold', 1, '2024-07-04 12:05:27', '2024-07-04 12:05:27'),
+(7, 'SALES RETURN', 'Cash', 1, '2024-07-04 12:05:43', '2024-07-04 12:05:43'),
+(8, 'SENCO OLD GOLD', 'Gold', 1, '2024-07-04 12:06:00', '2024-07-04 12:06:00'),
+(9, 'CUSTOMER OWN GOLD', 'Gold', 1, '2024-07-04 12:06:12', '2024-07-04 12:06:12'),
+(10, 'DBBL-CARD', 'Card', 1, '2024-07-04 12:06:26', '2024-07-04 12:06:26'),
+(11, 'CITY-CARD', 'Card', 1, '2024-07-04 12:06:40', '2024-07-04 12:06:40'),
+(12, 'CBBL-CARD', 'Card', 1, '2024-07-04 12:06:53', '2024-07-04 12:06:53'),
+(13, 'COMMUNITY BANK', 'Bank', 1, '2024-07-04 12:07:11', '2024-07-04 12:07:11'),
+(14, 'BKASH-CITY BANK', 'Mobile Banking', 1, '2024-07-04 12:07:47', '2024-07-04 12:07:47'),
+(15, 'BY CHEQUE', 'Cash', 1, '2024-07-04 12:08:00', '2024-07-04 12:08:00'),
+(16, 'CASH BACK', 'Cash', 1, '2024-07-04 12:08:12', '2024-07-04 12:08:12'),
+(17, 'EMI-SSL', 'Others', 1, '2024-07-04 12:08:23', '2024-07-04 12:08:23');
 
 -- --------------------------------------------------------
 
@@ -534,7 +569,8 @@ INSERT INTO `payrolls` (`id`, `employee`, `salary_date`, `joining_date`, `per_da
 (5, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '09-2024', '10-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '0', '32400', NULL, '2024-07-02 10:06:38', '2024-07-02 10:06:38'),
 (6, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '09-2024', '10-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '0', '32400', NULL, '2024-07-02 10:06:54', '2024-07-02 10:06:54'),
 (7, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '06-2024', '07-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '11700', '44100', '0', '0', '44100', NULL, '2024-07-02 10:08:15', '2024-07-02 10:08:15'),
-(8, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '09-2024', '10-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '50', '32350', NULL, '2024-07-02 10:08:34', '2024-07-02 10:08:34');
+(8, 1, '2024-07-02', '2024-04-02', '1200', '39', '46800', '09-2024', '10-2024', '11700', '26', '0', '26', '31200', '1200', '0', '0', '0', '0', '0', '0', '0', '1200', '32400', '0', '32400', '0', '50', '32350', NULL, '2024-07-02 10:08:34', '2024-07-02 10:08:34'),
+(9, 2, '2024-07-04', '2024-04-02', '900', '39', '35100', '06-2024', '07-2024', '8775', '26', '0', '26', '23400', '900', '0', '0', '0', '0', '0', '0', '0', '900', '24300', '8775', '33075', '0', '0', '33075', NULL, '2024-07-04 12:22:02', '2024-07-04 12:22:02');
 
 -- --------------------------------------------------------
 
@@ -587,11 +623,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_nr`, `product_details`, `product_category`, `product_type`, `weight`, `carat`, `quantity`, `st_or_dia`, `st_or_dia_price`, `wage`, `wage_type`, `supplier`, `purchase_price`, `stock_type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'aa', 'asdffsdfs', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL),
+(1, 'BNG-068', 'asdffsdfs', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL),
 (11, 'dsf', 'aa@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
 (12, 'qqq', 'qq@gmai', 9, NULL, '32kg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
-(64, 'R2', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '1000', 'Fixed', NULL, NULL, NULL, 1, NULL, NULL),
-(65, 'R3', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '10', 'Percentage', NULL, NULL, NULL, 1, NULL, NULL);
+(64, 'R2', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Fixed', NULL, NULL, NULL, 1, NULL, NULL),
+(65, 'R3', 'RING 21K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Percentage', NULL, NULL, NULL, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1031,13 +1067,13 @@ ALTER TABLE `zones`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `booking_calculations`
 --
 ALTER TABLE `booking_calculations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `booking_payment_calculations`
@@ -1109,13 +1145,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `payrolls`
 --
 ALTER TABLE `payrolls`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

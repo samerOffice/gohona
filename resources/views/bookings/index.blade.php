@@ -62,49 +62,27 @@ Customer Transaction
                         </thead>
                         <tbody>
                             @php $i = 1 @endphp
-                            @foreach($booking_calculations as $booking_calculation)
+                            @foreach($bookings as $booking)
                         <tr>
                           <td>{{$i++}}</td>
-                          <td>{{$booking_calculation->booking_number}}</td>                          
-                          <td>{{$booking_calculation->booking_date}}</td>
-                          <td>{{$booking_calculation->customer_name}}</td>
+                          <td>{{$booking->booking_number}}</td>                          
+                          <td>{{$booking->booking_date}}</td>
+                          <td>{{$booking->customer_name}}</td>
+                          <td>{{$booking->item_total_amount}}</td>
+                          <td>{{$booking->vat_amount}}</td>
+                          <td>{{$booking->subtotal_amount}}</td>
                           <td>
                             @php
-                            echo number_format($booking_calculation->item_total_amount, 2, '.', '')
+                            echo number_format($booking->discount_amount, 2, '.', '')
                             @endphp
                           </td>
+                          <td>{{$booking->total_amount}}</td>
+                          <td>{{$booking->total_paid_amount}}</td>
+                          <td>{{$booking->total_due_amount}}</td>
                           <td>
-                            @php
-                            echo number_format($booking_calculation->vat_amount, 2, '.', '')
-                            @endphp
-                          </td>
-                          <td>
-                            @php
-                            echo number_format($booking_calculation->sub_total_amount, 2, '.', '')
-                            @endphp
-                          </td>
-                          <td>
-                            @php
-                            echo number_format($booking_calculation->discount_amount, 2, '.', '')
-                            @endphp
-                          </td>
-                          <td>
-                            @php
-                            echo number_format($booking_calculation->total_amount, 2, '.', '')
-                            @endphp
-                          </td>
-                          <td>
-                            @php
-                            echo number_format($booking_calculation->paid_amount, 2, '.', '')
-                            @endphp
-                          </td>
-                          <td>
-                            @php
-                            echo number_format($booking_calculation->due_amount, 2, '.', '')
-                            @endphp
-                          </td>
-                          <td>
-                             <a href="{{route('booking_calculation.edit',$booking_calculation->id)}}" style="color: white"><button class="btn btn-outline-success"><i class="fa-solid fa-eye"></i> View</button></a>
+                             <a href="{{route('booking.edit',$booking->id)}}" style="color: white"><button class="btn btn-success"><i class="fa-solid fa-print"></i></button></a>
+                             <a href="{{route('booking.edit',$booking->id)}}" style="color: white"><button class="btn btn-warning"><i class="fa-solid fa-edit"></i></button></a>
+                             <a href="{{route('booking.edit',$booking->id)}}" style="color: white"><button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></a>
                         </td>
                         </tr> 
                         @endforeach              
