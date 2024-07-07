@@ -35,33 +35,33 @@
             </a>
           </li>
           @if(in_array(15, $permitted_menus_array))
-          <li class=" nav-item">
-            <a href="" class="nav-link">
-              <i class="nav-icon fa-solid fa-bangladeshi-taka-sign"></i>
-              <p>
-                Sales
+          <li  class="nav-item nav-link {{ Request::is('sale/create') ? 'nav-link active' : ''}}" style="{{ Request::is('sale/create') ? 'background-color: #17a2b8; !important' : ''}}">
+            <a href="{{url('/sale/create')}}" >
+              <i class="nav-icon fa-regular fa-gem" {{ Request::is('sale/create') ? 'color: white; !important' : ''}}"></i>
+              <p style="{{ Request::is('sale/create') ? 'color: white; !important' : ''}}">
+              Add Sale
               </p>
             </a>
           </li>
           @endif
 
           @if(in_array(16, $permitted_menus_array))
-          <li class="nav-item">
-            <a href="#" class="nav-link ">
-              <i class="nav-icon fa-solid fa-sheet-plastic"></i>
-              <p>
-                Sales List
+          <li  class="nav-item nav-link {{ Request::is('sale') ? 'nav-link active' : ''}}" style="{{ Request::is('sale') ? 'background-color: #17a2b8; !important' : ''}}">
+            <a href="{{url('/sale')}}" >
+              <i class="nav-icon fa-regular fa-gem" {{ Request::is('sale') ? 'color: white; !important' : ''}}"></i>
+              <p style="{{ Request::is('sale') ? 'color: white; !important' : ''}}">
+              Sales List
               </p>
             </a>
           </li>
           @endif
 
           @if(in_array(2, $permitted_menus_array))
-          <li class="nav-item">
-            <a href="#" class="nav-link ">
-              <i class="nav-icon fa-solid fa-book-open-reader"></i>
-              <p>
-                Add Booking
+          <li  class="nav-item nav-link {{ Request::is('booking/create') ? 'nav-link active' : ''}}" style="{{ Request::is('booking/create') ? 'background-color: #17a2b8; !important' : ''}}">
+            <a href="{{url('/booking/create')}}" >
+              <i class="nav-icon fa-regular fa-gem" {{ Request::is('booking/create') ? 'color: white; !important' : ''}}"></i>
+              <p style="{{ Request::is('booking/create') ? 'color: white; !important' : ''}}">
+              Add Booking
               </p>
             </a>
           </li>

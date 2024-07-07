@@ -1,7 +1,7 @@
 @extends('master')
 
 @section('title')
-Booking List
+Sales List
 @endsection
 
 @section('content')
@@ -13,8 +13,8 @@ Booking List
         <br>
         <div class="row">
             <div class="col-12">                              
-                <a class="btn btn-outline-primary float-right" href="{{route('booking.create')}}">
-                    <i class="fas fa-plus"></i> Add Booking
+                <a class="btn btn-outline-primary float-right" href="{{route('sale.create')}}">
+                    <i class="fas fa-plus"></i> Add Sale
                 </a> 
             </div>
 
@@ -39,7 +39,7 @@ Booking List
                 <br>
                 <div class="card">
                     <div class="card-header">
-                      <h3 class="card-title">Booking List</h3>
+                      <h3 class="card-title">Sales List</h3>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
@@ -47,8 +47,9 @@ Booking List
                         <thead>
                         <tr>
                           <th>Serial No.</th>                 
-                          <th>Booking Number</th>
-                          <th>Booking Date</th>
+                          <th>Memo Number</th>
+                          <th>Date</th>
+                          <th>Sale Type</th>
                           <th>Client Name</th>
                           <th>Item Total Amount (BDT)</th>
                           <th>VAT Amount (BDT)</th>
@@ -56,33 +57,40 @@ Booking List
                           <th>Discount Amount (BDT)</th>
                           <th>Total Amount (BDT)</th>
                           <th>Paid Amount (BDT)</th>
+                          <th>Cashback (BDT)</th>
                           <th>Due Amount (BDT)</th>
                           <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
                             @php $i = 1 @endphp
-                            @foreach($bookings as $booking)
+                            @foreach($sales as $sale)
                         <tr>
                           <td>{{$i++}}</td>
-                          <td>{{$booking->booking_number}}</td>                          
-                          <td>{{$booking->booking_date}}</td>
-                          <td>{{$booking->customer_name}}</td>
-                          <td>{{$booking->item_total_amount}}</td>
-                          <td>{{$booking->vat_amount}}</td>
-                          <td>{{$booking->subtotal_amount}}</td>
+                          <td>{{$sale->sale_number}}</td>                          
+                          <td>{{$sale->sale_date}}</td>
+                          <td>{{$sale->sale_type_name}}</td>
+                          <td>{{$sale->customer_name}}</td>
+                          <td>{{$sale->item_total_amount}}</td>
+                          <td>{{$sale->vat_amount}}</td>
+                          <td>{{$sale->subtotal_amount}}</td>
                           <td>
                             @php
-                            echo number_format($booking->discount_amount, 2, '.', '')
+                            echo number_format($sale->discount_amount, 2, '.', '')
                             @endphp
                           </td>
-                          <td>{{$booking->total_amount}}</td>
-                          <td>{{$booking->total_paid_amount}}</td>
-                          <td>{{$booking->total_due_amount}}</td>
+                          <td>{{$sale->total_amount}}</td>
+                          <td>{{$sale->total_paid_amount}}</td>
                           <td>
-                             <a href="{{route('booking.edit',$booking->id)}}" style="color: white"><button class="btn btn-success"><i class="fa-solid fa-print"></i></button></a>
-                             <a href="{{route('booking.edit',$booking->id)}}" style="color: white"><button class="btn btn-warning"><i class="fa-solid fa-edit"></i></button></a>
-                             <a href="{{route('booking.edit',$booking->id)}}" style="color: white"><button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></a>
+                            @php
+                            echo number_format($sale->total_return_amount, 2, '.', '')
+                            @endphp
+                          </td>
+                          <td>{{$sale->total_due_amount}}</td>
+                          <td>
+                             <a href="{{route('sale.edit',$sale->id)}}" style="color: white"><button class="btn btn-success"><i class="fa-solid fa-print"></i></button></a>
+                             <a href="{{route('sale.edit',$sale->id)}}" style="color: white"><button class="btn btn-warning"><i class="fa-solid fa-edit"></i></button></a>
+                             <a href="{{route('sale.edit',$sale->id)}}" style="color: white"><button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></a>
                         </td>
                         </tr> 
                         @endforeach              
