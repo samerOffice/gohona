@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 07, 2024 at 09:36 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jul 08, 2024 at 03:29 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -626,10 +626,10 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_nr`, `product_details`, `product_category`, `product_type`, `weight`, `carat`, `quantity`, `st_or_dia`, `st_or_dia_price`, `wage`, `wage_type`, `supplier`, `purchase_price`, `stock_type`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'BNG-068', 'asdffsdfs', NULL, NULL, '3.8', NULL, NULL, NULL, NULL, '6.7', NULL, NULL, NULL, 2, 2, NULL, NULL),
-(11, 'dsf', 'aa@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
+(1, 'BNG-068', 'asdffsdfs', NULL, NULL, '3.8', NULL, NULL, NULL, NULL, '6.7', NULL, NULL, NULL, 2, 1, NULL, NULL),
+(11, 'dsf', 'aa@gmail.com', NULL, NULL, '2.2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
 (12, 'qqq', 'qq@gmai', 9, NULL, '32kg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL),
-(64, 'R2', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Fixed', NULL, NULL, NULL, 3, NULL, NULL),
+(64, 'R2', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Fixed', NULL, NULL, NULL, 2, NULL, NULL),
 (65, 'R3', 'RING 21K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Percentage', NULL, NULL, NULL, 2, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -711,7 +711,8 @@ CREATE TABLE `sales` (
 --
 
 INSERT INTO `sales` (`id`, `sale_number`, `sale_type`, `bin_no`, `sale_date`, `client_no`, `client_id`, `user_id`, `item_total_amount`, `vat_amount`, `subtotal_amount`, `discount_amount`, `total_amount`, `total_paid_amount`, `total_return_amount`, `total_due_amount`, `created_at`, `updated_at`) VALUES
-(1, '779602', 1, '588731661-3503', '2024-07-07', NULL, 1, 2, '1,048.00', '52.00', '1,100.00', '100', '1,000.00', '300.00', '20', '720.00', '2024-07-07 19:15:14', '2024-07-07 19:15:14');
+(1, '779602', 1, '588731661-3503', '2024-07-07', NULL, 1, 2, '1,048.00', '52.00', '1,100.00', '100', '1,000.00', '300.00', '20', '720.00', '2024-07-07 19:15:14', '2024-07-07 19:15:14'),
+(2, '437773', 1, '641463251-6950', '2024-07-08', NULL, 2, 2, '413.00', '21.00', '434.00', '34', '400.00', '150.00', '20', '270.00', '2024-07-08 05:48:54', '2024-07-08 05:48:54');
 
 -- --------------------------------------------------------
 
@@ -740,7 +741,9 @@ CREATE TABLE `sale_calculations` (
 
 INSERT INTO `sale_calculations` (`id`, `sale_number`, `sale_date`, `product_id`, `unit_price_amount`, `wage`, `payment_type`, `payment_info`, `reference`, `payment_amount`, `created_at`, `updated_at`) VALUES
 (1, '779602', '2024-07-07', 65, '100', '13', 'cash', 'CASH', 'test1', '100', '2024-07-07 19:15:14', '2024-07-07 19:15:14'),
-(2, '779602', '2024-07-07', 1, '200', '6.7', 'gold', 'EXCHANGE GOLD (SENCO)', 'test2', '200', '2024-07-07 19:15:14', '2024-07-07 19:15:14');
+(2, '779602', '2024-07-07', 1, '200', '6.7', 'gold', 'EXCHANGE GOLD (SENCO)', 'test2', '200', '2024-07-07 19:15:14', '2024-07-07 19:15:14'),
+(3, '437773', '2024-07-08', 64, '100', '4.8', 'cash', 'CASH', NULL, '100', '2024-07-08 05:48:54', '2024-07-08 05:48:54'),
+(4, '437773', '2024-07-08', 65, '50', '6', 'bank', 'DBBL-TRANSFER', NULL, '50', '2024-07-08 05:48:54', '2024-07-08 05:48:54');
 
 -- --------------------------------------------------------
 
@@ -1264,13 +1267,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sale_calculations`
 --
 ALTER TABLE `sale_calculations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `sale_types`

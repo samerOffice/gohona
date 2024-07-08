@@ -130,11 +130,65 @@ class SaleController extends Controller
         }
 
     //  return redirect()->route('sale.index')->withSuccess('Sale is added successfully');
+    return redirect()->route('preview_sale');
     }
 
     private function generateRandomDigits($length)
     {
         return str_pad(mt_rand(0, pow(10, $length) - 1), $length, '0', STR_PAD_LEFT);
+    }
+
+    public function preview_sale(){
+        
+        $user_role = Auth::user()->role_id;
+
+        $menu_data = DB::table('menu_permissions')
+                ->where('role',$user_role)
+                ->first();
+        $permitted_menus = $menu_data->menus;
+        $permitted_menus_array = explode(',', $permitted_menus);
+
+        
+        $last_inserted_data = DB::table('sales')
+                             ->orderBy('id', 'desc')
+                             ->first();
+
+        $last_inserted_id = $last_inserted_data->id;
+
+        $sale = DB::table('sales')
+                ->leftJoin('customers','sales.client_id','customers.id')
+                ->leftJoin('users','sales.user_id','users.id')
+                ->leftJoin('sale_types','sales.sale_type','sale_types.id')
+                ->select('sales.*',
+                'customers.name as customer_name',
+                'users.name as user_name',
+                'customers.address as customer_address',
+                'customers.mobile_number as customer_mobile_number',
+                'sale_types.name as sale_type_name')
+                ->where('sales.id',$last_inserted_id)
+                ->first();
+
+
+
+            
+        $sold_product_details = DB::table('sale_calculations')
+                                ->leftJoin('products','sale_calculations.product_id','products.id')
+                                ->leftJoin('sales','sale_calculations.sale_number','sales.sale_number')
+                                ->select('sale_calculations.*',
+                                        'products.product_nr as token_no',
+                                        'products.product_details as product_details',
+                                        'products.weight as product_weight',
+                                        'products.st_or_dia as product_st_or_dia',
+                                        'products.st_or_dia_price as product_st_or_dia_price'                                       
+                                        )
+                                        ->where('sales.id',$last_inserted_id)
+                                        ->get();
+
+        // dd($sold_product_details);
+
+
+
+        return view('sales.preview',compact('permitted_menus_array','sale','sold_product_details'));
     }
 
     /**

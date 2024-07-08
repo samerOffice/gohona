@@ -88,9 +88,9 @@ Sales List
                           </td>
                           <td>{{$sale->total_due_amount}}</td>
                           <td>
-                             <a href="{{route('sale.edit',$sale->id)}}" style="color: white"><button class="btn btn-success"><i class="fa-solid fa-print"></i></button></a>
-                             <a href="{{route('sale.edit',$sale->id)}}" style="color: white"><button class="btn btn-warning"><i class="fa-solid fa-edit"></i></button></a>
-                             <a href="{{route('sale.edit',$sale->id)}}" style="color: white"><button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></a>
+                             <a href="{{route('preview_sale',$sale->id)}}" style="color: white"><button class="btn btn-outline-success"><i class="fa-solid fa-eye"></i></button></a>
+                             <a href="{{route('sale.edit',$sale->id)}}" style="color: white"><button class="btn btn-outline-primary"><i class="fa-solid fa-edit"></i></button></a>
+                             <a href="{{route('sale.edit',$sale->id)}}" style="color: white"><button class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button></a>
                         </td>
                         </tr> 
                         @endforeach              

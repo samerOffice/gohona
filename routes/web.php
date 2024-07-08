@@ -45,6 +45,7 @@ Route::get('/booking_preview', [BookingController::class, 'bookingPreview'])->na
 
 //sales
 Route::resource('sale', SaleController::class);
+Route::get('/preview_sale/{sale_id}', [SaleController::class, 'preview_sale'])->name('preview_sale');
 
 //product-category
 Route::get('/product_category_list', [ProductCategoryController::class, 'index'])->name('product_category_list');
