@@ -56,6 +56,12 @@ class BookingController extends Controller
         //                   ->get('under_type');
 
         // dd($payment_types);
+
+        //  $payment_types = DB::table('payment_methods')
+        //                   ->groupBy('under_type')
+        //                   ->get('under_type');
+
+        // dd($payment_types);
        
         return view('bookings.create',compact('permitted_menus_array','products','customers','users'));
     }
@@ -116,82 +122,13 @@ class BookingController extends Controller
       echo $str;
       }
 
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        
-        $randomPart1 = $this->generateRandomDigits(9); // Generates the first part (9 digits)
-        $randomPart2 = $this->generateRandomDigits(4); // Generates the second part (4 digits)
-        $binNumber = $randomPart1 . '-' . $randomPart2;
-
-        $booking_number = mt_rand(100000, 999999);
-
-        $booking = DB::table('bookings')->insertGetId([
-            'booking_number' => $booking_number,
-            'bin_no' => $binNumber,
-            'booking_date' => Carbon::now()->toDateString(),
-            'client_id' => $request->client,
-            'user_id' => $request->booked_by,
-            'item_total_amount' => $request->item_total_amount,
-            'vat_amount' => $request->total_vat_amount,
-            'subtotal_amount' => $request->subtotal_amount,
-            'discount_amount' => $request->discount,
-            'total_amount' => $request->total_amount_after_discount,
-            'total_paid_amount' => $request->paid,
-            'total_due_amount' => $request->due
-        ]);
-
-        $booking_num = DB::table('bookings')
-                       ->where('id',$booking)
-                       ->first();
-
-        $last_booking_number = $booking_num->booking_number;
-
-        // Insert each unit_price and wage into booking_calculations
-        $product_ids = $request->product_id;
-        $unit_price_amounts = $request->unit_price;
-        $wages = $request->wage;
-        $payment_types = $request->payment;
-        $payment_infos = $request->payment_info;
-        $references = $request->reference;
-        $payment_amounts = $request->amount;
-
-        foreach ($product_ids as $key => $product_id) {
-            $unit_price_amount = $unit_price_amounts[$key] ?? null; 
-            $wage = $wages[$key] ?? null;
-            $payment_type = $payment_types[$key] ?? null;
-            $payment_info = $payment_infos[$key] ?? null;
-            $reference = $references[$key] ?? null;
-            $payment_amount = $payment_amounts[$key] ?? null;
-
-            DB::table('booking_calculations')->insert([
-                'booking_number' => $last_booking_number,
-                'booking_date' => Carbon::now()->toDateString(),
-                'product_id' => $product_id,
-                'unit_price_amount' => $unit_price_amount,
-                'wage' => $wage,
-                'payment_type' => $payment_type,
-                'payment_info' => $payment_info,
-                'reference' => $reference,
-                'payment_amount' => $payment_amount
-                
-            ]);
-
-            $data = array();      
-            $data['status']=3;
-            $updated = DB::table('products')
-                  ->where('id', $product_id)
-                  ->update($data);
-        }
-
-     return redirect()->route('booking.index')->withSuccess('Booking is added successfully'); 
-    }
-
-    private function generateRandomDigits($length)
-    {
-        return str_pad(mt_rand(0, pow(10, $length) - 1), $length, '0', STR_PAD_LEFT);
+        //
     }
 
     /**
@@ -207,40 +144,7 @@ class BookingController extends Controller
      */
     public function edit(string $id)
     {
-        $user_role = Auth::user()->role_id;
-
-        $menu_data = DB::table('menu_permissions')
-                ->where('role',$user_role)
-                ->first();
-        $permitted_menus = $menu_data->menus;
-        $permitted_menus_array = explode(',', $permitted_menus);
-             
-        $booking = DB::table('bookings')
-                    ->leftJoin('customers','bookings.client_id','customers.id')
-                    ->leftJoin('users','bookings.user_id','users.id')
-                    ->select('bookings.*', 'customers.name as client_name', 'users.name as booked_by_name')
-                    ->where('bookings.id',$id)
-                    ->first();
-
-          $booking_number = $booking->booking_number;
-
-          $booking_details = DB::table('booking_calculations')
-                             ->leftJoin('products','booking_calculations.product_id','products.id')
-                             ->select('booking_calculations.*',
-                                       'products.id as product_id',
-                                       'products.product_nr as product_nr',
-                                       'products.product_details as product_details',
-                                       'products.weight as weight')
-                            ->where('booking_calculations.booking_number',$booking_number)
-                            ->get();
-
-        //  dd($booking_details);
-
-        $products = DB::table('products')->get();
-        $customers = DB::table('customers')->get();
-        $users = DB::table('users')->get();
-       
-        return view('bookings.edit',compact('booking','booking_details','products','customers','users','permitted_menus_array'));
+        //
     }
 
     /**
