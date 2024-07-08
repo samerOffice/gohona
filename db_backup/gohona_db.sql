@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< HEAD
+-- Generation Time: Jul 08, 2024 at 03:29 PM
+=======
 -- Generation Time: Jul 07, 2024 at 02:26 PM
+>>>>>>> origin/fahad
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -52,7 +56,12 @@ CREATE TABLE `bookings` (
 
 INSERT INTO `bookings` (`id`, `booking_number`, `bin_no`, `booking_date`, `client_no`, `client_id`, `user_id`, `item_total_amount`, `vat_amount`, `subtotal_amount`, `discount_amount`, `total_amount`, `total_paid_amount`, `total_due_amount`, `created_at`, `updated_at`) VALUES
 (1, '211975', '314136554-9327', '2024-07-07', NULL, 3, 1, '2,057.00', '103.00', '2,160.00', '160', '2,000.00', '1,700.00', '300.00', '2024-07-07 10:49:53', '2024-07-07 10:49:53'),
+<<<<<<< HEAD
+(2, '909074', '086156301-3070', '2024-07-07', NULL, 4, 4, '3,210.00', '161.00', '3,371.00', '20', '3,351.00', '2,200.00', '1,151.00', '2024-07-07 11:20:02', '2024-07-07 11:20:02'),
+(3, '708449', '824210684-3065', '2024-07-07', NULL, 4, 2, '3,743.00', '187.00', '3,930.00', '100', '3,830.00', '3,060.00', '770.00', '2024-07-07 17:10:57', '2024-07-07 17:10:57');
+=======
 (2, '909074', '086156301-3070', '2024-07-07', NULL, 4, 4, '3,210.00', '161.00', '3,371.00', '20', '3,351.00', '2,200.00', '1,151.00', '2024-07-07 11:20:02', '2024-07-07 11:20:02');
+>>>>>>> origin/fahad
 
 -- --------------------------------------------------------
 
@@ -82,7 +91,13 @@ CREATE TABLE `booking_calculations` (
 INSERT INTO `booking_calculations` (`id`, `booking_number`, `booking_date`, `product_id`, `unit_price_amount`, `wage`, `payment_type`, `payment_info`, `reference`, `payment_amount`, `created_at`, `updated_at`) VALUES
 (1, '211975', '2024-07-07', 64, '200', '4.8', 'cash', 'CASH', NULL, '500', '2024-07-07 10:49:53', '2024-07-07 10:49:53'),
 (2, '211975', '2024-07-07', 65, '540', '69', 'bank', 'DBBL-TRANSFER', 'testing ref.', '1200', '2024-07-07 10:49:53', '2024-07-07 10:49:53'),
+<<<<<<< HEAD
+(3, '909074', '2024-07-07', 12, '100', '10', 'cash', 'BY CHEQUE', NULL, '2200', '2024-07-07 11:20:02', '2024-07-07 11:20:02'),
+(4, '708449', '2024-07-07', 12, '100', '2', 'cash', 'CASH', NULL, '2500', '2024-07-07 17:10:57', '2024-07-07 17:10:57'),
+(5, '708449', '2024-07-07', 64, '200', '4.8', 'card', 'DBBL-CARD', NULL, '560', '2024-07-07 17:10:57', '2024-07-07 17:10:57');
+=======
 (3, '909074', '2024-07-07', 12, '100', '10', 'cash', 'BY CHEQUE', NULL, '2200', '2024-07-07 11:20:02', '2024-07-07 11:20:02');
+>>>>>>> origin/fahad
 
 -- --------------------------------------------------------
 
@@ -623,11 +638,19 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `product_nr`, `product_details`, `product_category`, `product_type`, `weight`, `carat`, `quantity`, `st_or_dia`, `st_or_dia_price`, `wage`, `wage_type`, `supplier`, `purchase_price`, `stock_type`, `status`, `created_at`, `updated_at`) VALUES
+<<<<<<< HEAD
+(1, 'BNG-068', 'asdffsdfs', NULL, NULL, '3.8', NULL, NULL, NULL, NULL, '6.7', NULL, NULL, NULL, 2, 1, NULL, NULL),
+(11, 'dsf', 'aa@gmail.com', NULL, NULL, '2.2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
+(12, 'qqq', 'qq@gmai', 9, NULL, '32kg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, NULL, NULL),
+(64, 'R2', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Fixed', NULL, NULL, NULL, 2, NULL, NULL),
+(65, 'R3', 'RING 21K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Percentage', NULL, NULL, NULL, 2, NULL, NULL);
+=======
 (1, 'BNG-068', 'asdffsdfs', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, 1, NULL, NULL),
 (11, 'dsf', 'aa@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
 (12, 'qqq', 'qq@gmai', 9, NULL, '32kg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
 (64, 'R2', 'RING 22K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Fixed', NULL, NULL, NULL, 1, NULL, NULL),
 (65, 'R3', 'RING 21K', NULL, NULL, '2.68', NULL, NULL, NULL, NULL, '4.8', 'Percentage', NULL, NULL, NULL, 1, NULL, NULL);
+>>>>>>> origin/fahad
 
 -- --------------------------------------------------------
 
@@ -679,6 +702,72 @@ INSERT INTO `roles` (`id`, `role_name`, `status`, `created_at`, `updated_at`) VA
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sales`
+--
+
+CREATE TABLE `sales` (
+  `id` int(11) NOT NULL,
+  `sale_number` varchar(255) DEFAULT NULL,
+  `sale_type` int(100) DEFAULT NULL,
+  `bin_no` varchar(100) DEFAULT NULL,
+  `sale_date` date DEFAULT NULL,
+  `client_no` int(255) DEFAULT NULL,
+  `client_id` int(255) DEFAULT NULL,
+  `user_id` int(100) DEFAULT NULL,
+  `item_total_amount` varchar(255) DEFAULT NULL,
+  `vat_amount` varchar(255) DEFAULT NULL,
+  `subtotal_amount` varchar(255) DEFAULT NULL,
+  `discount_amount` varchar(100) DEFAULT NULL,
+  `total_amount` varchar(255) DEFAULT NULL,
+  `total_paid_amount` varchar(255) DEFAULT NULL,
+  `total_return_amount` varchar(255) DEFAULT NULL,
+  `total_due_amount` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sales`
+--
+
+INSERT INTO `sales` (`id`, `sale_number`, `sale_type`, `bin_no`, `sale_date`, `client_no`, `client_id`, `user_id`, `item_total_amount`, `vat_amount`, `subtotal_amount`, `discount_amount`, `total_amount`, `total_paid_amount`, `total_return_amount`, `total_due_amount`, `created_at`, `updated_at`) VALUES
+(1, '779602', 1, '588731661-3503', '2024-07-07', NULL, 1, 2, '1,048.00', '52.00', '1,100.00', '100', '1,000.00', '300.00', '20', '720.00', '2024-07-07 19:15:14', '2024-07-07 19:15:14'),
+(2, '437773', 1, '641463251-6950', '2024-07-08', NULL, 2, 2, '413.00', '21.00', '434.00', '34', '400.00', '150.00', '20', '270.00', '2024-07-08 05:48:54', '2024-07-08 05:48:54');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sale_calculations`
+--
+
+CREATE TABLE `sale_calculations` (
+  `id` int(11) NOT NULL,
+  `sale_number` varchar(255) DEFAULT NULL,
+  `sale_date` date DEFAULT NULL,
+  `product_id` int(255) DEFAULT NULL,
+  `unit_price_amount` varchar(255) DEFAULT NULL,
+  `wage` varchar(255) DEFAULT NULL,
+  `payment_type` varchar(100) DEFAULT NULL,
+  `payment_info` varchar(100) DEFAULT NULL,
+  `reference` varchar(100) DEFAULT NULL,
+  `payment_amount` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sale_calculations`
+--
+
+INSERT INTO `sale_calculations` (`id`, `sale_number`, `sale_date`, `product_id`, `unit_price_amount`, `wage`, `payment_type`, `payment_info`, `reference`, `payment_amount`, `created_at`, `updated_at`) VALUES
+(1, '779602', '2024-07-07', 65, '100', '13', 'cash', 'CASH', 'test1', '100', '2024-07-07 19:15:14', '2024-07-07 19:15:14'),
+(2, '779602', '2024-07-07', 1, '200', '6.7', 'gold', 'EXCHANGE GOLD (SENCO)', 'test2', '200', '2024-07-07 19:15:14', '2024-07-07 19:15:14'),
+(3, '437773', '2024-07-08', 64, '100', '4.8', 'cash', 'CASH', NULL, '100', '2024-07-08 05:48:54', '2024-07-08 05:48:54'),
+(4, '437773', '2024-07-08', 65, '50', '6', 'bank', 'DBBL-TRANSFER', NULL, '50', '2024-07-08 05:48:54', '2024-07-08 05:48:54');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sale_types`
 --
 
@@ -695,10 +784,15 @@ CREATE TABLE `sale_types` (
 --
 
 INSERT INTO `sale_types` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'hh sale', 1, '2024-05-07 11:57:55', '2024-05-07 11:57:55'),
-(2, 'hh sale4356', 2, '2024-05-07 11:58:08', '2024-05-07 11:58:08'),
-(3, 'jjjj sa', 2, '2024-05-07 11:58:21', '2024-05-07 11:58:21'),
-(4, 'sdf', 2, '2024-05-07 11:58:38', '2024-05-07 11:58:38');
+(1, 'NORMAL', 1, '2024-07-07 18:54:50', '2024-07-07 18:54:50'),
+(2, 'BOOKING', 1, '2024-07-07 18:55:04', '2024-07-07 18:55:04'),
+(3, 'EXECHANGE', 1, '2024-07-07 18:55:14', '2024-07-07 18:55:14'),
+(4, 'CORPORATE', 1, '2024-07-07 18:55:24', '2024-07-07 18:55:24'),
+(5, 'ORDER SALE', 1, '2024-07-07 18:55:36', '2024-07-07 18:55:36'),
+(6, 'SALES RETURN', 1, '2024-07-07 18:55:47', '2024-07-07 18:55:47'),
+(7, 'DUE SALE', 1, '2024-07-07 18:55:57', '2024-07-07 18:55:57'),
+(8, 'EMI SALE', 1, '2024-07-07 18:56:06', '2024-07-07 18:56:06'),
+(9, 'SENCO', 1, '2024-07-07 18:56:16', '2024-07-07 18:56:16');
 
 -- --------------------------------------------------------
 
@@ -1011,6 +1105,18 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `sales`
+--
+ALTER TABLE `sales`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sale_calculations`
+--
+ALTER TABLE `sale_calculations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sale_types`
 --
 ALTER TABLE `sale_types`
@@ -1067,13 +1173,21 @@ ALTER TABLE `zones`
 -- AUTO_INCREMENT for table `bookings`
 --
 ALTER TABLE `bookings`
+<<<<<<< HEAD
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+=======
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+>>>>>>> origin/fahad
 
 --
 -- AUTO_INCREMENT for table `booking_calculations`
 --
 ALTER TABLE `booking_calculations`
+<<<<<<< HEAD
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+=======
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+>>>>>>> origin/fahad
 
 --
 -- AUTO_INCREMENT for table `booking_payment_calculations`
@@ -1178,10 +1292,22 @@ ALTER TABLE `roles`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `sales`
+--
+ALTER TABLE `sales`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `sale_calculations`
+--
+ALTER TABLE `sale_calculations`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `sale_types`
 --
 ALTER TABLE `sale_types`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `settings`

@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\TodayRateController;
 use App\Http\Controllers\SaleTypeController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ZoneController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\CustomerCategoryController;
@@ -23,7 +24,6 @@ use App\Http\Controllers\CustomerTransactionController;
 use App\Http\Controllers\SupplierTransactionController;
 
 
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->middleware('guest');
 Route::get('/home', [CustomAuthController::class, 'dashboard'])->name('dashboard');
 Route::get('/login', [CustomAuthController::class, 'index'])->name('login')->middleware('guest');
@@ -36,11 +36,17 @@ Route::get('/password_reset', [CustomAuthController::class, 'password_reset'])->
 Route::post('/new_password_set',[App\Http\Controllers\CustomAuthController::class,'new_password_set']);
 
 
+Route::middleware('auth')->group(function () {
 
 //booking
 Route::resource('booking', BookingController::class);
+Route::post('/booking_preview_data', [BookingController::class, 'bookingPreviewData']);
+Route::get('/booking_preview', [BookingController::class, 'bookingPreview'])->name('booking_preview');
 
-Route::middleware('auth')->group(function () {
+//sales
+Route::resource('sale', SaleController::class);
+Route::get('/preview_sale/{sale_id}', [SaleController::class, 'preview_sale'])->name('preview_sale');
+
 //product-category
 Route::get('/product_category_list', [ProductCategoryController::class, 'index'])->name('product_category_list');
 Route::get('/add_product_category', [ProductCategoryController::class, 'add_product_category'])->name('add_product_category');

@@ -15,7 +15,7 @@ Booking Create
                     <!-- start page title -->
                     <div class="row">
                         <div class="col-12">
-                            <a class="btn btn-outline-info float-right" href="{{route('booking.index')}}">
+                            <a class="btn btn-outline-info float-right" href="{{route('sale.index')}}">
                                 <i class="fas fa-arrow-left"></i> Back
                             </a>
                         </div>
@@ -28,16 +28,27 @@ Booking Create
                     <div class="col-lg-12">
                     <div class="card">
                     <div class="card-header">                                   
-                        <h4 class="card-title ">Add Booking</h4>
+                        <h4 class="card-title ">Add Sale</h4>
                     </div>
 
                     <div class="card-body">
-                    <form method="POST" action="{{route('booking.store')}}" id="order-form" role="form" enctype="multipart/form-data">
+                    <form method="POST" action="{{route('sale.store')}}" id="order-form" role="form" enctype="multipart/form-data">
                         {{-- <input type="hidden" name="_token" value="8eyHwlhgbvUWRrPpYCRndSFGl7lkmT1kALo2D2Wr"> --}}
                         @csrf
                         <div class="row">
                     <div class="col-12 col-md-12">
                         <div class="mb-3 row">
+
+                        <div class="col-md-4">
+                                <label for="client" class="col-form-label text-start">Sales Type</label>         
+                                {{-- <select required id="client" class="form-control" name="client"><option selected="selected" value="">Select client</option></select> --}}
+                                <select class="form-control select2bs4" id="sale_type" required name="sale_type" style="width: 100%;">
+                                    @foreach($sale_types as $sale_type)
+                                    <option value="{{$sale_type->id}}">{{$sale_type->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <div class="col-md-4">
                                 <label for="client" class="col-form-label text-start">Client</label>         
                                 {{-- <select required id="client" class="form-control" name="client"><option selected="selected" value="">Select client</option></select> --}}
@@ -190,6 +201,16 @@ Booking Create
                                         <input id="paidAmount" required readonly class="form-control" name="paid" type="text" value="">
                                     </td>
                                 </tr>
+
+                                <tr>
+                                <td class="text-end" colspan="7">
+                                    Cashback
+                                </td>
+                                <td id="return_amount" style="padding: 1px;" colspan="2">
+                                    <input id="returnAmount" required class="form-control" name="return_amount" type="text" value="0">
+                                </td>
+                                </tr>
+
                                 <tr>
                                     <td class="text-end" colspan="7" >
                                         Due
@@ -550,6 +571,10 @@ $('#summernote').summernote();
             recalculate()
         })
 
+        $("#return_amount").on('keyup', function() {
+            recalculate()
+        })
+
         var subtotal_without_vat = 0;
         var vat = 0;
 
@@ -657,6 +682,14 @@ $('#summernote').summernote();
             });
 
             $("#paidAmount").val(bd_money_format(paid));
+
+            var return_amount = parseFloat($("#returnAmount").val());
+
+            if(!isNaN(return_amount)){
+                total += return_amount;
+            }
+
+            console.log('return_amount ' + return_amount );
 
             if (!isNaN(total)) {
                 $("#dueAmount").val(bd_money_format((total - paid).toFixed(2)))
